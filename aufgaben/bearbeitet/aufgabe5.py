@@ -1,5 +1,6 @@
 # Aufgabe 5: Klassen und Objekte
 # Erstellen Sie eine Klasse Auto mit den Attributen marke, modell und baujahr.#klasse Auto
+# Definieren Sie Methoden für das Starten, Fahren und Stoppen des Autos.
 class Auto:
     def __init__(self, marke, modell, baujahr):
         self.marke = marke
@@ -18,7 +19,7 @@ class Auto:
     def __str__(self):
         return f"Auto: {self.marke} {self.modell}, Baujahr {self.baujahr}"
 
-
+# 3 verschiedene Autos erstellen
 auto1 = Auto("VW", "Golf", 2020)
 auto2 = Auto("BMW", "3er", 2018)
 auto3 = Auto("Toyota", "Corolla", 2022)
