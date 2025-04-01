@@ -1,19 +1,35 @@
+import random
+
+def kampfsimulation(krieger1, krieger2):
+    while True :
+        krieger = [krieger1, krieger2]
+        am_zug = random.randint(0, 1)
+        angreifender_krieger = krieger[am_zug]
+        krieger.remove(angreifender_krieger)
+        verteidigender_krieger = krieger[0]
+        angreifender_krieger.angreifen(verteidigender_krieger)
+        verteidigender_krieger.verteidigen(angreifender_krieger)
+        print(angreifender_krieger)
+        print(verteidigender_krieger)
+        if verteidigender_krieger.gefallen():
+            break
+
 class Krieger:
     
     def __init__(self, name, lebenspunkte, angriffskraft, verteidigung):
         self.name = name
         self.lebenspunkte = lebenspunkte
         self.angriffskraft = angriffskraft
-        self.verteitigung = verteidigung
+        self.verteidigung = verteidigung
 
     def __str__(self):
-        return f"Name: {self.name} | Lebenspunkte: {self.lebenspunkte} | Angriffskraft: {self.angriffskraft} | Verteidigung: {self.verteitigung}"
+        return f"Name: {self.name} | Lebenspunkte: {self.lebenspunkte} | Angriffskraft: {self.angriffskraft} | Verteidigung: {self.verteidigung}"
 
     def angreifen(self, gegner):
         print(f"{self.name} attackiert {gegner.name} mit einer Angfrifsstärke von {self.angriffskraft}!")
 
-    def verteitigen(self, gegner):
-        schaden = gegner.angriffskraft - 0.5 * self.verteitigung
+    def verteidigen(self, gegner):
+        schaden = gegner.angriffskraft - 0.5 * self.verteidigung
         self.lebenspunkte -= schaden
         print(f"{self.name} verteidigt sich gegen {gegner.name} und nimmt {schaden} Schaden!")
         if self.gefallen():
@@ -26,20 +42,4 @@ class Krieger:
 herbert = Krieger("Sir Herbert", 100, 80, 35)
 arthur = Krieger("King Arthur", 90, 65, 95)
 
-print(herbert)
-print(arthur)
-
-print("#####################")
-herbert.angreifen(arthur)
-arthur.verteitigen(herbert)
-herbert.angreifen(arthur)
-arthur.verteitigen(herbert)
-herbert.angreifen(arthur)
-arthur.verteitigen(herbert)
-print("#####################")
-
-print(herbert)
-print(arthur)
-
-# print(herbert)
-# print(arthur)
+kampfsimulation(herbert, arthur)
