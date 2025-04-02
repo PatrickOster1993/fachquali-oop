@@ -29,7 +29,7 @@ anderes_buch = Book(
     title="Anderer Titel", 
     year=2023,
     price = 14.99
-)
+) 
 
 print(mein_buch)
 
