@@ -20,6 +20,23 @@ class Book:
         if self.zustand != "neu":
             self.price *= 0.7
 
+class Leseratte:
+
+    # Konstruktor
+    def __init__(self, name, buecher):
+        self.name = name
+        self.buecher = buecher
+    
+    def __str__(self):
+        meine_buecher = f"{self.name}s Bücherliste:\n"
+        meine_buecher += "--------------------\n"
+        for buch in self.buecher:
+            title = buch.title
+            meine_buecher += title
+            meine_buecher += "\n"
+        return meine_buecher
+
+
 # Instanzen / Objekte der Klasse "Book" erstellen
 mein_buch = Book("Patrick Oster", "Mein Titel", 2025, 19.99)
 dein_buch = Book("Max Mustermann", "Sein Titel", 2024, 9.99)
@@ -31,18 +48,21 @@ anderes_buch = Book(
     price = 14.99
 )
 
-print(mein_buch)
+# print(mein_buch)
 
-mein_buch.changeZustand("leichte Dellen")
-print(mein_buch)
+# mein_buch.changeZustand("leichte Dellen")
+# print(mein_buch)
 
-mein_buch.changeZustand("leichte Dellen")
-print(mein_buch)
+# mein_buch.changeZustand("leichte Dellen")
+# print(mein_buch)
 
-# meine_buecher_liste = [mein_buch, dein_buch, anderes_buch]
+meine_buecher_liste = [mein_buch, dein_buch, anderes_buch]
 
 # mein_author = mein_buch.author
 # print(mein_author)
 
 # mein_title = mein_buch.title
 # print(mein_title)
+
+ich = Leseratte("Patrick", meine_buecher_liste)
+print(ich)
