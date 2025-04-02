@@ -40,6 +40,5 @@ class Krieger:
         return self.lebenspunkte <= 0
 
 herbert = Krieger("Sir Herbert", 100, 80, 35)
-arthur = Krieger("King Arthur", 90, 65, 95)
 
-kampfsimulation(herbert, arthur)
+# kampfsimulation(herbert, arthur)
