@@ -24,14 +24,33 @@ class Rechteck:
                 print(zeichen, end=" ")
             print()
 
-mein_rechteck = Rechteck(3, 5)
-meine_flaeche = mein_rechteck.getFlaeche()
-mein_umfang = mein_rechteck.getUmfang()
-print("Fläche:", meine_flaeche, "Umfang:", mein_umfang)
-mein_rechteck.visualizeRechteck()
+# mein_rechteck = Rechteck(3, 5)
+# meine_flaeche = mein_rechteck.getFlaeche()
+# mein_umfang = mein_rechteck.getUmfang()
+# print("Fläche:", meine_flaeche, "Umfang:", mein_umfang)
+# mein_rechteck.visualizeRechteck()
 
-dein_rechteck = Rechteck(6, 5)
-deine_flaeche = dein_rechteck.getFlaeche()
-dein_umfang = dein_rechteck.getUmfang()
-print("Fläche:", deine_flaeche, "Umfang:", dein_umfang)
-dein_rechteck.visualizeRechteck()
+# dein_rechteck = Rechteck(6, 5)
+# deine_flaeche = dein_rechteck.getFlaeche()
+# dein_umfang = dein_rechteck.getUmfang()
+# print("Fläche:", deine_flaeche, "Umfang:", dein_umfang)
+# dein_rechteck.visualizeRechteck()
+
+class Kreis:
+
+    # Konstante (unabh. von Instanz!)
+    PI = 3.14
+
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def getFlaeche(self):
+        return self.radius * self.radius * self.PI
+
+    def getUmfang(self):
+        return 2 * self.radius * self.PI
+    
+
+mein_kreis = Kreis(5)
+print("Fläche:", mein_kreis.getFlaeche())
+print("PI:", Kreis.PI)
