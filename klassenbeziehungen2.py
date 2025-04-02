@@ -16,11 +16,18 @@ def kampfsimulation(krieger1, krieger2):
 
 class Krieger:
     
-    def __init__(self, name, lebenspunkte, angriffskraft, verteidigung):
+    def __init__(self, name, lebenspunkte, angriffskraft, verteidigung, ruestung = None):
         self.name = name
         self.lebenspunkte = lebenspunkte
         self.angriffskraft = angriffskraft
         self.verteidigung = verteidigung
+        self.ruestung = ruestung
+        self.setRuestung(ruestung)
+    
+    def setRuestung(self, ruestung):
+        self.ruestung = ruestung
+        if self.ruestung != None:
+            self.verteidigung += self.ruestung.bonus
 
     def __str__(self):
         return f"Name: {self.name} | Lebenspunkte: {self.lebenspunkte} | Angriffskraft: {self.angriffskraft} | Verteidigung: {self.verteidigung}"
@@ -50,23 +57,24 @@ class Krieger:
     # def critical(self, factor: int) -> int:
     #     return self.angriffskraft * factor
 
-# critical_angriffskraft = herbert.critical(2.3) # geht auch wegen schwacher Typisierung!
-# print(critical_angriffskraft)
+class Ruestung:
+    
+    def __init__(self, name, bonus):
+        self.name = name
+        self.bonus = bonus
+    
+    def __str__(self):
+        return f"{self.name} liefert einen Verteidigungsbonus von {self.bonus}!"
+
+herbert = Krieger("Sir Herbert", 100, 80, 35)
+
+meine_ruestung = Ruestung("Eisenschild", 25)
+arthur = Krieger("King Arthur", 90, 60, 75, meine_ruestung)
+herbert.setRuestung(meine_ruestung)
+
+print(herbert)
+print(arthur)
+
 
 # kampfsimulation(herbert, arthur)
-
-# Operatoren: + - / * == <= >= ...
-# Liste der in Python verfügbaren Methoden: siehe Tabelle 7.1 (Magische Methoden) --> S. 496
-## Beispiel mit "Gleichheits-Überprüfung: "
-# sven = herbert
-# sven = Krieger("Sir Herbert", 100, 80, 35)
-
-# print("Speicheradresse von herbert:", id(herbert))
-# print("Speicheradresse von sven:", id(sven))
-
-# # sven.name = "Ritter Sven"
-# print("herbert:", herbert)
-# print("sven:", sven)
-
-# print(sven == herbert)
 
