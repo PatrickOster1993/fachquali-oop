@@ -1,0 +1,34 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.16 Chrome/132.0.6834.196 Electron/34.2.0 Safari/537.36" version="26.0.16">
+  <diagram name="Seite-1" id="0K1PrOaq9LxmHDQG06Dq">
+    <mxGraphModel dx="552" dy="486" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="C4OtkeYzmVM3o48okvzq-10" value="&lt;b&gt;Auto&lt;/b&gt;" style="swimlane;fontStyle=4;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="50" y="160" width="140" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="C4OtkeYzmVM3o48okvzq-11" value="+ marke: String&lt;div&gt;+ modell: String&lt;/div&gt;&lt;div&gt;+ baujahr: Integer&lt;/div&gt;" style="html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;rotatable=0;points=[[0,0.5],[1,0.5]];resizeWidth=1;whiteSpace=wrap;" vertex="1" parent="C4OtkeYzmVM3o48okvzq-10">
+          <mxGeometry y="30" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="C4OtkeYzmVM3o48okvzq-12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C4OtkeYzmVM3o48okvzq-10">
+          <mxGeometry y="90" width="140" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="C4OtkeYzmVM3o48okvzq-13" value="+ auto(): void&lt;div&gt;+__str__(): String&lt;br&gt;&lt;div&gt;+ starten():void&lt;/div&gt;&lt;div&gt;+ fahren(): void&lt;/div&gt;&lt;div&gt;+ stoppen(): void&lt;/div&gt;&lt;/div&gt;" style="html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;rotatable=0;points=[[0,0.5],[1,0.5]];resizeWidth=1;whiteSpace=wrap;" vertex="1" parent="C4OtkeYzmVM3o48okvzq-10">
+          <mxGeometry y="98" width="140" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="C4OtkeYzmVM3o48okvzq-17" value="&lt;b&gt;Shop&lt;/b&gt;" style="swimlane;fontStyle=4;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="240" y="160" width="140" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="C4OtkeYzmVM3o48okvzq-18" value="+ name: String&lt;div&gt;+ artikel: String [[]]&lt;/div&gt;&lt;div&gt;+ website: String&lt;/div&gt;" style="html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;rotatable=0;points=[[0,0.5],[1,0.5]];resizeWidth=1;whiteSpace=wrap;" vertex="1" parent="C4OtkeYzmVM3o48okvzq-17">
+          <mxGeometry y="30" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="C4OtkeYzmVM3o48okvzq-19" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C4OtkeYzmVM3o48okvzq-17">
+          <mxGeometry y="90" width="140" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="C4OtkeYzmVM3o48okvzq-20" value="+ shop(): void&lt;div&gt;&lt;div&gt;+ sortProduct():void&lt;/div&gt;&lt;div&gt;+ addProduct(): void&lt;/div&gt;&lt;div&gt;+ removeProduct(): void&lt;/div&gt;&lt;/div&gt;&lt;div&gt;+displayProduct():void&lt;/div&gt;" style="html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;rotatable=0;points=[[0,0.5],[1,0.5]];resizeWidth=1;whiteSpace=wrap;" vertex="1" parent="C4OtkeYzmVM3o48okvzq-17">
+          <mxGeometry y="98" width="140" height="92" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
