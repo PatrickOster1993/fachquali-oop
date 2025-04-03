@@ -1,0 +1,51 @@
+Kapselung (Encapsulation) ist ein Prinzip der Objektorientierten Programmierung (OOP), das darauf abzielt, Daten und Methoden innerhalb einer Klasse zu verbergen und nur über definierte Schnittstellen darauf zuzugreifen.
+
+Vorteile der Kapselung:
+
+Schutz von Daten vor unbeabsichtigtem Ändern
+
+Verbesserung der Wartbarkeit durch klar definierte Zugriffsmethoden
+
+Reduzierung der Komplexität durch Verbergen von Implementierungsdetails
+
+Ermöglichung von Kontrollmechanismen (z. B. Validierung von Werten)
+
+
+Zugriffsmodifikatoren in Python
+Python kennt keine strikten Zugriffsmodifikatoren wie private, protected oder public (wie z. B. in Java oder C#). Stattdessen nutzt es Namenskonventionen, um die Sichtbarkeit von Attributen und Methoden zu kennzeichnen:
+
+Syntax	            Modifikator             Bedeutung
+
+public_var	        Public	                Öffentlich, von überall zugänglich
+_protected_var	    Protected	            Geschützt, nur innerhalb der Klasse und Unterklassen gedacht (kein echter Schutz)
+__private_var	    Private	Privat,         durch Namensänderung schwer zugänglich, aber nicht vollständig versteckt
+
+
+Die beste Lösung für Kapselung ist der Zugriff über Getter und Setter-Methoden:
+
+Kontrolle über Daten (z. B. Validierung)
+
+Verhindert versehentliche Manipulation
+
+
+Kapselung schützt Daten und erleichtert Wartung und Debugging.
+
+Python erzwingt den Schutz nicht, aber Konventionen (_protected, __private) helfen.
+
+Beste Praxis: Getter und Setter mit @property, um Zugriff zu steuern.
+
+
+@property Beispiel:
+
+class Auto:
+    def __init__(self, marke, geschwindigkeit):
+        self.__marke = marke  
+
+    @property
+    def marke(self):  # Getter
+        return self.__marke
+
+    @marke.setter
+    def marke(self, neue_marke):  # Setter
+        if neue_marke:  
+            self.__marke = neue_marke
