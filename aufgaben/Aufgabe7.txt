@@ -1,0 +1,153 @@
+Magic Methods (auch dunder methods genannt, von double underscore) sind spezielle Methoden in Python, die durch zwei Unterstriche (__) am Anfang und Ende ihres Namens gekennzeichnet sind.
+Sie ermöglichen die Anpassung des Verhaltens von Objekten in Bezug auf Operatoren, Typumwandlungen, Iterationen und mehr.
+
+Operatorüberladung
+Magic Methods können verwendet werden, um das Verhalten von Operatoren anzupassen.
+
+Arithmetische Operatoren
+
+__add__(self, other) → +
+
+__sub__(self, other) → -
+
+__mul__(self, other) → *
+
+__truediv__(self, other) → /
+
+__floordiv__(self, other) → //
+
+__mod__(self, other) → %
+
+__pow__(self, other) → **
+
+Vergleichsoperatoren
+
+__eq__(self, other) → ==
+
+__ne__(self, other) → !=
+
+__lt__(self, other) → <
+
+__le__(self, other) → <=
+
+__gt__(self, other) → >
+
+__ge__(self, other) → >=
+
+Diese Methoden machen eine Klasse iterierbar oder ermöglichen den Zugriff auf Elemente.
+
+__len__(self) → Definiert die Länge (len(obj))
+
+__getitem__(self, key) → Zugriff auf Elemente (obj[key])
+
+__setitem__(self, key, value) → Setzen von Werten (obj[key] = value)
+
+__delitem__(self, key) → Löschen von Elementen (del obj[key])
+
+__contains__(self, item) → Prüft item in obj
+
+Iteration
+Diese Methoden ermöglichen es, eine Klasse iterierbar zu machen.
+
+__iter__(self) → Gibt einen Iterator zurück.
+
+__next__(self) → Gibt das nächste Element zurück.
+
+Kontextmanager
+Mit diesen Methoden kann eine Klasse als Kontextmanager (with-Anweisung) verwendet werden.
+
+__enter__(self) → Wird bei with-Beginn ausgeführt.
+
+__exit__(self, exc_type, exc_value, traceback) → Wird am Ende von with ausgeführt.
+
+
+
+################################################################################################################################################################
+
+Klassendiagramme
+Ein Klassendiagramm ist eine zentrale Diagrammart der Unified Modeling Language (UML), die die Struktur eines Systems durch Klassen, deren Attribute und Methoden sowie deren Beziehungen zueinander darstellt.
+Es dient zur Modellierung der Objektorientierten Programmierung (OOP) und hilft bei der Analyse, dem Entwurf und der Dokumentation von Software-Systemen.
+
+Durch den Einsatz von Klassendiagrammen kann die Lesbarkeit und Wartbarkeit von Code verbessert werden, indem die Systemarchitektur visuell dargestellt wird.
+
+
+Klassen
+
+Eine Klasse wird durch ein Rechteck dargestellt und in drei Abschnitte unterteilt:
+
+Klassenname (oben, fett geschrieben)
+
+Attribute (in der Mitte, Eigenschaften der Klasse)
+
+Methoden (unten, Verhalten der Klasse)
+
++---------------------+
+|     Person         |
++---------------------+
+| - name: str        |
+| - alter: int       |
++---------------------+
+| + sprechen()       |
+| + essen()          |
++---------------------+
+
+
+Namenskonventionen:
+
++ (Public) → Öffentlich, von überall zugänglich
+
+- (Private) → Privat, nur innerhalb der Klasse zugänglich
+
+# (Protected) → Geschützt, nur innerhalb der Klasse und ihrer Unterklassen zugänglich
+
+~ (Package) → Zugriff innerhalb desselben Pakets (selten genutzt)
+
+
+Attribute und Methoden
+
+Attribute: Definieren die Eigenschaften eines Objekts (z. B. name: str, alter: int)
+
+Methoden: Definieren das Verhalten einer Klasse (z. B. sprechen(), essen())
+
+Getter & Setter: Oft für den kontrollierten Zugriff auf Attribute verwendet
+
+
+Assoziation
+
+Beschreibt eine einfache Verbindung zwischen zwei Klassen
+
+Wird mit einer durchgezogenen Linie dargestellt
+
+Optional mit Rollen (z. B. besitzt, verwaltet) und Multiplizitäten (1, 0..*, 1..*) versehen
+
+
+Aggregation (Ganzes-Teil-Beziehung, schwache Bindung)
+
+Eine spezielle Form der Assoziation
+
+Das Teil-Objekt kann existieren, ohne dass das Ganze existiert
+
+Wird mit einer leeren Raute dargestellt
+
+
+Komposition (starke Bindung)
+
+Eine stärkere Form der Aggregation
+
+Das Teil-Objekt kann nicht ohne das Ganze existieren
+
+Wird mit einer gefüllten Raute dargestellt
+
+
+Vererbung (Generalisierung)
+
+Zeigt eine "ist-ein"-Beziehung zwischen Klassen
+
+Wird mit einer durchgezogenen Linie mit einem Dreieck dargestellt
+
+
+Abhängigkeit (Dependency)
+
+Zeigt, dass eine Klasse eine andere Klasse temporär verwendet
+
+Wird mit einer gestrichelten Linie und Pfeilspitze dargestellt
