@@ -48,10 +48,11 @@ class Exchange:
         self._stocks.remove(stock)
 
     def getStockByName(self, name:str):
-        if name in self._stocks:
-            return f"Aktie: {name} ist vorhanden."
-        else:
-            return f"Aktie {name} ist nicht vorhanden."
+        for i in range(len(self._stocks)):
+                stockName = self._stocks[i]
+                if stockName._name == name:
+                    return f"Aktie: {name} ist vorhanden."
+        return f"Aktie {name} ist nicht vorhanden."
         
     def getAmountOfStock(self):
         return len(self._stocks)
@@ -66,48 +67,53 @@ class Exchange:
 ###########################################################
 ############# Aufgabe 1 Abfragen ##########################
 
-mystock = Stock("ING Group", 17.44, 1_000_000)
+stock_ing = Stock("ING Group", 17.44, 1_000_000)
 
-print(mystock)
+print(stock_ing)
 print("####################################################")
-mystock/2
+stock_ing/2
 
-print(mystock)
-print("####################################################")
-
-mystock._updatePrice(9.00)
-
-print(mystock)
+print(stock_ing)
 print("####################################################")
 
-print(f"Marktvolumen: {mystock.getMarketValue()}€")
+stock_ing._updatePrice(9.00)
+
+print(stock_ing)
+print("####################################################")
+
+print(f"Marktvolumen: {stock_ing.getMarketValue()}€")
 
 print("####################################################")
 
 
 ###########################################################
-############# Aufgabe 2 Abfragen ##########################
+############# Aufgabe 2 und 3 Abfragen ####################
 
-myExchange = Exchange("NYSE", "New York", "USD", 1971)
+exchange_nyse = Exchange("NYSE", "New York", "USD", 1971)
 
-print(myExchange)
-
-print("####################################################")
-
-myExchange._addStock("Caterpillar")
-myExchange._addStock("Coca-Cola")
-myExchange._addStock("UnitedHealth")
-
-myExchange.listStocks()
-print("####################################################")
-
-myExchange._removeStock("Coca-Cola")
-
-myExchange.listStocks()
-print("####################################################")
-
-print(myExchange.getStockByName("Caterpillar"))
+print(exchange_nyse)
 
 print("####################################################")
 
-print(f"Aktienanzahl: {myExchange.getAmountOfStock()}")
+stock_caterpillar = Stock("Caterpillar", 250, 1_500_000)
+
+exchange_nyse._addStock(stock_caterpillar)
+
+exchange_nyse.listStocks()
+print("####################################################")
+
+# exchange_nyse._removeStock("Coca-Cola")
+
+exchange_nyse.listStocks()
+print("####################################################")
+
+print(exchange_nyse.getStockByName("Caterpillar"))
+
+print("####################################################")
+
+print(f"Aktienanzahl: {exchange_nyse.getAmountOfStock()}")
+
+print("####################################################")
+
+###########################################################
+############# Aufgabe 4 ###################################
