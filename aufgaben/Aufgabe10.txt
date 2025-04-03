@@ -49,3 +49,62 @@ class Auto:
     def marke(self, neue_marke):  # Setter
         if neue_marke:  
             self.__marke = neue_marke
+
+
+
+#####################################################################################################
+Sequenzdiagramm
+
+Ein Sequenzdiagramm ist eine Diagrammart der Unified Modeling Language (UML), die das dynamische Verhalten eines Systems darstellt.
+Es zeigt, wie Objekte miteinander interagieren, indem es den zeitlichen Ablauf von Nachrichten und Methodenaufrufen zwischen ihnen visualisiert.
+
+Sequenzdiagramme werden verwendet, um:
+
+Abläufe in Software-Systemen zu modellieren (z. B. API-Aufrufe, Benutzerinteraktionen)
+
+Interaktionen zwischen Objekten oder Systemkomponenten zu verstehen
+
+Fehlersuche und Optimierung zu erleichtern
+
+Kommunikation zwischen Entwicklern und Stakeholdern zu verbessern
+
+Typische Anwendungsfälle:
+Use-Case-Szenarien (z. B. Benutzer meldet sich an)
+Kommunikation zwischen Microservices
+Ablauf in verteilten Systemen
+
+Grundelemente eines Sequenzdiagramms:
+
+Akteure und Objekte
+Akteure: Externe Benutzer oder Systeme, die mit dem System interagieren (z. B. Kunde, Admin).
+
+Objekte: Klassen oder Komponenten im System (z. B. Datenbank, Bestellverwaltung).
+
+Darstellung: Akteure und Objekte werden als rechteckige Boxen mit Namen dargestellt.
+
+
+Lebenslinien (Lifelines)
+Jeder Akteur oder jedes Objekt erhält eine vertikale gestrichelte Linie, die seine Existenz während der Interaktion darstellt.
+
+Die Lebenslinie beginnt am oberen Rand und geht nach unten.
+
+Nachrichten und Methodenaufrufe
+Synchrone Nachricht : Der Sender wartet auf die Antwort.
+
+Asynchrone Nachricht : Der Sender fährt fort, ohne auf eine Antwort zu warten.
+
+Antwort : Rückgabe eines Wertes oder einer Bestätigung.
+
+
+Aktivierungsbalken (Execution Specification)
+Zeigt an, wann ein Objekt aktiv ist (z. B. beim Bearbeiten einer Anfrage).
+
+Dargestellt als dicker vertikaler Balken auf der Lebenslinie.
+
+
+Kontrollstrukturen
+Alternative (alt): Zeigt eine Entscheidung mit mehreren Möglichkeiten.
+
+Schleife (loop): Wiederholt eine Aktion.
+
+Optionale Aktion (opt): Bedingte Ausführung einer Nachricht.
