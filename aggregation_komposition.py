@@ -60,4 +60,4 @@ mein_auto.fahren()
 # Hier läge dann immer eine Aggregationsbeziehung vor - ansonsten eine Kompositionsbeziehung!
 
 # Merksatz 2: Eine Aggregation liegt immer dann vor, wenn die Existenz eines "Teils" in ALLEN Fällen
-# unabhängig von der Existenz des "Ganzen" ist!
+# unabhängig von der Existenz des "Ganzen" ist - unabhängig vom Programmablauf (nur bezüglich der Beziehungen zu den Klassen untereinander)
