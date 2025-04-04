@@ -1,41 +1,3 @@
-' class Song:
-
-'     def __str__(self):
-'         return f"Song-ID: {self.id} | Titel: {self.__titel} | Künstler: {self.kuenstler} | Genre: {self.__genre} | Dauer (s): {self.dauer}"
-
-' class Playlist:
-    
-
-    
-'     def __str__(self):
-'         infos = "Playlist: " + self.name + " | Dauer: " + str(self.__dauer) + "\n"
-'         for song in self.__songs:
-'             infos += (str(song) + "\n")
-'         return infos
-
-'     def __add__(self, song):
-'         self.__songs.append(song)
-'         self.__berechneAbspieldauer()
-'         return self
-
-'     def __berechneAbspieldauer(self):
-'         abspieldauer = 0
-'         for song in self.__songs:
-'             abspieldauer += song.dauer
-'         self.__dauer = abspieldauer
-
-'     def getAnzahlTitel(self):
-'         return len(self.__songs)
-
-
-
-'     def sucheSong(self, songID):
-'         for song in self.__songs:
-'             if song.id == songID:
-'                 return song
-'         return None
-
-
 @startuml my_playlist
 mainframe **sd** my_playlist
 actor User
@@ -63,19 +25,18 @@ end
 User -> ":Playlist" : _str__()
 ":Playlist" --> User
 
+User -> ":Playlist" : getHaufigsterKuenstler())
 
+loop
+":Playlist" -> ":Playlist" : kuenstler_liste.append(kuenstler)
+end
 
-'     def getHaufigsterKuenstler(self):
-'         kuenstler_liste = []
-'         kuenstler_count = []
-'         for song in self.__songs:
-'             kuenstler = song.kuenstler
-'             kuenstler_liste.append(kuenstler)
-'         for i in range(len(kuenstler_liste)):
-'             kuenstler = kuenstler_liste[i]
-'             kuenstler_count.append(kuenstler_liste.count(kuenstler))
-'         kuenstler_index = kuenstler_count.index(max(kuenstler_count))
-'         return kuenstler_liste[kuenstler_index]
+loop
+":Playlist" -> ":Playlist" : kuenstler_count.append(kuenstler)
+end
 
-' print(playlist.getHaufigsterKuenstler())
-' print(playlist.sucheSong("P-B-01"))
+":Playlist" -> ":Playlist" : kuenstler_count.index(max(kuenstler_count))
+":Playlist" --> User
+
+User -> ":Playlist" : sucheSong()
+":Playlist" --> User
