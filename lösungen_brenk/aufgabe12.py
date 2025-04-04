@@ -1,24 +1,24 @@
 class Stock:
-    def __init__(self, name, price, volume):
+    def __init__(self, name, price, __volume):
         self.name = name
         self.__price = price
-        self.volume = volume
+        self.__volume = __volume
 
     def updatePrice(self, newPrice):
         self.__price = newPrice
     
     def getMarketValue(self):
-        return self.__price * self.volume
+        return self.__price * self.__volume
 
     def __str__(self):
-        return f"Name der Aktie: {self.name} | Kurs: {self.__price} | Handelsvolumen: {self.volume}"
+        return f"Name der Aktie: {self.name} | Kurs: {self.__price} | Handels__volumen: {self.__volume}"
     
     def __truediv__(self, splitFactor):
         if splitFactor <= 0:
             raise ValueError("Der Split-Faktor muss größer als 0 sein.")
         
         self.__price /= splitFactor
-        self.volume *= splitFactor
+        self.__volume *= splitFactor
         return self
     
 class Exchange:
@@ -27,27 +27,27 @@ class Exchange:
         self.location = location
         self.currency = currency
         self.establishedYear = establishedYear
-        self.stocks = []
+        self.__stocks = []
 
     def addStock(self, stock):
-        self.stocks.append(stock)
+        self.__stocks.append(stock)
     
     def removeStock(self, stock):
-        if stock in self.stocks:
-            self.stocks.remove(stock)
+        if stock in self.__stocks:
+            self.__stocks.remove(stock)
         else:
             print("{stock} is not listed.")
 
     def getStockByName(self, name):
-        for stock in self.stocks:
+        for stock in self.__stocks:
             if name == stock.name:
                 return stock
 
     def getStockCount(self):
-        return len(self.stocks)
+        return len(self.__stocks)
 
-    def listStocks(self):
-        print("\n".join(str(stock) for stock in self.stocks))
+    def list__stocks(self):
+        print("\n".join(str(stock) for stock in self.__stocks))
 
 vw = Stock("VW", 167.79, 10000)
 daimler = Stock("Daimler", 120.56, 10000000)
@@ -57,11 +57,11 @@ print(daimler.getMarketValue())
 
 frankfurt.addStock(vw)
 frankfurt.addStock(daimler)
-frankfurt.listStocks()
+frankfurt.list__stocks()
 
 daimler /= 2
-frankfurt.listStocks()
-
+frankfurt.list__stocks()
+print(daimler)
 print(frankfurt.getStockCount())
 
 # ### **5. Zeichnen Sie abschließend ein Sequenzdiagramm für Ihren in Unterpunkt „3.“ beschriebenen Programmablauf.**  
