@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+########## Head
 # Aufgabe 12   Klassen- und Sequenzdiagramm
 # Werfen  Sie  einen  Blick  auf  das  Ihnen  vorliegende  Klassendiagramm,  welches  das  Zusammenspiel 
 # zwischen einer Börse und, an der jeweiligen Börse gelisteten, Unternehmen veranschaulichen soll. 
@@ -167,7 +167,7 @@ if __name__ == "__main__":
     # Anzahl der Aktien anzeigen
     print("\nAnzahl der Aktien an der Börse:")
     print(nasdaq.getStockCount())
-=======
+########
 class Stock:
 
     def __init__(self, name, price, volume):
@@ -266,4 +266,4 @@ nasdaq.listStocks()
 # stock /= 2 --> stock = stock / 2
 
 # __truediv__() <=> /
->>>>>>> main
+########  main
