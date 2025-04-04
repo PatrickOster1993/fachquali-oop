@@ -13,15 +13,11 @@ class Stock:
         return f"Name: {self._name}\nPreis: {self._price}\nVolumen: {self._volume}"
     
     def __truediv__(self, splitFactor):
-        priceAfterSplit = self._price / splitFactor
-        volumeAfterSplit = self._volume * splitFactor
-        self._price = priceAfterSplit
-        self._volume = volumeAfterSplit
-        return self._price / splitFactor and self._volume * splitFactor
+        self._price /= splitFactor
+        self._volume *= splitFactor
     
     def _updatePrice(self, newPrice):
         self._price = newPrice
-        return self._price
 
     def getMarketValue(self):
         marketValue = self._price * self._volume
@@ -45,8 +41,15 @@ class Exchange:
         self._stocks.append(stock)
 
     def _removeStock(self, stock:str):
-        self._stocks.remove(stock)
-
+        for i in range(len(self._stocks)):
+                stockName = self._stocks[i]
+                if stockName._name == stock:
+                    self._stocks.remove(stockName)
+                    return f"Aktie: {stock} wurde entfernt."
+                else:
+                    print("Fehler")
+        return f"Aktie {stock} ist nicht vorhanden."
+    
     def getStockByName(self, name:str):
         for i in range(len(self._stocks)):
                 stockName = self._stocks[i]
@@ -68,10 +71,14 @@ class Exchange:
 ############# Aufgabe 1 Abfragen ##########################
 
 stock_ing = Stock("ING Group", 17.44, 1_000_000)
+stock_caterpillar = Stock("Caterpillar", 282, 1_500_000)
+stock_coca_cola = Stock("Coca-Cola", 66, 3_000_000)
+stock_fed_ex = Stock("FedEx", 200, 2_000_000)
 
 print(stock_ing)
 print("####################################################")
-stock_ing/2
+stock_ing.__truediv__(2)
+stock_ing = stock_ing.__truediv__(2)
 
 print(stock_ing)
 print("####################################################")
@@ -95,19 +102,24 @@ print(exchange_nyse)
 
 print("####################################################")
 
-stock_caterpillar = Stock("Caterpillar", 250, 1_500_000)
-
 exchange_nyse._addStock(stock_caterpillar)
+exchange_nyse._addStock(stock_coca_cola)
+exchange_nyse._addStock(stock_fed_ex)
+
 
 exchange_nyse.listStocks()
 print("####################################################")
 
-# exchange_nyse._removeStock("Coca-Cola")
+removeCaterpillar = exchange_nyse._removeStock("Caterpillar")
+print(removeCaterpillar)
+print("####################################################")
+
 
 exchange_nyse.listStocks()
 print("####################################################")
 
-print(exchange_nyse.getStockByName("Caterpillar"))
+print("###########GetStockByName:")
+print(exchange_nyse.getStockByName("Coca-Cola"))
 
 print("####################################################")
 
