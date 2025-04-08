@@ -40,21 +40,29 @@ class Exchange:
     def _addStock(self, stock:str):
         self._stocks.append(stock)
 
-    def _removeStock(self, stock:str):
-        for i in range(len(self._stocks)):
-                stockName = self._stocks[i]
-                if stockName._name == stock:
-                    self._stocks.remove(stockName)
-                    return f"Aktie: {stock} wurde entfernt."
-                else:
-                    print("Fehler")
-        return f"Aktie {stock} ist nicht vorhanden."
-    
-    def getStockByName(self, name:str):
+    def search(self, name):
         for i in range(len(self._stocks)):
                 stockName = self._stocks[i]
                 if stockName._name == name:
-                    return f"Aktie: {name} ist vorhanden."
+                    return stockName
+        
+        
+
+
+    def _removeStock(self, name:str):
+        if self.search(name):
+            self._stocks.remove(self.search(name))
+            return f"Aktie: {name} wurde entfernt."
+        else:
+            print("Fehler")
+        return f"Aktie {name} ist nicht vorhanden."
+    
+
+
+
+    def getStockByName(self, name:str):
+        if self.search(name):
+            return f"Aktie: {name} ist vorhanden."
         return f"Aktie {name} ist nicht vorhanden."
         
     def getAmountOfStock(self):
@@ -75,57 +83,64 @@ stock_caterpillar = Stock("Caterpillar", 282, 1_500_000)
 stock_coca_cola = Stock("Coca-Cola", 66, 3_000_000)
 stock_fed_ex = Stock("FedEx", 200, 2_000_000)
 
-print(stock_ing)
-print("####################################################")
-stock_ing.__truediv__(2)
-stock_ing = stock_ing.__truediv__(2)
+# print(stock_ing)
+# print("####################################################")
+# stock_ing.__truediv__(2)
+# stock_ing = stock_ing.__truediv__(2)
 
-print(stock_ing)
-print("####################################################")
+# print(stock_ing)
+# print("####################################################")
 
-stock_ing._updatePrice(9.00)
+# # stock_ing._updatePrice(9.00)
 
-print(stock_ing)
-print("####################################################")
+# print(stock_ing)
+# print("####################################################")
 
-print(f"Marktvolumen: {stock_ing.getMarketValue()}€")
+# print(f"Marktvolumen: {stock_ing.getMarketValue()}€")
 
-print("####################################################")
+# print("####################################################")
 
 
 ###########################################################
-############# Aufgabe 2 und 3 Abfragen ####################
+# ############# Aufgabe 2 und 3 Abfragen ####################
 
 exchange_nyse = Exchange("NYSE", "New York", "USD", 1971)
 
-print(exchange_nyse)
+# print(exchange_nyse)
 
-print("####################################################")
+# print("####################################################")
 
 exchange_nyse._addStock(stock_caterpillar)
 exchange_nyse._addStock(stock_coca_cola)
 exchange_nyse._addStock(stock_fed_ex)
 
 
-exchange_nyse.listStocks()
-print("####################################################")
+# exchange_nyse.listStocks()
+# print("####################################################")
 
 removeCaterpillar = exchange_nyse._removeStock("Caterpillar")
 print(removeCaterpillar)
-print("####################################################")
+removeCaterpillar2 = exchange_nyse._removeStock("Cater")
+#print(removeCaterpillar2)
+# print(removeCaterpillar)
+# print("####################################################")
 
 
-exchange_nyse.listStocks()
-print("####################################################")
+# exchange_nyse.listStocks()
+# print("####################################################")
 
-print("###########GetStockByName:")
-print(exchange_nyse.getStockByName("Coca-Cola"))
+# print("###########GetStockByName:")
+# print(exchange_nyse.getStockByName("Coca-Cola"))
 
-print("####################################################")
+# print("####################################################")
 
-print(f"Aktienanzahl: {exchange_nyse.getAmountOfStock()}")
+# print(f"Aktienanzahl: {exchange_nyse.getAmountOfStock()}")
 
-print("####################################################")
+# print("####################################################")
 
-###########################################################
-############# Aufgabe 4 ###################################
+
+# test = exchange_nyse.getStockByName("Coca-Cola")
+
+# print(test)
+# ###########################################################
+# ############# Aufgabe 4 ###################################
