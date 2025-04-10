@@ -7,12 +7,12 @@ class Geraet(ABC):
         self._einsatzjahr = einsatzjahr
         self._status = "ausgeschaltet"
 
-    #@abstractmethod
+    @abstractmethod
     def zeige_status(self):
         '''zeige_status() – soll Gerätedaten und aktuellen Status anzeigen'''
         pass
 
-    #@abstractmethod
+    @abstractmethod
     def geraete_typ(self):
         '''geraetetyp() – soll "Server", "Switch" oder "Storage" zurückgeben'''
         pass 
@@ -41,8 +41,7 @@ class Switch(Geraet):
         print(f"Gerät: {self._modell} | Status: {self._status}")
 
     def geraetetyp(self) -> str:
-        print(f"Aufgabe doof, Kein Gerätetyp festgelegt. Deswegen printe ich einfach 'Server'.")
-        print("Gerätetyp: Switch")
+        return "Switch"
 
 class Server(Geraet):
     def __init__(self, hersteller: str, modell: str, einsatzjahr: int, anzahl_kerne: int):
@@ -53,8 +52,7 @@ class Server(Geraet):
         print(f"Gerät: {self._modell} | Status: {self._status}")
     
     def geraetetyp(self) -> str:
-        print(f"Aufgabe doof, Kein Gerätetyp festgelegt. Deswegen printe ich einfach 'Server'.")
-        print("Gerätetyp: Server")              
+        return "Server"     
     
 
 class Storage(Geraet):
@@ -66,8 +64,7 @@ class Storage(Geraet):
         print(f"Gerät: {self._modell} | Status: {self._status}")
 
     def geraetetyp(self) -> str:
-        print(f"Aufgabe doof, Kein Gerätetyp festgelegt. Deswegen printe ich einfach 'Server'.")
-        print("Gerätetyp: Storage")
+        return "Storage"
 
 class Rechenzentrum:
     def __init__(self):
