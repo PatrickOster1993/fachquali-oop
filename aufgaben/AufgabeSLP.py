@@ -13,7 +13,7 @@ class Geraet(ABC):
         pass
 
     @abstractmethod
-    def geraete_typ(self):
+    def geraetetyp(self):
         '''geraetetyp() – soll "Server", "Switch" oder "Storage" zurückgeben'''
         pass 
     
@@ -38,7 +38,7 @@ class Switch(Geraet):
         self.ports = ports
 
     def zeige_status(self):
-        print(f"Gerät: {self._modell} | Status: {self._status}")
+        print(f"Gerät: {self._modell}| Ports: {self.ports} | Status: {self._status}")
 
     def geraetetyp(self) -> str:
         return "Switch"
@@ -49,7 +49,7 @@ class Server(Geraet):
         self.anzahl_kerne = anzahl_kerne
     
     def zeige_status(self):
-        print(f"Gerät: {self._modell} | Status: {self._status}")
+        print(f"Gerät: {self._modell} | Anzahl Kerne: {self.anzahl_kerne} | Status: {self._status}")
     
     def geraetetyp(self) -> str:
         return "Server"     
@@ -61,7 +61,7 @@ class Storage(Geraet):
         self.kapazitaet_tb = kapazitaet_tb
 
     def zeige_status(self):
-        print(f"Gerät: {self._modell} | Status: {self._status}")
+        print(f"Gerät: {self._modell}| Speicherkapazität: {self.kapazitaet_tb} | Status: {self._status}")
 
     def geraetetyp(self) -> str:
         return "Storage"
@@ -84,12 +84,16 @@ class Rechenzentrum:
 
     def geraete_nach_typ(self, typ: str):
         for geraete in self.__geraete:
-            if geraete.geraetetyp().lower() == typ.lower():
+            if geraete.geraetetyp() == typ: # laut gpt ist das unsauber, weil Falscheingaben (Groß und Kleinschreibung) zu Fehlerhaften ausgabe führen können (.lower() benutzen. 
+                # Außerdem greifen wir auf eine protected Variable zu.. das sollten wir eigentlich nicht tun. 
+                # Demnach sollte man eine Getter methode einbauen in der Klasse, auf die dann hier zugegriffen werden soll.
                 geraete.zeige_status()
 
     def suche_geraet_nach_modell(self, modellname: str):
         for geraete in self.__geraete:
-            if modellname == geraete._modell:
+            if modellname == geraete._modell:# laut gpt ist das unsauber, weil Falscheingaben (Groß und Kleinschreibung) zu Fehlerhaften ausgabe führen können (.lower() benutzen. 
+                # Außerdem greifen wir auf eine protected Variable zu.. das sollten wir eigentlich nicht tun. 
+                # Demnach sollte man eine Getter methode einbauen in der Klasse, auf die dann hier zugegriffen werden soll.
                 geraete.zeige_status()
 
 
@@ -112,5 +116,6 @@ if __name__ == "__main__":
     print("###############################################################")
     rechenzentrum1.aktive_geraete_anzeigen()
     print("###############################################################")
-    rechenzentrum1.suche_geraet_nach_modell("2210")
+    rechenzentrum1.suche_geraet_nach_modell("840")
     print("###############################################################")
+    rechenzentrum1.geraete_nach_typ("Storage")
