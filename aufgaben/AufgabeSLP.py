@@ -32,6 +32,17 @@ class Geraet(ABC):
     def ist_aktiv(self):
         return self._status == "aktiv"
 
+class Switch(Geraet):
+    def __init__(self, hersteller: str, modell: str, einsatzjahr: int, ports: int):
+        super().__init__(hersteller, modell, einsatzjahr)
+        self.ports = ports
+
+    def zeige_status(self):
+        print(f"Gerät: {self._modell} | Status: {self._status}")
+
+    def geraetetyp(self) -> str:
+        print(f"Aufgabe doof, Kein Gerätetyp festgelegt. Deswegen printe ich einfach 'Server'.")
+        print("Gerätetyp: Switch")
 
 class Server(Geraet):
     def __init__(self, hersteller: str, modell: str, einsatzjahr: int, anzahl_kerne: int):
@@ -56,7 +67,7 @@ class Storage(Geraet):
 
     def geraetetyp(self) -> str:
         print(f"Aufgabe doof, Kein Gerätetyp festgelegt. Deswegen printe ich einfach 'Server'.")
-        print("Gerätetyp: Server")
+        print("Gerätetyp: Storage")
 
 class Rechenzentrum:
     def __init__(self):
@@ -81,13 +92,28 @@ class Rechenzentrum:
 
     def suche_geraet_nach_modell(self, modellname: str):
         for geraete in self.__geraete:
-            if modellname.lower() in geraete._modell.lower():
+            if modellname == geraete._modell:
                 geraete.zeige_status()
 
 
+if __name__ == "__main__":
+    server1 = Server("HP", "2210", 2025, 12)
+    switch1 = Switch("TP-Link", "840", 2021, 8)
+    storage1 = Storage("Samsung", "980", 2021, 4)
 
-# fritzbox = Geraet("Fritzbox", "7730", 2010, "deaktiviert")
+    rechenzentrum1 = Rechenzentrum()
 
-# fritzbox.starten()
+    rechenzentrum1.geraet_hinzufuegen(server1)
+    rechenzentrum1.geraet_hinzufuegen(switch1)
+    rechenzentrum1.geraet_hinzufuegen(storage1)
 
-# print(fritzbox.zeige_status())
+    server1.starten()
+
+    storage1.wartung_starten()
+
+    rechenzentrum1.alle_geraete_anzeigen()
+    print("###############################################################")
+    rechenzentrum1.aktive_geraete_anzeigen()
+    print("###############################################################")
+    rechenzentrum1.suche_geraet_nach_modell("2210")
+    print("###############################################################")
