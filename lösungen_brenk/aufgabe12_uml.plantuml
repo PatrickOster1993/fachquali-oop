@@ -1,0 +1,33 @@
+@startuml aufgabe12
+actor User
+
+User --> ":Stock" : create()
+activate ":Stock"
+User --> ":Stock" : create()
+activate ":Stock"
+User --> ":Exchange" : create()
+activate ":Exchange"
+
+User -> ":Stock" : getMarketValue()
+":Stock" -> User : return MarketValue
+User -> ":Exchange" : addStock(vw)
+User -> ":Exchange" : addStock(daimler)
+
+User -> ":Exchange" : listStocks()
+
+loop
+    ":Stock" -> ":Exchange" : toString()
+end
+
+User -> ":Stock" : /= 2
+User -> ":Stock" : split Price and Volume
+
+User -> ":Exchange" : listStocks()
+
+loop
+    ":Stock" -> ":Exchange" : toString()
+end
+
+User -> ":Stock" : toString()
+User -> ":Exchange" : getStockCount()
+@enduml

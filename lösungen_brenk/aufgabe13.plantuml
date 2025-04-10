@@ -1,0 +1,42 @@
+@startuml my_playlist
+mainframe **sd** my_playlist
+actor User
+
+User --> ":Song" : create()
+activate ":Song"
+
+User -> ":Song" : _str__()
+":Song" --> User
+
+User --> ":Song" : create()
+activate ":Song"
+
+User --> ":Song" : create()
+activate ":Song"
+
+User --> ":Playlist" : create()
+activate ":Playlist"
+
+loop
+":Playlist" --> ":Song" : append()
+":Playlist" -> ":Playlist": berechneAbspieldauer()
+end
+
+User -> ":Playlist" : _str__()
+":Playlist" --> User
+
+User -> ":Playlist" : getHaufigsterKuenstler())
+
+loop
+":Playlist" -> ":Playlist" : kuenstler_liste.append(kuenstler)
+end
+
+loop
+":Playlist" -> ":Playlist" : kuenstler_count.append(kuenstler)
+end
+
+":Playlist" -> ":Playlist" : kuenstler_count.index(max(kuenstler_count))
+":Playlist" --> User
+
+User -> ":Playlist" : sucheSong()
+":Playlist" --> User
