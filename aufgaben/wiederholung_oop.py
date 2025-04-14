@@ -57,7 +57,7 @@ class Watchlist:
         return self
   
     def __str__(self):
-        watchlist_overview = f"Meine Watchlist: {self.name} | Gesamtdauer: {self.__dauer}\n-----------------------------------------------------\n"
+        watchlist_overview = f"Watchlist: {self.name} | Gesamtdauer: {self.__dauer}\n-----------------------------------------------------\n"
         for inhalt in self.__inhalte:
             watchlist_overview += inhalt.overview()
             watchlist_overview += "\n"
@@ -70,16 +70,55 @@ class Watchlist:
             gesamtdauer += inhalt_dauer
         self.__dauer = gesamtdauer
 
-##### Sequenz für Sequenzdiagramm (Beginn) #####
+class Nutzer:
+
+    def __init__(self):
+        self.WatchlistList = []
+        self.likedContent = []
+
+    def __add__(self, watchlist):
+        self.WatchlistList.append(watchlist)
+        return self.WatchlistList
+
+    def __str__(self):
+        watchlistList_overview = f"Meine Watchlists:\n"
+        for inhalt in self.WatchlistList:
+            watchlistList_overview += inhalt.__str__()
+            watchlistList_overview += "\n"
+        return watchlistList_overview
+
+    def removeContentFromSpecificWatchlist(self, watchlist_titel, content_titel):
+        for watchlist in self.WatchlistList:
+            if watchlist_titel == watchlist.name:
+                pass
+
+
+
+
+# ##### Sequenz für Sequenzdiagramm (Beginn) #####
+# my_watchlist = Watchlist("Meisterwerke", "WL-001")
+
+# my_film = Film("CF-001", "Stereotypischer Actionfilm", "Action", 6, 120.75)
+# print(my_film.overview())
+# my_serie = Serie("CS-001", "Das große Python-Drama", "Drama", 16, 600.0, 20)
+
+# my_watchlist += my_film
+# my_watchlist += my_serie
+# my_watchlist += my_serie
+
+# print(my_watchlist)
+# ##### Sequenz für Sequenzdiagramm (Ende) #####
+
+
+
 my_watchlist = Watchlist("Meisterwerke", "WL-001")
-
 my_film = Film("CF-001", "Stereotypischer Actionfilm", "Action", 6, 120.75)
-print(my_film.overview())
 my_serie = Serie("CS-001", "Das große Python-Drama", "Drama", 16, 600.0, 20)
-
 my_watchlist += my_film
 my_watchlist += my_serie
-my_watchlist += my_serie
 
-print(my_watchlist)
-##### Sequenz für Sequenzdiagramm (Ende) #####
+my_nutzer = Nutzer()
+my_nutzer.__add__(my_watchlist)
+print(my_nutzer)
+
+
