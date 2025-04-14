@@ -2,30 +2,62 @@
 mainframe **sd** my_playlist
 actor User
 
+
 User --> ":Song" : create()
 activate ":Song"
+deactivate ":Song"
 
-User -> ":Song" : _str__()
+User -> ":Song" : str()
+activate ":Song"
 ":Song" --> User
+deactivate ":Song"
 
 User --> ":Song" : create()
 activate ":Song"
+deactivate ":Song"
 
 User --> ":Song" : create()
 activate ":Song"
+deactivate ":Song"
 
 User --> ":Playlist" : create()
 activate ":Playlist"
+deactivate ":Playlist"
 
-loop
+User --> ":Playlist" : add()
+activate ":Playlist"
 ":Playlist" --> ":Song" : append()
+activate ":Song"
+deactivate ":Song"
 ":Playlist" -> ":Playlist": berechneAbspieldauer()
-end
-
-User -> ":Playlist" : _str__()
 ":Playlist" --> User
+deactivate ":Playlist"
+
+User --> ":Playlist" : add()
+activate ":Playlist"
+":Playlist" --> ":Song" : append()
+activate ":Song"
+deactivate ":Song"
+":Playlist" -> ":Playlist": berechneAbspieldauer()
+":Playlist" --> User
+deactivate ":Playlist"
+
+User --> ":Playlist" : add()
+activate ":Playlist"
+":Playlist" --> ":Song" : append()
+activate ":Song"
+deactivate ":Song"
+":Playlist" -> ":Playlist": berechneAbspieldauer()
+":Playlist" --> User
+deactivate ":Playlist"
+
+User -> ":Playlist" : str()
+activate ":Playlist"
+":Playlist" --> User
+deactivate ":Playlist"
 
 User -> ":Playlist" : getHaufigsterKuenstler())
+activate ":Playlist"
 
 loop
 ":Playlist" -> ":Playlist" : kuenstler_liste.append(kuenstler)
@@ -37,6 +69,15 @@ end
 
 ":Playlist" -> ":Playlist" : kuenstler_count.index(max(kuenstler_count))
 ":Playlist" --> User
+deactivate ":Playlist"
 
 User -> ":Playlist" : sucheSong()
+activate ":Playlist"
 ":Playlist" --> User
+deactivate ":Playlist"
+
+User -> ":Playlist"
+destroy ":Playlist"
+
+User -> ":Song"
+destroy ":Song"
