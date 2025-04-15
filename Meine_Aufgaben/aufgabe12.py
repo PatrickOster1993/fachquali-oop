@@ -32,32 +32,70 @@ class Exchange:
         self.establishedyear = establishedyear
         self.stocks = []
 
-    def addStock (self, stocks):
-        self.stocks.append(stocks)
-        return f"Aktie Hinzugefügt"
+    def addStock (self, stock):
+        self.stocks.append(stock)
+        return f"Aktie {stock.name} Hinzugefügt"
         
 
-    def removeStock (self, stocks):
-        pass
+    def removeStock (self, stock):
+        self.stocks.remove(stock)
+        return f"Aktie {stock.name} wurde gelöscht"
 
     def getStockByName(self, name):
-        pass
+        if self.search(name):
+            print (self.stocks[name])
+            return None
+        else: 
+            print ("Nichts gefunden du opfer")
+            return None
+        
+        
+
+    def search(self, search):
+        for i in self.stocks:
+            print(i)
+            if search == i.name:
+                return search
 
     def getStockAmount (self):
         pass
 
     def listStocks (self):
-        pass
+        a= "Stocks:\n"
+        for stock in self.stocks:
+            a += stock.name +"\n"
+        return a
 
-    # def __str__(self) -> str:
-    #     return f"Börse {self.boerse} location {self.location} currency {self.currency} established year {self.establishedyear} stocks {self.stocks}"
+    def __str__(self) -> str:
+        return (f"Börse {self.boerse} location {self.location} currency {self.currency} established year {self.establishedyear}. {self.listStocks()}")
+    
+        
 
 
 boerse1 = Exchange("bitvavo", "germany", "euro", 2010)
 
 stock1 = Stock("XRP", 2.10, 1000000 )
+stock2 = Stock("XRP2", 2.10, 1000000 ) 
+stock3 = Stock("XRP3", 2.10, 1000000 )
+stock4 = Stock("XRP4", 2.10, 1000000 )
 
 print (stock1)
 
 boerse1.addStock(stock1)
+boerse1.addStock(stock2)
+boerse1.addStock(stock3)
+boerse1.addStock(stock4)
+
+
 print (boerse1)
+
+remove =(boerse1.removeStock(stock1))
+print (remove)
+
+print (boerse1.listStocks())
+
+nameeee= boerse1.search("XRP3")
+
+print (nameeee)
+sname = boerse1.getStockByName("XRP3")
+print (sname)
