@@ -3,6 +3,7 @@ import sys
 import math
 
 # Widgets, die wir benötigen
+from PyQt5.QtGui import QPalette, QColor # eigene Farbgebung festlegen:)
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QGridLayout, QPushButton
 # QApplication: Erstellen einer Instanz ihrer Applikation
 # QWidget: Basisklasse (= Elternklasse), die etwaige, für das Fenster erforderliche Attribute, Methoden, ... besitzt.
@@ -18,9 +19,17 @@ class Calculator(QWidget):
         self.initUI()
     
     def initUI(self):
+
+        my_palette = QPalette()
+        my_palette.setColor(QPalette.Background, QColor(57, 13, 120)) # nur Hintergrund
+        # my_palette.setColor(QPalette.Window, QColor(77, 9, 0)) # Fenster selbst
+        self.setPalette(my_palette)
+
+        self.setFixedSize(400, 300)
         vbox = QVBoxLayout()
 
         self.display = QLineEdit()
+        self.display.setStyleSheet("font-size: 24px; height: 40px;")
         vbox.addWidget(self.display) # einzelnes graphisches Element (hier Texteingabefeld) dem Layout hinzufügen
 
         grid = QGridLayout()
@@ -37,7 +46,7 @@ class Calculator(QWidget):
             ('1', 2, 0), ('2', 2, 1), ('3', 2, 2), ('-', 2, 3),
             ('0', 3, 0), ('C', 3, 1), ('.', 3, 2), ('+', 3, 3),
             ('%', 4, 0), ('π', 4, 1),
-            ('=', 5, 0, 1, 4) # (... 1, 4) bedeutet: soll sich über 1 Zeile und 4 Spalten erstrecken
+            ('=', 4, 0, 1, 4) # (... 1, 4) bedeutet: soll sich über 1 Zeile und 4 Spalten erstrecken
         ]
         # (Text auf Button, Zeile, Spalte) -> z. B. ('7', 0, 0)
 
@@ -53,6 +62,7 @@ class Calculator(QWidget):
                 colSpan = item[4]
 
             button = QPushButton(btnText)
+            button.setStyleSheet("font-size: 24px; height: 40px;")
             button.clicked.connect(self.onButtonClicked) # Verbinden des jeweiligen Buttons mit der gewünschten "Klick-Funktionalität"
             grid.addWidget(button, row, col, rowSpan, colSpan) # 1, 1 = jeder Button soll in diesem Fall über 1 Zeile und Spalte gehen
 
@@ -76,11 +86,15 @@ class Calculator(QWidget):
         else:
             # bei allen anderen Eingaben sollen die Strings (z. B. eine Zahl) einfach hinter das Display platziert werden!
             self.display.setText(self.display.text() + text)
+            # bei allen anderen Eingaben sollen die Strings (z. B. eine Zahl) einfach hinter das Display platziert werden!
+            self.display.setText(self.display.text() + text)
 
 app = QApplication(sys.argv) # sys.argv -> ordentliches Beenden (Integration von GUI in "Systemlandschaft") (*)
 app.setStyle('Fusion') # von PyQT zur Verfügung gestelltes "Theme" verwendet!
+app.setStyle('Fusion') # von PyQT zur Verfügung gestelltes "Theme" verwendet!
 my_calculator = Calculator()
 
+my_calculator.show() # Fenster anzeigen!
 my_calculator.show() # Fenster anzeigen!
 
 sys.exit(app.exec_()) # (*) + initiales Starten der Ereignisschleife für Benutzerinteraktion.
