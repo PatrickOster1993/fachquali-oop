@@ -46,7 +46,7 @@ class Calculator(QWidget):
             ('1', 2, 0), ('2', 2, 1), ('3', 2, 2), ('-', 2, 3),
             ('0', 3, 0), ('C', 3, 1), ('.', 3, 2), ('+', 3, 3),
             ('%', 4, 0), ('π', 4, 1),
-            ('=', 4, 0, 1, 4) # (... 1, 4) bedeutet: soll sich über 1 Zeile und 4 Spalten erstrecken
+            ('=', 5, 0, 1, 4) # (... 1, 4) bedeutet: soll sich über 1 Zeile und 4 Spalten erstrecken
         ]
         # (Text auf Button, Zeile, Spalte) -> z. B. ('7', 0, 0)
 
@@ -84,8 +84,6 @@ class Calculator(QWidget):
             result = round(eval(self.display.text()), 8) # Rechenoperation vornehmen (das was in Display gerade steht)
             self.display.setText(str(result)) # Ergebnis soll Display wieder updaten
         else:
-            # bei allen anderen Eingaben sollen die Strings (z. B. eine Zahl) einfach hinter das Display platziert werden!
-            self.display.setText(self.display.text() + text)
             # bei allen anderen Eingaben sollen die Strings (z. B. eine Zahl) einfach hinter das Display platziert werden!
             self.display.setText(self.display.text() + text)
 
