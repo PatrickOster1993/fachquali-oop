@@ -1,4 +1,4 @@
-# Wird benötigt um Program ordentlich zu beenden
+# sys Wird benötigt, um Programm ordentlich zu beenden
 import sys
 
 # Widgets, die wir benötigen
@@ -14,7 +14,7 @@ class Calculator(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
-
+    
     def initUI(self):
         print("Mein Taschenrechner")
         print("###################")
@@ -52,5 +52,5 @@ my_calculator = Calculator()
 
 my_calculator.show() # Fenster anzeigen!
 
-sys.exit(app.exec_())
+sys.exit(app.exec_()) # (*) + initiales Starten der Ereignisschleife für Benutzerinteraktion.
 
