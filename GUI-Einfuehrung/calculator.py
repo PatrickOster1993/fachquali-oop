@@ -89,10 +89,8 @@ class Calculator(QWidget):
 
 app = QApplication(sys.argv) # sys.argv -> ordentliches Beenden (Integration von GUI in "Systemlandschaft") (*)
 app.setStyle('Fusion') # von PyQT zur Verfügung gestelltes "Theme" verwendet!
-app.setStyle('Fusion') # von PyQT zur Verfügung gestelltes "Theme" verwendet!
 my_calculator = Calculator()
 
-my_calculator.show() # Fenster anzeigen!
 my_calculator.show() # Fenster anzeigen!
 
 sys.exit(app.exec_()) # (*) + initiales Starten der Ereignisschleife für Benutzerinteraktion.
