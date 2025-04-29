@@ -1,8 +1,13 @@
 # Wird benötigt um Program ordentlich zu beenden
 import sys
 
-# Widgets die wir benötigen
+# Widgets, die wir benötigen
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QGridLayout
+# QApplication: Erstellen einer Instanz ihrer Applikation
+# QWidget: Basisklasse (= Elternklasse), die etwaige, für das Fenster erforderliche Attribute, Methoden, ... besitzt.
+# QVBoxLayout: Erstellt ein vertikales Layout, um grafische Elemente (= Widgets) untereinander anzuordnen / stacken
+# QLineEdit: erstellt uns ein Display, auf dem alle Eingaben und Ausgaben dargestellt werden
+# QGridLayout: Ähnlich wie "Grid" in Webentwicklung, wodurch wir den "tabellarischen" Aufbau (Zeilen u. Spalten) festlegen können
 
 class Calculator(QWidget):
 
@@ -11,29 +16,41 @@ class Calculator(QWidget):
         self.initUI()
 
     def initUI(self):
-        print("Mein Taschenrecher")
-        print("##################")
+        print("Mein Taschenrechner")
+        print("###################")
 
         vbox = QVBoxLayout()
 
         self.display = QLineEdit()
-        vbox.addWidget(self.display) # einzelnes graphisches Element ( Texteingabefeld )
+        vbox.addWidget(self.display) # einzelnes graphisches Element (hier Texteingabefeld) dem Layout hinzufügen
 
         grid = QGridLayout()
 
+        # Liste mit allen für grid erforderlichen Infos zu Button anlegen (wird später durch Schleife einfacher und cleaner!)
         
 
-        self.setLayout(vbox) # Hauptlayout auf Fenster anwenden
-        self.setWindowTitle("Taschenrechner")
+        self.setLayout(vbox) # Hauptlayout auf Fenster anwenden!
+        self.setWindowTitle("DAA-Taschenrechner") # Setzen des Fenstertitels
 
-    
     def onButtonClicked(self):
         pass
+        # text = self.display.lower()
+        # if text == 'exit':
+        #     print("Taschenrechner wird beendet!")
+        #     self.running = False
+        # elif text == 'c':
+        #     print("Bildschirm bereinigt!")
+        #     self.display = ""
+        # elif text == '=':
+        #     print("Nichts zu berechnen. Bitte Berechnung eingeben!")
+        # else:
+        #     result = round(float(eval(text)), 8)
+        #     print(f"Ergebnis: {result}")
 
-app = QApplication(sys.argv)
+app = QApplication(sys.argv) # sys.argv -> ordentliches Beenden (Integration von GUI in "Systemlandschaft") (*)
 my_calculator = Calculator()
 
-my_calculator.show()
+my_calculator.show() # Fenster anzeigen!
 
 sys.exit(app.exec_())
 
