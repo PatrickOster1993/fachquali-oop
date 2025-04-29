@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ########## Head
 # Aufgabe 12   Klassen- und Sequenzdiagramm
 # Werfen  Sie  einen  Blick  auf  das  Ihnen  vorliegende  Klassendiagramm,  welches  das  Zusammenspiel 
@@ -168,6 +169,8 @@ if __name__ == "__main__":
     print("\nAnzahl der Aktien an der Börse:")
     print(nasdaq.getStockCount())
 ########
+=======
+>>>>>>> main
 class Stock:
 
     def __init__(self, name, price, volume):
@@ -265,5 +268,9 @@ nasdaq.listStocks()
 # stock / 2
 # stock /= 2 --> stock = stock / 2
 
+<<<<<<< HEAD
 # __truediv__() <=> /
 ########  main
+=======
+# __truediv__() <=> /
+>>>>>>> main
