@@ -52,13 +52,18 @@ class TodoController:
     def toggle_todo(self, index):
         """
         Ändert den Erledigungsstatus eines Todos und aktualisiert die View.
-        
-        Args:
-            index (int): Index des zu ändernden Todos
+    
+        Args
+        index (int): Index des zu ändernden Todos
         """
         if 0 <= index < len(self.model.items):
             todo_item = self.model.items[index]
             todo_item.toggle_completed()
+            
+            # Speichern nach Änderung (falls die TodoList keinen direkten Zugriff hat)
+            if hasattr(self.model, 'storage') and self.model.storage:
+                self.model._save_to_storage()
+                
             self.update_view()
             
             status = "erledigt" if todo_item.completed else "nicht erledigt"

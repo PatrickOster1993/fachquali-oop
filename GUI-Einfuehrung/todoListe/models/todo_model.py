@@ -33,9 +33,11 @@ class TodoList:
     Diese Klasse dient als Container-Model für alle Todo-Items
     und implementiert Methoden zur Verwaltung der Liste.
     """
-    def __init__(self):
+    def __init__(self, storage):
         """Initialisiert eine leere Todo-Liste."""
+        self.storage = storage
         self.items = []
+        self._load_from_storage()
         
     def add_item(self, title):
         """
@@ -73,3 +75,28 @@ class TodoList:
             list: Liste aller TodoItems
         """
         return self.items
+    
+    def _save_to_storage(self):
+        """
+        Private Methode zum Speichern in den persistenten Speicher.
+        Wird nach jeder Änderung an der Liste aufgerufen.
+        """
+        if self.storage:
+            self.storage.save_todos(self.items)
+
+    def _load_from_storage(self):
+        """
+        Private Methode zum Laden aus dem persistenten Speicher.
+        Wird bei der Initialisierung aufgerufen.
+        """
+        if self.storage:
+            # Lade gespeicherte Daten
+            loaded_items = self.storage.load_todos()
+            
+            # Konvertiere die geladenen Daten in TodoItem-Objekte
+            self.items = []
+            for item_data in loaded_items:
+                self.items.append(TodoItem(
+                    title=item_data['title'],
+                    completed=item_data['completed']
+                ))
