@@ -40,7 +40,7 @@ class Todo(QWidget):
         vbox.addLayout(self.grid)
 
         self.setLayout(vbox)
-        self.setWindowTitle("DAA-Taschenrechner")
+        self.setWindowTitle("To-Do-App")
 
     def onButtonClicked(self):
         sender = self.sender()
