@@ -4,7 +4,7 @@ import sys
 # Widgets, die wir benötigen
 from PyQt5.QtGui import QPalette, QColor # eigene Farbgebung festlegen:)
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QGridLayout, QPushButton
-# QApplication: Erstellen einer Instanz ihrer Applikation
+# QApplication: Erstellen einer Instanz ihrer Applikation  -- auskommentiert unten und ausgelagert nach Maincalc
 # QWidget: Basisklasse (= Elternklasse), die etwaige, für das Fenster erforderliche Attribute, Methoden, ... besitzt.
 # QVBoxLayout: Erstellt ein vertikales Layout, um grafische Elemente (= Widgets) untereinander anzuordnen / stacken
 # QLineEdit: erstellt uns ein Display, auf dem alle Eingaben und Ausgaben dargestellt werden
@@ -82,10 +82,10 @@ class Calculator(QWidget):
             # bei allen anderen Eingaben sollen die Strings (z. B. eine Zahl) einfach hinter das Display platziert werden!
             self.display.setText(self.display.text() + text)
 
-app = QApplication(sys.argv) # sys.argv -> ordentliches Beenden (Integration von GUI in "Systemlandschaft") (*)
+""" app = QApplication(sys.argv) # sys.argv -> ordentliches Beenden (Integration von GUI in "Systemlandschaft") (*)
 app.setStyle('Fusion') # von PyQT zur Verfügung gestelltes "Theme" verwendet!
 my_calculator = Calculator()
 
 my_calculator.show() # Fenster anzeigen!
 
-sys.exit(app.exec_()) # (*) + initiales Starten der Ereignisschleife für Benutzerinteraktion.
+sys.exit(app.exec_()) # (*) + initiales Starten der Ereignisschleife für Benutzerinteraktion. """
