@@ -1,8 +1,14 @@
 import os
 
+<<<<<<< HEAD
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QListWidget
 from PyQt5.QtCore import Qt
 
+=======
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QListWidget
+from widgets.todo_lineedit import TodoLineedit
+from widgets.todo_button import TodoButton
+>>>>>>> origin/main
 
 class TodoApp(QWidget):
     def __init__(self, dataName):
@@ -20,15 +26,6 @@ class TodoApp(QWidget):
                     line = line.strip()
                     if line:
                         self.task_list.addItem(line)
-
-    def createLineedit(current_text: str, placeholder_text="") -> QLineEdit:
-        lineedit = QLineEdit(current_text)
-        lineedit.setPlaceholderText(placeholder_text)
-        return lineedit
-    
-    def createButton(self, title):
-        button = QPushButton(title)
-        return button
     
     def createTaskList(self):
         return QListWidget()
@@ -46,12 +43,13 @@ class TodoApp(QWidget):
         self.layout = QVBoxLayout()
 
         # Eingabefeld für neue Tasks
-        self.task_input = self.createLineedit("Neue Aufgabe eingeben...")
+        self.task_input = TodoLineedit(
+            placeholderText= "Neue Aufgabe eingeben..."
+        )
         self.addWidgetToLayout(self.task_input)
 
         # Button zum Hinzufügen neuer Tasks
-        add_button = self.createButton("Task hinzufügen")
-        add_button.clicked.connect(self.addTask)
+        add_button = TodoButton("Task hinzufügen", self.addTask)
         self.addWidgetToLayout(add_button)
 
         # Liste für mehrere Tasks
@@ -59,8 +57,7 @@ class TodoApp(QWidget):
         self.addWidgetToLayout(self.task_list)
 
         # Button zum Löschen von Tasks
-        delete_button = self.createButton("Task löschen")
-        delete_button.clicked.connect(self.deleteTask)
+        delete_button = TodoButton("Task löschen", self.deleteTask)
         self.addWidgetToLayout(delete_button)
 
         self.setLayout(self.layout)
