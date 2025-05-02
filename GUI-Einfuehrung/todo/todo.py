@@ -1,6 +1,8 @@
 import os
 
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QListWidget
+from PyQt5.QtCore import Qt
+
 
 class TodoApp(QWidget):
     def __init__(self, dataName):
