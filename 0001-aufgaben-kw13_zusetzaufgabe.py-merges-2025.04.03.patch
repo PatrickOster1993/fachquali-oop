@@ -1,0 +1,291 @@
+From 8d276d3938e82d142b5262f8c3ad17d75f7f9733 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Thu, 3 Apr 2025 14:37:16 +0200
+Subject: [PATCH 1/5] =?UTF-8?q?aufgaben/kw13=5Fzusetzaufgabe.py=20=C2=B4me?=
+ =?UTF-8?q?rges=202025.04.03?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ aufgaben/kw14_aufgabe10.py |   0
+ aufgaben/kw14_aufgabe11.py |  87 +++++++++++++++++++
+ aufgaben/kw14_aufgabe12.py | 168 +++++++++++++++++++++++++++++++++++++
+ 3 files changed, 255 insertions(+)
+ create mode 100644 aufgaben/kw14_aufgabe10.py
+ create mode 100644 aufgaben/kw14_aufgabe11.py
+ create mode 100644 aufgaben/kw14_aufgabe12.py
+
+diff --git a/aufgaben/kw14_aufgabe10.py b/aufgaben/kw14_aufgabe10.py
+new file mode 100644
+index 0000000..e69de29
+diff --git a/aufgaben/kw14_aufgabe11.py b/aufgaben/kw14_aufgabe11.py
+new file mode 100644
+index 0000000..f04e02a
+--- /dev/null
++++ b/aufgaben/kw14_aufgabe11.py
+@@ -0,0 +1,87 @@
++# Aufgabe 11   Kapselung (Encapsulation)
++# Schauen  Sie  sich  nochmals  „Aufgabe  6“  (=  Online-Shop)  an  und  ergänzen  Sie  den  Code  um  eine 
++# sinnvolle  Kapselung.  Überlegen  Sie  sich  hierbei  vor  allem,  welche  Attribute  und  Methoden  in 
++# welchem Maße geschützt werden sollten.
++
++
++
++class Produkt:
++    def __init__(self, name, preis, lagerbestand):
++        self.__name = name  # Privates Attribut
++        self.__preis = preis  # Privates Attribut
++        self.__lagerbestand = lagerbestand  # Privates Attribut
++
++    # Getter-Methode für den Namen
++    def get_name(self):
++        return self.__name
++
++    # Getter-Methode für den Preis
++    def get_preis(self):
++        return self.__preis
++
++    # Setter-Methode für den Preis
++    def set_preis(self, neuer_preis):
++        if neuer_preis > 0:
++            self.__preis = neuer_preis
++        else:
++            print("Der Preis muss positiv sein!")
++
++    # Getter-Methode für den Lagerbestand
++    def get_lagerbestand(self):
++        return self.__lagerbestand
++
++    # Setter-Methode für den Lagerbestand
++    def set_lagerbestand(self, neuer_lagerbestand):
++        if neuer_lagerbestand >= 0:
++            self.__lagerbestand = neuer_lagerbestand
++        else:
++            print("Der Lagerbestand darf nicht negativ sein!")
++
++    # Methode zur Darstellung des Produkts
++    def __str__(self):
++        return f"{self.__name}: Preis: {self.__preis}€, Lagerbestand: {self.__lagerbestand}"
++
++
++# Beispiel: Online-Shop
++class OnlineShop:
++    def __init__(self):
++        self.produkte = []
++
++    def produkt_hinzufuegen(self, produkt):
++        self.produkte.append(produkt)
++
++    def produkt_entfernen(self, produkt):
++        if produkt in self.produkte:
++            self.produkte.remove(produkt)
++        else:
++            print("Produkt nicht im Shop vorhanden.")
++
++    def __str__(self):
++        produkt_liste = "\n".join(str(produkt) for produkt in self.produkte)
++        return f"Online-Shop:\n{produkt_liste}"
++
++
++# Testen des Codes
++produkt1 = Produkt("Laptop", 999.99, 10)
++produkt2 = Produkt("Smartphone", 499.99, 20)
++
++# Zugriff auf Attribute über Getter-Methoden
++print(produkt1.get_name())  # Ausgabe: Laptop
++print(produkt1.get_preis())  # Ausgabe: 999.99
++print(produkt1.get_lagerbestand())  # Ausgabe: 10
++
++# Ändern des Preises und Lagerbestands über Setter-Methoden
++produkt1.set_preis(899.99)
++produkt1.set_lagerbestand(15)
++
++# Überprüfen der Änderungen
++print(produkt1.get_preis())  # Ausgabe: 899.99
++print(produkt1.get_lagerbestand())  # Ausgabe: 15
++
++# Online-Shop erstellen
++shop = OnlineShop()
++shop.produkt_hinzufuegen(produkt1)
++shop.produkt_hinzufuegen(produkt2)
++
++# Ausgabe des Shops
++print(shop)
+diff --git a/aufgaben/kw14_aufgabe12.py b/aufgaben/kw14_aufgabe12.py
+new file mode 100644
+index 0000000..d828352
+--- /dev/null
++++ b/aufgaben/kw14_aufgabe12.py
+@@ -0,0 +1,168 @@
++# Aufgabe 12   Klassen- und Sequenzdiagramm
++# Werfen  Sie  einen  Blick  auf  das  Ihnen  vorliegende  Klassendiagramm,  welches  das  Zusammenspiel 
++# zwischen einer Börse und, an der jeweiligen Börse gelisteten, Unternehmen veranschaulichen soll. 
++# Führen Sie nun die nachfolgenden Arbeitsschritte aus:
++# 1. Erstellen  Sie  zunächst  die  Klasse  Stock,  indem  Sie  folgende  Attribute  und  Methoden 
++# hinzufügen (denken Sie dabei auch an die Erstellung eines geeigneten Konstruktors):
++# - name: Name des der Aktie zugrundeliegenden Unternehmens
++# - price: aktueller Preis der Aktie
++# - volume: aktuelles Handelsvolumen der Aktie
++# - __str__():  Soll  eine  geeignete,  lesbare  Darstellung  der  wichtigsten  Informationen  der 
++# Aktie liefern.
++# - __truediv__(splitFactor): Operatorüberladung soll der Simulation eines sog. 
++# „Aktiensplits“ dienen. Dabei soll der Preis der Aktie durch den übergebenen Split-Faktor 
++# geteilt, und das Volumen der Aktie mit dem gleichen Faktor multipliziert werden. Nach 
++# der  Berechnung  soll  die  Methode  das  Stock-Objekt  selbst  zurückgeben,  sodass  der  Split 
++# direkt auf das Objekt angewendet wird.
++# - updatePrice(newPrice):  Soll  das  Attribut  „price“  mit  dem  übergebenen  Argument 
++# „newPrice“ überschreiben.
++# - getMarketValue():  Soll  den  Marktwert  einer  Aktie  berechnen,  indem  das  Produkt  aus 
++# dem Preis und dem Volumen zurückgegeben wird.
++# 2. Erstellen  Sie  daraufhin  die  Klasse  Exchange,  indem  Sie  folgende  Attribute  und  Methoden 
++# hinzufügen (denken Sie auch hier an die Erstellung eines geeigneten Konstruktors):
++# - name: Name der Börse (z. B. „NASDAQ“)
++# - location: Geographische Lage der Börse (z. B. „USA“)
++# - currency: Währung, in der gehandelt wird (z. B. „USD“)
++# - establishedYear: Gründungsjahr der Börse
++# - stocks: Liste aller aller an der entsprechenden Börse gelisteter Aktien
++# - addStock(stock): Soll die als Argument übergebene Aktie der als Attribut hinterlegten 
++# Liste „stocks“ hinzufügen.
++# - removeStock(stock):  Soll  die  als  Argument  übergebene  Aktie  aus  der  als  Attribut 
++# hinterlegten  Liste  „stocks“  entfernen,  sofern  sich  diese  innerhalb  der  Liste  befindet. 
++# Andernfalls soll eine entsprechende Meldung in der Konsole ausgegeben werden.
++# - getStockByName(name): Soll die jeweilige, sich in der Liste befindenden, Aktie 
++# zurückgeben, deren Name sich mit dem als Argument übergebenen Namen deckt.
++# - getStockByName(): Soll die Anzahl der sich in der Liste befindenden Aktien 
++# zurückgeben.
++# - listStocks():  Soll  alle  sich  in  der  Liste  befindenden  Aktien  sowie  deren  wichtigsten 
++# Informationen in einer gut lesbaren, strukturierten Form in der Konsole ausgeben.
++# 3. Testen  Sie im Nachfolgenden Ihre Implementierungen, indem Sie mehrere Objekte / 
++# Instanzen der Klassen erzeugen und alle implementierten Methoden anwenden.
++# 4. Entspricht  die  Beziehung  zwischen  „Exchange“  und  „Stock“  einer  Aggregations-  oder 
++# Kompositionsbeziehung?
++# 5. Zeichnen Sie abschließend ein Sequenzdiagramm für Ihren in Unterpunkt „3.“ 
++# Programmablauf.
++
++
++
++
++
++# Klasse Stock
++class Stock:
++    def __init__(self, name, price, volume):
++        self.name = name  # Name des Unternehmens
++        self.price = price  # Aktueller Preis der Aktie
++        self.volume = volume  # Aktuelles Handelsvolumen
++
++    def __str__(self):
++        return f"Aktie: {self.name}, Preis: {self.price}, Volumen: {self.volume}"
++
++    def __truediv__(self, splitFactor):
++        """Operatorüberladung für Aktiensplit"""
++        if splitFactor <= 0:
++            raise ValueError("Split-Faktor muss größer als 0 sein.")
++        self.price /= splitFactor
++        self.volume *= splitFactor
++        return self
++
++    def updatePrice(self, newPrice):
++        """Aktualisiert den Preis der Aktie"""
++        if newPrice > 0:
++            self.price = newPrice
++        else:
++            print("Der Preis muss positiv sein.")
++
++    def getMarketValue(self):
++        """Berechnet den Marktwert der Aktie"""
++        return self.price * self.volume
++
++
++# Klasse Exchange
++class Exchange:
++    def __init__(self, name, location, currency, establishedYear):
++        self.name = name  # Name der Börse
++        self.location = location  # Geographische Lage
++        self.currency = currency  # Währung
++        self.establishedYear = establishedYear  # Gründungsjahr
++        self.stocks = []  # Liste der gelisteten Aktien
++
++    def addStock(self, stock):
++        """Fügt eine Aktie zur Liste hinzu"""
++        self.stocks.append(stock)
++
++    def removeStock(self, stock):
++        """Entfernt eine Aktie aus der Liste"""
++        if stock in self.stocks:
++            self.stocks.remove(stock)
++        else:
++            print(f"Die Aktie {stock.name} ist nicht an der Börse gelistet.")
++
++    def getStockByName(self, name):
++        """Gibt eine Aktie basierend auf dem Namen zurück"""
++        for stock in self.stocks:
++            if stock.name == name:
++                return stock
++        return None
++
++    def getStockCount(self):
++        """Gibt die Anzahl der gelisteten Aktien zurück"""
++        return len(self.stocks)
++
++    def listStocks(self):
++        """Gibt alle gelisteten Aktien in lesbarer Form aus"""
++        if not self.stocks:
++            print("Keine Aktien an der Börse gelistet.")
++        else:
++            print(f"Aktien an der {self.name} ({self.location}, {self.currency}):")
++            for stock in self.stocks:
++                print(stock)
++
++
++# Testen der Implementierung
++if __name__ == "__main__":
++    # Erstellen von Aktien
++    stock1 = Stock("Apple", 150.0, 1000000)
++    stock2 = Stock("Microsoft", 300.0, 500000)
++    stock3 = Stock("Tesla", 750.0, 200000)
++
++    # Erstellen einer Börse
++    nasdaq = Exchange("NASDAQ", "USA", "USD", 1971)
++
++    # Aktien zur Börse hinzufügen
++    nasdaq.addStock(stock1)
++    nasdaq.addStock(stock2)
++    nasdaq.addStock(stock3)
++
++    # Liste der Aktien anzeigen
++    nasdaq.listStocks()
++
++    # Aktiensplit simulieren
++    print("\nSimuliere Aktiensplit für Apple (Faktor 2):")
++    stock1 = stock1 / 2
++    print(stock1)
++
++    # Aktualisieren des Preises einer Aktie
++    print("\nAktualisiere Preis von Tesla auf 800.0:")
++    stock3.updatePrice(800.0)
++    print(stock3)
++
++    # Marktwert berechnen
++    print("\nMarktwert von Microsoft:")
++    print(stock2.getMarketValue())
++
++    # Aktie entfernen
++    print("\nEntferne Aktie Microsoft:")
++    nasdaq.removeStock(stock2)
++    nasdaq.listStocks()
++
++    # Suche nach einer Aktie
++    print("\nSuche nach Aktie Apple:")
++    found_stock = nasdaq.getStockByName("Apple")
++    if found_stock:
++        print(found_stock)
++    else:
++        print("Aktie nicht gefunden.")
++
++    # Anzahl der Aktien anzeigen
++    print("\nAnzahl der Aktien an der Börse:")
++    print(nasdaq.getStockCount())
+-- 
+2.47.1.windows.2
+
