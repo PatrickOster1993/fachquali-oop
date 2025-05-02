@@ -20,16 +20,16 @@ class TodoView(QWidget):
         self.addWidgetToLayout(self.task_input)
 
         # Button zum Hinzufügen neuer Tasks
-        add_button = TodoButton("Task hinzufügen", self.addTask)
-        self.addWidgetToLayout(add_button)
+        self.add_button = TodoButton("Task hinzufügen")
+        self.addWidgetToLayout(self.add_button)
 
         # Liste für mehrere Tasks
         self.task_list = TodoList()
         self.addWidgetToLayout(self.task_list)
 
         # Button zum Löschen von Tasks
-        delete_button = TodoButton("Task löschen", self.deleteTask)
-        self.addWidgetToLayout(delete_button)
+        self.delete_button = TodoButton("Task löschen")
+        self.addWidgetToLayout(self.delete_button)
 
         self.setLayout(self.layout)
 
