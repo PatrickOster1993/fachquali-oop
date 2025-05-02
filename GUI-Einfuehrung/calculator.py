@@ -47,7 +47,6 @@ class Calculator(QWidget):
             ('=', 4, 0, 1, 4) # (... 1, 4) bedeutet: soll sich über 1 Zeile und 4 Spalten erstrecken
         ]
         # (Text auf Button, Zeile, Spalte) -> z. B. ('7', 0, 0)
-
         for item in buttons:
             btnText = item[0]
             row = item[1]
@@ -72,7 +71,7 @@ class Calculator(QWidget):
     def onButtonClicked(self):
         sender = self.sender()
         text = sender.text() # Text auf jeweiligem Sender-Button
-        print(text)
+        # print(text) -> nur für Debugging-Zwecke
 
         if text.lower() == 'c':
             self.display.clear() # Inhalt auf Display leeren
