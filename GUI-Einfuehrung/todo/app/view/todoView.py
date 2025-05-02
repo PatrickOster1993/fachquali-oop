@@ -7,6 +7,7 @@ class TodoView(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.initUI()
 
     def initUI(self):
         
@@ -39,3 +40,4 @@ class TodoView(QWidget):
     def setStyling(self):
         self.setWindowTitle("DAA-ToDo-Liste")
         self.setFixedSize(400, 400)
+    
