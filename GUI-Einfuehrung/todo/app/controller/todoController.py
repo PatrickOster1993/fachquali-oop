@@ -1,14 +1,16 @@
-from PyQt5.QtCore import QObject
+#from PyQt5.QtWidgets import QWidget
 from app.view.todoView import TodoView
 from app.model.todoModel import TodoModel
 
-class TodoController(QObject):
+class TodoController:
 
     def __init__(self, filePath: str):
         super().__init__()
         self.view = TodoView()
         self.model = TodoModel(filePath)
+        self.signalConnector()
         self.loadTasks()
+        self.view.closeEvent = self.closeEvent
 
     def loadTasks(self):
         self.model.loadTasks()
