@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtWidgets import QApplication
-from todo.app.controller.todoController import TodoController
+from app.controller.todoController import TodoController
 
 def main():
     app = QApplication(sys.argv)
