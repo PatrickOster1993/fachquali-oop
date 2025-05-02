@@ -16,4 +16,4 @@ class TodoLineEdit(QLineEdit):
         self.setPlaceholderText(placeholder_text)
 
     def setPlaceholderText(self, placeholder_text: str):
-    
+        super().setPlaceholderText(placeholder_text)

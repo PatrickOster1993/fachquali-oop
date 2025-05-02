@@ -1,14 +1,13 @@
 import os
 
-<<<<<<< HEAD
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QListWidget
 from PyQt5.QtCore import Qt
 
-=======
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QListWidget
-from widgets.todo_lineedit import TodoLineedit
+# Importiere die benutzerdefinierte LineEdit-Klasse
+from widgets.todo_lineedit import TodoLineEdit
+# Importiere die benutzerdefinierte Button-Klasse
 from widgets.todo_button import TodoButton
->>>>>>> origin/main
+
 
 class TodoApp(QWidget):
     def __init__(self, dataName):
@@ -18,7 +17,7 @@ class TodoApp(QWidget):
         self.initUI()
         self.loadTasks()
     
-    # zu Beginn der Anwendung sollen alle bereits früher angelegten Tasks in der Task-Liste angezeigt werden!
+    # Lädt Tasks aus der Datei beim Start
     def loadTasks(self):
         if os.path.exists(self.dataPath): # gleichbedeutend mit "./tasks.txt"
             with open(self.dataPath, "r", encoding="utf-8") as file:
@@ -28,9 +27,11 @@ class TodoApp(QWidget):
                         self.task_list.addItem(line)
     
     def createTaskList(self):
+        # Erstellt das Listen-Widget
         return QListWidget()
     
     def addWidgetToLayout(self, widget):
+        # Hilfsmethode zum Hinzufügen von Widgets zum Layout
         self.layout.addWidget(widget)
 
     def setStyling(self):
@@ -43,13 +44,13 @@ class TodoApp(QWidget):
         self.layout = QVBoxLayout()
 
         # Eingabefeld für neue Tasks
-        self.task_input = TodoLineedit(
-            placeholderText= "Neue Aufgabe eingeben..."
+        self.task_input = TodoLineEdit( # Korrigierter Klassenname (großes E)
+            placeholder_text= "Neue Aufgabe eingeben..." # Korrigierter Parametername
         )
         self.addWidgetToLayout(self.task_input)
 
         # Button zum Hinzufügen neuer Tasks
-        add_button = TodoButton("Task hinzufügen", self.addTask)
+        add_button = TodoButton("Task hinzufügen", click=self.addTask)
         self.addWidgetToLayout(add_button)
 
         # Liste für mehrere Tasks
@@ -57,7 +58,7 @@ class TodoApp(QWidget):
         self.addWidgetToLayout(self.task_list)
 
         # Button zum Löschen von Tasks
-        delete_button = TodoButton("Task löschen", self.deleteTask)
+        delete_button = TodoButton("Task löschen", click=self.deleteTask)
         self.addWidgetToLayout(delete_button)
 
         self.setLayout(self.layout)
@@ -65,16 +66,14 @@ class TodoApp(QWidget):
     def addTask(self):
         task_text = self.task_input.text()
 
-        if task_text == "" or None:
-            task_text = self.task_input.text()
- 
+        # Füge den Task hinzu, wenn Text vorhanden ist
         if task_text:
             self.task_list.addItem(task_text)
 
         self.task_input.clear()
 
     # wird automatisch aufgerufen beim Beenden
-    def closeEvent(self, event):
+    def closeEvent(self, event): # PyQt Event-Handler
         self.saveTasks()
         event.accept()
 
@@ -85,6 +84,7 @@ class TodoApp(QWidget):
                 file.write(self.task_list.item(i).text() + '\n')
 
     def deleteTask(self):
+        # Löscht die aktuell ausgewählten Elemente
         selected_items = self.task_list.selectedItems()
         # print(selected_items) # Debugging-Zwecke
 
