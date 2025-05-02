@@ -51,7 +51,7 @@ class CalculatorView(QWidget):
             
             # Lambda mit Standardparameter für den Button-Text
             button.clicked.connect(lambda checked, text=button_text: 
-                                 self.controller.handle_button_click(text))
+                                self.controller.handle_button_click(text))
             
             buttons_layout.addWidget(button, row, col)
             self.buttons_dict[button_text] = button
