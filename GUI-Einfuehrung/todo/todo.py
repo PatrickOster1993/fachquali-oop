@@ -1,11 +1,11 @@
-# To-Do-Liste
-import sys
 import os
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QPushButton, QListWidget
+
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QListWidget
 
 class TodoApp(QWidget):
-    def __init__(self):
-        self.dataPath = "tasks.txt"
+    def __init__(self, dataName):
+        self.dataPath = os.getcwd() + '/GUI-Einfuehrung/todo/data/' + dataName
+        print(self.dataPath)
         super().__init__()
         self.initUI()
         self.loadTasks()
@@ -15,18 +15,17 @@ class TodoApp(QWidget):
         if os.path.exists(self.dataPath): # gleichbedeutend mit "./tasks.txt"
             with open(self.dataPath, "r", encoding="utf-8") as file:
                 for line in file:
-                    self.addTask(line.strip())
+                    line = line.strip()
+                    if line:
+                        self.task_list.addItem(line)
 
     def createLineedit(current_text: str, placeholder_text="") -> QLineEdit:
         lineedit = QLineEdit(current_text)
-
         lineedit.setPlaceholderText(placeholder_text)
-
         return lineedit
     
     def createButton(self, title):
         button = QPushButton(title)
-
         return button
     
     def createTaskList(self):
@@ -64,19 +63,27 @@ class TodoApp(QWidget):
 
         self.setLayout(self.layout)
     
-    def addTask(self, task = ""):
-
+    def addTask(self):
         task_text = self.task_input.text()
-        # print(task_text) # Debugging-Zwecke
-        self.task_list.addItem(task_text)
 
-        self.task_list.addItem(task)
+        if task_text == "" or None:
+            task_text = self.task_input.text()
+ 
+        if task_text:
+            self.task_list.addItem(task_text)
 
         self.task_input.clear()
 
+    # wird automatisch aufgerufen beim Beenden
+    def closeEvent(self, event):
+        self.saveTasks()
+        event.accept()
+
     # gegen Ende der Anwendung sollen alle Tasks in eine .txt gespeichert werden (persistentes Speichern!)
-    def safeTasks(self):
-        pass
+    def saveTasks(self):
+        with open(self.dataPath, "w", encoding="utf-8") as file:
+            for i in range(self.task_list.count()):
+                file.write(self.task_list.item(i).text() + '\n')
 
     def deleteTask(self):
         selected_items = self.task_list.selectedItems()
@@ -86,9 +93,3 @@ class TodoApp(QWidget):
 
             # print(self.task_list.row(item)) # Debugging-Zweck
             self.task_list.takeItem(self.task_list.row(item))
-
-app = QApplication(sys.argv)
-app.setStyle('Fusion')
-todo = TodoApp()
-todo.show()
-sys.exit(app.exec_())
