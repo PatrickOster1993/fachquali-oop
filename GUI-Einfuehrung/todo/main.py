@@ -1,13 +1,13 @@
 import sys
 
 from PyQt5.QtWidgets import QApplication
-from app.todo import TodoApp
+from app.controller.todoController import TodoController
 
 def main():
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
-    todo = TodoApp("tasks.txt")
-    todo.show()
+    controller = TodoController("tasks.txt")
+    controller.view.show()
     sys.exit(app.exec_())
 
 main()
