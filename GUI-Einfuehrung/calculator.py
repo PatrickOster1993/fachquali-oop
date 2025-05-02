@@ -10,8 +10,6 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QGrid
 # QLineEdit: erstellt uns ein Display, auf dem alle Eingaben und Ausgaben dargestellt werden
 # QGridLayout: Ähnlich wie "Grid" in Webentwicklung, wodurch wir den "tabellarischen" Aufbau (Zeilen u. Spalten) festlegen können
 # QPushButton: Button für die einzelnen Elemente auf Taschenrechner (z. B. '+' oder '5')
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QGridLayout, QPushButton, QLineEdit
-from PyQt5.QtCore import Qt
 
 class Calculator(QWidget):
 
