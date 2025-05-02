@@ -10,6 +10,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QGrid
 # QLineEdit: erstellt uns ein Display, auf dem alle Eingaben und Ausgaben dargestellt werden
 # QGridLayout: Ähnlich wie "Grid" in Webentwicklung, wodurch wir den "tabellarischen" Aufbau (Zeilen u. Spalten) festlegen können
 # QPushButton: Button für die einzelnen Elemente auf Taschenrechner (z. B. '+' oder '5')
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QGridLayout, QPushButton, QLineEdit
+from PyQt5.QtCore import Qt
 
 class Calculator(QWidget):
 
@@ -18,9 +20,55 @@ class Calculator(QWidget):
         self.initUI()
     
     def initUI(self):
-        print("Mein Taschenrechner")
-        print("###################")
+
+        my_palette = QPalette()
+        my_palette.setColor(QPalette.Background, QColor(57, 13, 120)) # nur Hintergrund
+        # my_palette.setColor(QPalette.Window, QColor(77, 9, 0)) # Fenster selbst
+        self.setPalette(my_palette)
+
+        self.setFixedSize(400, 300)
+        vbox = QVBoxLayout()
+
+        self.display = QLineEdit()
+        self.display.setStyleSheet("font-size: 24px; height: 40px;")
+        vbox.addWidget(self.display) # einzelnes graphisches Element (hier Texteingabefeld) dem Layout hinzufügen
+
+        grid = QGridLayout()
+
+        # Liste mit allen für grid erforderlichen Infos zu Button anlegen (wird später durch Schleife einfacher und cleaner!)
         
+        # 7 8 9 /
+        # 4 5 6 *
+        # 1 2 3 -
+        # 0 C = +
+        buttons = [
+            ('7', 0, 0), ('8', 0, 1), ('9', 0, 2), ('/', 0, 3),
+            ('4', 1, 0), ('5', 1, 1), ('6', 1, 2), ('*', 1, 3),
+            ('1', 2, 0), ('2', 2, 1), ('3', 2, 2), ('-', 2, 3),
+            ('0', 3, 0), ('C', 3, 1), ('.', 3, 2), ('+', 3, 3),
+            ('=', 4, 0, 1, 4) # (... 1, 4) bedeutet: soll sich über 1 Zeile und 4 Spalten erstrecken
+        ]
+        # (Text auf Button, Zeile, Spalte) -> z. B. ('7', 0, 0)
+        for item in buttons:
+            btnText = item[0]
+            row = item[1]
+            col = item[2]
+            rowSpan = 1
+            colSpan = 1
+
+            if len(item) > 3:
+                rowSpan = item[3]
+                colSpan = item[4]
+
+            button = QPushButton(btnText)
+            button.setStyleSheet("font-size: 24px; height: 40px;")
+            button.clicked.connect(self.onButtonClicked) # Verbinden des jeweiligen Buttons mit der gewünschten "Klick-Funktionalität"
+            grid.addWidget(button, row, col, rowSpan, colSpan) # 1, 1 = jeder Button soll in diesem Fall über 1 Zeile und Spalte gehen
+
+        vbox.addLayout(grid) # einzelnes graphisches Element (hier Grid mit allen Buttons) dem Layout hinzufügen
+
+        self.setLayout(vbox) # Hauptlayout auf Fenster anwenden!
+        self.setWindowTitle("DAA-Taschenrechner") # Setzen des Fenstertitels
 
     def onButtonClicked(self):
         sender = self.sender()
