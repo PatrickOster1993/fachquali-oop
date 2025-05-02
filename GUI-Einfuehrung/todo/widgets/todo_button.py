@@ -1,11 +1,3 @@
-    # def createButton(self, title):
-    #     button = QPushButton(title)
-    #     return button
-
-#  # Button zum Hinzufügen neuer Tasks
-#         add_button = self.createButton("Task hinzufügen")
-#         add_button.clicked.connect(self.addTask)
-
 from PyQt5.QtWidgets import QPushButton
 
 class TodoButton(QPushButton):
