@@ -1,0 +1,16 @@
+Selbständige Aufgabe (15. Januar):
+----------------------------------
+- Lesen Sie sich nochmals die Rubriken "Fortgeschritten" und "Experten" aus der "playground.py" durch
+- versuchen Sie die Aufgaben 1 - 4 (falls sinnvoll) so abzuändern, dass diese auch Konzepten aus den beiden Kategorien enthalten!
+- erweitern Sie die Aufgaben auch gerne um Konzepte, auf die wir beim Besprechen der Aufgaben noch eingegangen sind (z. B. Exception-Handling)
+- Anregung: Bei Aufgabe 2 könnten Sie den Nutzer selbst entscheiden lassen, ob Umwandlung von °C in °F oder umgekehrt!
+
+Selbständige Aufgabe (16. Januar):
+----------------------------------
+- Nehmen Sie erneut Aufgabe 7 zur Hand und ändern Sie die Lösung dahingehend ab, dass es als "kleines" Vorhersagemodell dient!
+- Erstellen Sie sich hierzu zunächst einmal arrays (geeigneter Datentyp?) für die letzten 10 Kalenderwochen (Temperaturdaten von Mo - So)
+- Berechnen Sie dann die Durchschnittstemperatur für jeden Wochentag über die letzten 10 Wochentag
+- Bestimmen Sie den Höchst- und Tiefstand der Temperatur (wie gehabt)
+- Plotten Sie die Durchschnittstemperatur (y-Achse) über die Wochentage (x-Achse)
+- Fügen Sie noch den Höchst- und Tiefstand in das Diagramm ein 
+- Machen Sie das Diagramm ein klein wenig hübscher:)
