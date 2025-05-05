@@ -21,15 +21,6 @@ class TodoModel:
                     if line:
                         self.__tasks.append(line)
                 print("Tasks geladen!")
-
-#    # zu Beginn der Anwendung sollen alle bereits früher angelegten Tasks in der Task-Liste angezeigt werden!
-#     def loadTasks(self):
-#         if os.path.exists(self.dataPath): # gleichbedeutend mit "./tasks.txt"
-#             with open(self.dataPath, "r", encoding="utf-8") as file:
-#                 for line in file:
-#                     line = line.strip()
-#                     if line:
-#                         self.task_list.addItem(line)
     
     def getTasks(self):
         return self.__tasks
