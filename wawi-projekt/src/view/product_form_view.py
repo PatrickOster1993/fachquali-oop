@@ -24,6 +24,7 @@ class ProductFormView(QWidget):
         updateProductList(products: list): Updates the product list in the view.
         getInput() -> tuple: Retrieves the input values from the form fields.
         clearInput(): Clears the input fields in the form.
+        addWidget(widget: QWidget, placeholder:str): Add specified widget to layout.
     """
     
     def __init__(self):
@@ -33,7 +34,18 @@ class ProductFormView(QWidget):
         Sets up the base QWidget and prepares the UI components.
         """
         super().__init__()
+        self.initUI()
     
+    def addWidget(self, widget: QWidget, placeholder: str):
+        """
+        Adds widget to layout and sets placeholder text as given within arguments.
+
+        Args:
+            widget (QWidget): Widget Object to add to layout
+            placeholder (str): Placeholder text for responding widget
+        """
+        self.layout.addWidget(widget, placeholder)
+
     def initUI(self):
         """
         Sets up the graphical user interface for the product form.
@@ -41,7 +53,23 @@ class ProductFormView(QWidget):
         This method initializes and arranges all UI components, such as labels,
         input fields, and buttons, within the form.
         """
-        pass
+        self.setWindowTitle("WaWi")
+
+        self.layout = QVBoxLayout()
+
+        self.nameInput = QLineEdit(self)
+        self.addWidget(self.nameInput, "Produktbezeichnung")
+
+        self.priceInput = QLineEdit(self)
+        self.addWidget(self.priceInput, "Preis")
+
+        self.quantityInput = QLineEdit(self)
+        self.addWidget(self.quantityInput, "Menge")
+
+        self.submitButton = QPushButton(self)
+        
+
+
 
     def showMessage(self, title: str, message: str):
         """
