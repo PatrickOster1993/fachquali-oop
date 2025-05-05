@@ -24,7 +24,7 @@ class ProductFormView(QWidget):
         updateProductList(products: list): Updates the product list in the view.
         getInput() -> tuple: Retrieves the input values from the form fields.
         clearInput(): Clears the input fields in the form.
-        addWidget(widget: QWidget, placeholder:str): Add specified widget to layout.
+        addWidget(widget: QWidget, info: str): Add specified widget to layout.
     """
     
     def __init__(self):
@@ -36,16 +36,22 @@ class ProductFormView(QWidget):
         super().__init__()
         self.initUI()
     
-    def addWidget(self, widget: QWidget, placeholder: str):
+    def addWidget(self, widget: QWidget, info: str):
         """
         Adds widget to layout and sets placeholder text as given within arguments.
 
         Args:
             widget (QWidget): Widget Object to add to layout
-            placeholder (str): Placeholder text for responding widget
+            placeholder (str): Further information regarding widget.
         """
-        self.layout.addWidget(widget, placeholder)
 
+        if isinstance(widget, QLineEdit):
+            self.layout.addWidget(QLabel(info))
+        elif isinstance(widget, QPushButton):
+            widget.setText(info)
+
+        self.layout.addWidget(widget)
+        
     def initUI(self):
         """
         Sets up the graphical user interface for the product form.
@@ -67,9 +73,15 @@ class ProductFormView(QWidget):
         self.addWidget(self.quantityInput, "Menge")
 
         self.submitButton = QPushButton(self)
-        
+        self.addWidget(self.submitButton, "Hinzufügen")
 
+        self.deleteButton = QPushButton(self)
+        self.addWidget(self.deleteButton, "Entfernen")
 
+        self.cancelButton = QPushButton(self)
+        self.addWidget(self.cancelButton, "Abbrechen")
+
+        self.setLayout(self.layout)
 
     def showMessage(self, title: str, message: str):
         """
