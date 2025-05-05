@@ -94,7 +94,11 @@ class ProductFormView(QWidget):
             title (str): The title of the message box.
             message (str): The message to display.
         """
-        pass
+        messageBox = QMessageBox()
+        messageBox.setWindowTitle(title)
+        messageBox.setText(message)
+        messageBox.setIcon(QMessageBox.information)
+        messageBox.exec_()
 
     def updateProductList(self, products: list):
         """
@@ -124,4 +128,6 @@ class ProductFormView(QWidget):
         """
         Clears the input fields in the form.
         """
-        pass
+        self.nameInput.clear()
+        self.priceInput.clear()
+        self.quantityInput.clear()
