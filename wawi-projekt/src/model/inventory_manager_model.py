@@ -37,7 +37,7 @@ class InventoryManager:
             print(inventory.currentId)
         """
         self.products = []
-        self.currentId = None
+        self.currentId = 0
 
     def addProduct(self, product: Product):
         """
