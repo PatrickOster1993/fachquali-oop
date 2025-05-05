@@ -1,8 +1,9 @@
 import os
 
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QListWidget
+from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from widgets.todo_lineedit import TodoLineedit
 from widgets.todo_button import TodoButton
+from widgets.todo_list import TodoList
 
 class TodoApp(QWidget):
     def __init__(self, dataName):
@@ -20,9 +21,6 @@ class TodoApp(QWidget):
                     line = line.strip()
                     if line:
                         self.task_list.addItem(line)
-    
-    def createTaskList(self):
-        return QListWidget()
     
     def addWidgetToLayout(self, widget):
         self.layout.addWidget(widget)
@@ -47,7 +45,7 @@ class TodoApp(QWidget):
         self.addWidgetToLayout(add_button)
 
         # Liste für mehrere Tasks
-        self.task_list = self.createTaskList()
+        self.task_list = TodoList()
         self.addWidgetToLayout(self.task_list)
 
         # Button zum Löschen von Tasks

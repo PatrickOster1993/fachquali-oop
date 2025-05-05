@@ -1,4 +1,2 @@
-dfsdfdsfds
-sdfsdfsdf
-dfsdf
-Hat geklappt!
+asdfasdfasdfasdfa
+funktioniert auch ohne Vererbung?
