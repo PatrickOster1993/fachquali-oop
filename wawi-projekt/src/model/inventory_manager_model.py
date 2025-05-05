@@ -1,5 +1,5 @@
- 
 from .product_model import Product
+
 class InventoryManager:
     """
     InventoryManager is responsible for managing the inventory of products.
@@ -12,7 +12,7 @@ class InventoryManager:
     Methods:
         addProduct(product): Adds a new product to the inventory.
         removeProduct(productId): Removes a product from the inventory based on its ID.
-        saveProducts(): Saves the current inventory to a file.
+        saveProduct(): Saves the current product to a file.
         loadProducts(): Loads the inventory from a file.
         getProduct(productId): Retrieves a product from the inventory based on its ID.
     Example:
@@ -38,6 +38,7 @@ class InventoryManager:
         """
         self.products = []
         self.currentId = None
+
     def addProduct(self, product: Product):
         """
         Adds a new product to the inventory.
@@ -46,7 +47,14 @@ class InventoryManager:
         Returns:
             None
         """
-        pass
+        if product.productId in [products.productId for products in self.products]:
+            raise ValueError("Product with this ID already exists.")
+        else:
+            self.currentId = product.productId
+            self.products.append(product)
+        
+        self.saveProduct()
+
     def removeProduct(self, productId: int):
         """
         Removes a product from the inventory based on its ID.
@@ -56,9 +64,9 @@ class InventoryManager:
             None
         """
         pass
-    def saveProducts(self):
+    def saveProduct(self):
         """
-        Saves the current inventory to a file.
+        Saves the current Product to a file.
         Args:
             None
         Returns:
@@ -82,4 +90,8 @@ class InventoryManager:
         Returns:
             Product: The product object if found, otherwise None.
         """
-        pass
+        for product in self.products:
+            if product.productId == productId:
+                return product
+        return None
+        

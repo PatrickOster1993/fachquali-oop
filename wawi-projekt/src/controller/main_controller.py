@@ -25,10 +25,24 @@ class MainController:
         self.model = InventoryManager()
         self.view = ProductFormView()
 
+        self.view.submitButton.clicked.connect(self.addProduct)
+
     def addProduct(self):
         """
         Adds a new product to the inventory.
         """
+        currentId = self.model.currentId
+        name, price, quantity = self.view.getInput()
+        product = Product(
+            productId=currentId,
+            name = name,
+            price = price,
+            quantity= quantity
+            )
+        self.model.addProduct(product)
+        products = self.model.products
+        self.view.updateProductList(products)
+        self.view.clearInputs()
 
     def removeProduct(self):
         """
