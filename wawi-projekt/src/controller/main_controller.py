@@ -48,6 +48,11 @@ class MainController:
         """
         Removes a product from the inventory by its ID.
         """
+        selected_item = self.view.productList.selectedItems()
+
+        # hier fehlt noch ganz viel :(
+
+        self.model.removeProduct(productId)
 
     def start(self):
         """
