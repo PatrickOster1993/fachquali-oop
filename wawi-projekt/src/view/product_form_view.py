@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QListWidget
 
 class ProductFormView(QWidget):
     """
@@ -72,6 +72,9 @@ class ProductFormView(QWidget):
         self.quantityInput = QLineEdit(self)
         self.addWidget(self.quantityInput, "Menge")
 
+        self.productList = QListWidget(self)
+        self.addWidget(self.productList, "Produkte")
+
         self.submitButton = QPushButton(self)
         self.addWidget(self.submitButton, "Hinzufügen")
 
@@ -100,16 +103,22 @@ class ProductFormView(QWidget):
         Args:
             products (list): The list of products to display.
         """
-        pass
+        self.productList.clear() 
+        for product in products:
+            self.productList.addItem(f"ID: {product.productId} | Name: {product.name} | Preis: {product.price} | Menge: {product.quantity}")
 
     def getInput(self) -> tuple:
         """
         Retrieves the input values from the form fields.
  
         Returns:
-            tuple: A tuple containing the input values (e.g., name, price, quantity).
+            tuple: A tuple containing the input values (name, price, quantity).
         """
-        pass
+        return (
+            self.nameInput.text(),
+            self.priceInput.text(),
+            self.quantityInput.text()
+        )
 
     def clearInputs(self):
         """
