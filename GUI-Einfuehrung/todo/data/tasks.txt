@@ -1,3 +1,2 @@
-dfsdfdsfds
-sdfsdfsdf
-Das habe ich nach Ordnerauslagerung hinzugefügt
+asdfasdfasdfasdfa
+funktioniert auch ohne Vererbung?
