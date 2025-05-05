@@ -47,11 +47,12 @@ class InventoryManager:
         Returns:
             None
         """
-        if product.productId in [products.productId for products in self.products]:
-            raise ValueError("Product with this ID already exists.")
-        else:
-            self.currentId = product.productId
-            self.products.append(product)
+        # if product.productId in [products.productId for products in self.products]:
+        #     raise ValueError("Product with this ID already exists.")
+        # else:
+        self.currentId += 1
+        product.productId = self.currentId
+        self.products.append(product)
         
         self.saveProduct()
 

@@ -31,10 +31,8 @@ class MainController:
         """
         Adds a new product to the inventory.
         """
-        currentId = self.model.currentId
         name, price, quantity = self.view.getInput()
         product = Product(
-            productId=currentId,
             name = name,
             price = price,
             quantity= quantity
