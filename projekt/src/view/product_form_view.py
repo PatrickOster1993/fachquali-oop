@@ -36,7 +36,7 @@ class ProductFormView(QWidget):
         super().__init__()
         self.initUI()
     
-    def addWidget(self, widget: QWidget, info: str):
+    def addWidget(self, widget: QWidget, context: str):
         """
         Adds widget to layout and sets placeholder text as given within arguments.
 
@@ -46,9 +46,9 @@ class ProductFormView(QWidget):
         """
 
         if isinstance(widget, QLineEdit):
-            self.layout.addWidget(QLabel(info))
+            self.layout.addWidget(QLabel(context))
         elif isinstance(widget, QPushButton):
-            widget.setText(info)
+            widget.setText(context)
 
         self.layout.addWidget(widget)
         
@@ -124,4 +124,6 @@ class ProductFormView(QWidget):
         """
         Clears the input fields in the form.
         """
-        pass
+        self.nameInput.clear()
+        self.priceInput.clear()
+        self.quantityInput.clear()
