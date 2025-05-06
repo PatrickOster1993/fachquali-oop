@@ -75,6 +75,7 @@ class InventoryManager:
                 new_product_list.append(product)
 
         self.products = new_product_list
+        self.saveProduct()
 
     def saveProduct(self):
         """
@@ -94,22 +95,29 @@ class InventoryManager:
     def loadProducts(self):
         """
         Loads the inventory from a file.
-        Args:
-            None
-        Returns:
-            None
+        Sets currentId to the highest existing productId.
         """
         try:
             with open(self.path, 'r') as file:
                 data = json.load(file)
-                print(data)
+                max_id = 0
                 for elem in data:
                     elem_dict = dict(elem)
-                    loaded_product = Product(elem_dict["name"], elem_dict["price"], elem_dict["quantity"], elem_dict["productId"])
+                    loaded_product = Product(
+                        elem_dict["name"],
+                        elem_dict["price"],
+                        elem_dict["quantity"],
+                        elem_dict["productId"]
+                    )
                     self.products.append(loaded_product)
-        except(FileNotFoundError, json.JSONDecodeError):
+                    if loaded_product.productId > max_id:
+                        max_id = loaded_product.productId
+                self.currentId = max_id
+        except (FileNotFoundError, json.JSONDecodeError):
             print("Auf Datei konnte nicht zugegriffen werden!")
             self.products = []
+            self.currentId = 0
+
 
     def getProduct(self, productId: int) -> Product:
         """
