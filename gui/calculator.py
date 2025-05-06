@@ -2,6 +2,7 @@
 import sys
 
 # Widgets, die wir benötigen
+from PyQt5.QtGui import QPalette, QColor # eigene Farbgebung festlegen:)
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QGridLayout, QPushButton
 # QApplication: Erstellen einer Instanz ihrer Applikation
 # QWidget: Basisklasse (= Elternklasse), die etwaige, für das Fenster erforderliche Attribute, Methoden, ... besitzt.
@@ -17,9 +18,17 @@ class Calculator(QWidget):
         self.initUI()
     
     def initUI(self):
+
+        my_palette = QPalette()
+        my_palette.setColor(QPalette.Background, QColor(57, 13, 120)) # nur Hintergrund
+        # my_palette.setColor(QPalette.Window, QColor(77, 9, 0)) # Fenster selbst
+        self.setPalette(my_palette)
+
+        self.setFixedSize(400, 300)
         vbox = QVBoxLayout()
 
         self.display = QLineEdit()
+        self.display.setStyleSheet("font-size: 24px; height: 40px;")
         vbox.addWidget(self.display) # einzelnes graphisches Element (hier Texteingabefeld) dem Layout hinzufügen
 
         grid = QGridLayout()
@@ -38,7 +47,6 @@ class Calculator(QWidget):
             ('=', 4, 0, 1, 4) # (... 1, 4) bedeutet: soll sich über 1 Zeile und 4 Spalten erstrecken
         ]
         # (Text auf Button, Zeile, Spalte) -> z. B. ('7', 0, 0)
-
         for item in buttons:
             btnText = item[0]
             row = item[1]
@@ -51,6 +59,7 @@ class Calculator(QWidget):
                 colSpan = item[4]
 
             button = QPushButton(btnText)
+            button.setStyleSheet("font-size: 24px; height: 40px;")
             button.clicked.connect(self.onButtonClicked) # Verbinden des jeweiligen Buttons mit der gewünschten "Klick-Funktionalität"
             grid.addWidget(button, row, col, rowSpan, colSpan) # 1, 1 = jeder Button soll in diesem Fall über 1 Zeile und Spalte gehen
 
@@ -62,7 +71,7 @@ class Calculator(QWidget):
     def onButtonClicked(self):
         sender = self.sender()
         text = sender.text() # Text auf jeweiligem Sender-Button
-        print(text)
+        # print(text) -> nur für Debugging-Zwecke
 
         if text.lower() == 'c':
             self.display.clear() # Inhalt auf Display leeren
