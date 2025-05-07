@@ -51,6 +51,7 @@ print("Temperaturen vorher:", temperaturen)
 i = 0
 
 while i < temp_len:
+    # temp = temperaturen[i]
     temp = temperaturen[i]
     if temp < 18:
         temperaturen[i] = 18

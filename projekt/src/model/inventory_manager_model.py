@@ -1,4 +1,6 @@
 from .product_model import Product
+import os
+import json
 
 class InventoryManager:
     """
@@ -31,6 +33,7 @@ class InventoryManager:
         Attributes:
             products (list): A list of Product objects representing the inventory.
             currentId (int): The ID of the currently selected product.
+            path (str): Path to the product data. For saving and loading purpose.
         Example:
             inventory = InventoryManager()
             print(inventory.products)
@@ -38,6 +41,8 @@ class InventoryManager:
         """
         self.products = []
         self.currentId = 0
+        self.path = os.getcwd() + "/projekt/src/data/products.json"
+        self.loadProducts()
 
     def addProduct(self, product: Product):
         """
@@ -64,7 +69,14 @@ class InventoryManager:
         Returns:
             None
         """
-        pass
+        new_product_list = []
+        for product in self.products:
+            if product.productId != productId:
+                new_product_list.append(product)
+
+        self.products = new_product_list
+        self.saveProduct()
+
     def saveProduct(self):
         """
         Saves the current Product to a file.
@@ -73,16 +85,40 @@ class InventoryManager:
         Returns:
             None
         """
-        pass
+        try:
+            with open(self.path, 'w') as file:
+                #self.products
+                json.dump([product.toDict() for product in self.products], file)
+        except:
+            print(f"Produkte konnten nicht als .json in {self.path} gespeichert werden!")
+            
     def loadProducts(self):
         """
         Loads the inventory from a file.
-        Args:
-            None
-        Returns:
-            None
+        Sets currentId to the highest existing productId.
         """
-        pass
+        try:
+            with open(self.path, 'r') as file:
+                data = json.load(file)
+                max_id = 0
+                for elem in data:
+                    elem_dict = dict(elem)
+                    loaded_product = Product(
+                        elem_dict["name"],
+                        elem_dict["price"],
+                        elem_dict["quantity"],
+                        elem_dict["productId"]
+                    )
+                    self.products.append(loaded_product)
+                    if loaded_product.productId > max_id:
+                        max_id = loaded_product.productId
+                self.currentId = max_id
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("Auf Datei konnte nicht zugegriffen werden!")
+            self.products = []
+            self.currentId = 0
+
+
     def getProduct(self, productId: int) -> Product:
         """
         Retrieves a product from the inventory based on its ID.

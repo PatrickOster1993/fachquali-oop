@@ -15,7 +15,6 @@ class ProductFormView(QWidget):
         quantityInput (QLineEdit): Input field for the product quantity.
         submitButton (QPushButton): Button to submit the form data.
         deleteButton (QPushButton): Deletes the selected products.
-        cancelButton (QPushButton): Button to cancel the form operation.
 
     Methods:
         __init__(): Initializes the ProductFormView instance.
@@ -36,7 +35,7 @@ class ProductFormView(QWidget):
         super().__init__()
         self.initUI()
     
-    def addWidget(self, widget: QWidget, info: str):
+    def addWidget(self, widget: QWidget, context: str):
         """
         Adds widget to layout and sets placeholder text as given within arguments.
 
@@ -46,9 +45,9 @@ class ProductFormView(QWidget):
         """
 
         if isinstance(widget, QLineEdit):
-            self.layout.addWidget(QLabel(info))
+            self.layout.addWidget(QLabel(context))
         elif isinstance(widget, QPushButton):
-            widget.setText(info)
+            widget.setText(context)
 
         self.layout.addWidget(widget)
         
@@ -80,9 +79,6 @@ class ProductFormView(QWidget):
 
         self.deleteButton = QPushButton(self)
         self.addWidget(self.deleteButton, "Entfernen")
-
-        self.cancelButton = QPushButton(self)
-        self.addWidget(self.cancelButton, "Abbrechen")
 
         self.setLayout(self.layout)
 
@@ -124,4 +120,6 @@ class ProductFormView(QWidget):
         """
         Clears the input fields in the form.
         """
-        pass
+        self.nameInput.clear()
+        self.priceInput.clear()
+        self.quantityInput.clear()
