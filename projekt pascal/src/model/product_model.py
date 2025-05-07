@@ -17,17 +17,30 @@ class Product:
     def __init__(self, name: str, price: float, quantity: int, productId = None):
         """
         Initializes a new instance of the Product class.
- 
+
         Args:
             productId (int): The unique identifier for the product.
             name (str): The name of the product.
             price (float): The price of the product.
             quantity (int): The quantity of the product in stock.
         """
-        self.productId = productId
-        self.name = name
-        self.price = price
-        self.quantity = quantity
+        self.productId = int(productId) if productId is not None else None
+        self.name = str(name)
+        
+        try:
+            self.price = float(price)
+            if self.price < 0:
+                raise ValueError("Price must not be negative.")
+        except ValueError:
+            raise ValueError("Price must be a number.")
+
+        try:
+            self.quantity = int(quantity)
+            if self.quantity < 0:
+                raise ValueError("Quantity must not be negative.")
+        except ValueError:
+            raise ValueError("Quantity must be an integer")
+        
 
     def toDict(self):
         """

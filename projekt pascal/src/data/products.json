@@ -1,1 +1,26 @@
-[{"productId": 1, "name": "Laptop", "price": "499.99", "quantity": "2"}, {"productId": 2, "name": "Monitor", "price": "179.99", "quantity": "4"}]
+[
+    {
+      "productId": 1,
+      "name": "Laptop",
+      "price": 899.99,
+      "quantity": 15
+    },
+    {
+      "productId": 2,
+      "name": "Monitor",
+      "price": 249.99,
+      "quantity": 25
+    },
+    {
+      "productId": 3,
+      "name": "Keyboard",
+      "price": 59.99,
+      "quantity": 40
+    },
+    {
+      "productId": 4,
+      "name": "Mouse",
+      "price": 29.99,
+      "quantity": 50
+    }
+  ]

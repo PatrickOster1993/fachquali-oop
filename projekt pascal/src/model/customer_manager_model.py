@@ -25,7 +25,6 @@ class CustomerManager:
         """
         self.customers = []
         self.currentId = 0
-        # Relativen Pfad verwenden, der von der Projektstruktur unabhängig ist
         self.path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "customers.json")
         self.loadCustomers()
 
@@ -56,13 +55,12 @@ class CustomerManager:
         Saves the customers to a file.
         """
         try:
-            # Stellen Sie sicher, dass das Verzeichnis existiert
             os.makedirs(os.path.dirname(self.path), exist_ok=True)
             
             with open(self.path, 'w') as file:
                 json.dump([customer.toDict() for customer in self.customers], file)
         except Exception as e:
-            print(f"Kundendaten konnten nicht als .json in {self.path} gespeichert werden! Fehler: {e}")
+            print(f"Customer data could not be saved as .json in {self.path}! Error: {e}")
             
     def loadCustomers(self):
         """
@@ -72,24 +70,26 @@ class CustomerManager:
         try:
             with open(self.path, 'r') as file:
                 data = json.load(file)
-                # Stelle sicher, dass customers zu Beginn leer ist
                 self.customers = []
                 max_id = 0
                 for elem in data:
                     elem_dict = dict(elem)
-                    loaded_customer = Customer(
-                        elem_dict["name"],
-                        elem_dict["address"],
-                        elem_dict["email"],
-                        elem_dict["phone"],
-                        elem_dict["customerId"]
-                    )
-                    self.customers.append(loaded_customer)
-                    if loaded_customer.customerId > max_id:
-                        max_id = loaded_customer.customerId
+                    try:
+                        loaded_customer = Customer(
+                            elem_dict["name"],
+                            elem_dict["address"],
+                            elem_dict["email"],
+                            elem_dict["phone"],
+                            elem_dict["customerId"]
+                        )
+                        self.customers.append(loaded_customer)
+                        if loaded_customer.customerId > max_id:
+                            max_id = loaded_customer.customerId
+                    except (KeyError, ValueError) as e:
+                        print(f"Error loading customer: {e}")
                 self.currentId = max_id
         except (FileNotFoundError, json.JSONDecodeError):
-            print(f"Auf Kundendatei konnte nicht zugegriffen werden oder sie existiert noch nicht!")
+            print(f"Customer file could not be accessed or does not exist yet!")
             self.customers = []
             self.currentId = 0
 

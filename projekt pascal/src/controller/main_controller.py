@@ -4,7 +4,7 @@ from view.product_form_view import ProductFormView
 from model.customer_manager_model import CustomerManager
 from model.customer_model import Customer
 from view.customer_form_view import CustomerFormView
-from PyQt5.QtWidgets import QTabWidget, QMainWindow, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QTabWidget, QMainWindow, QWidget, QVBoxLayout, QMessageBox
 
 class MainController:
     """
@@ -37,13 +37,13 @@ class MainController:
         """
         self.inventory_manager = InventoryManager()
         self.customer_manager = CustomerManager()
-        
+
         self.main_window = QMainWindow()
         self.main_window.setWindowTitle("WaWi - Warehouse Management System")
         self.main_window.setMinimumSize(600, 500)
         
         self.tabs = QTabWidget()
-        
+
         self.product_view = ProductFormView()
         self.product_view.submitButton.clicked.connect(self.addProduct)
         self.product_view.deleteButton.clicked.connect(self.removeProduct)
@@ -52,8 +52,8 @@ class MainController:
         self.customer_view.submitButton.clicked.connect(self.addCustomer)
         self.customer_view.deleteButton.clicked.connect(self.removeCustomer)
         
-        self.tabs.addTab(self.product_view, "Produkte")
-        self.tabs.addTab(self.customer_view, "Kunden")
+        self.tabs.addTab(self.product_view, "Products")
+        self.tabs.addTab(self.customer_view, "Customers")
         
         self.main_window.setCentralWidget(self.tabs)
 
@@ -63,8 +63,16 @@ class MainController:
         """
         name, price, quantity = self.product_view.getInput()
         
-        if not name or not price or not quantity:
-            self.product_view.showMessage("Fehler", "Alle Felder müssen ausgefüllt sein!")
+        if not name:
+            self.showMessage(self.product_view, "Error", "Product name cannot be empty!")
+            return
+            
+        if not price:
+            self.showMessage(self.product_view, "Error", "Price cannot be empty!")
+            return
+            
+        if not quantity:
+            self.showMessage(self.product_view, "Error", "Quantity cannot be empty!")
             return
             
         try:
@@ -77,9 +85,9 @@ class MainController:
             products = self.inventory_manager.products
             self.product_view.updateProductList(products)
             self.product_view.clearInputs()
-            self.product_view.showMessage("Erfolg", f"Produkt '{name}' wurde erfolgreich hinzugefügt!")
+            self.showMessage(self.product_view, "Success", f"Product '{name}' successfully added!")
         except ValueError as e:
-            self.product_view.showMessage("Fehler", str(e))
+            self.showMessage(self.product_view, "Error", str(e))
 
     def removeProduct(self):
         """
@@ -87,15 +95,19 @@ class MainController:
         """
         selected_items = self.product_view.productList.selectedItems()
         if not selected_items:
-            self.product_view.showMessage("Hinweis", "Bitte wählen Sie ein Produkt zum Entfernen aus.")
+            self.showMessage(self.product_view, "Note", "Please select a product to remove.")
             return
             
         for item in selected_items:
             self.product_view.productList.takeItem(self.product_view.productList.row(item))
-            selected_id = int(item.text().split(' | ')[0].split(' ')[1])
-            self.inventory_manager.removeProduct(selected_id)
+            try:
+                selected_id = int(item.text().split(' | ')[0].split(' ')[1])
+                self.inventory_manager.removeProduct(selected_id)
+            except (ValueError, IndexError) as e:
+                self.showMessage(self.product_view, "Error", f"Error removing product: {str(e)}")
+                return
         
-        self.product_view.showMessage("Erfolg", "Ausgewählte Produkte wurden entfernt.")
+        self.showMessage(self.product_view, "Success", "Selected products have been removed.")
 
     def addCustomer(self):
         """
@@ -103,8 +115,16 @@ class MainController:
         """
         name, address, email, phone = self.customer_view.getInput()
         
-        if not name or not address or not email:
-            self.customer_view.showMessage("Fehler", "Name, Adresse und E-Mail müssen ausgefüllt sein!")
+        if not name:
+            self.showMessage(self.customer_view, "Error", "Name cannot be empty!")
+            return
+            
+        if not address:
+            self.showMessage(self.customer_view, "Error", "Address cannot be empty!")
+            return
+            
+        if not email:
+            self.showMessage(self.customer_view, "Error", "Email cannot be empty!")
             return
             
         try:
@@ -118,9 +138,9 @@ class MainController:
             customers = self.customer_manager.customers
             self.customer_view.updateCustomerList(customers)
             self.customer_view.clearInputs()
-            self.customer_view.showMessage("Erfolg", f"Kunde '{name}' wurde erfolgreich hinzugefügt!")
+            self.showMessage(self.customer_view, "Success", f"Customer '{name}' successfully added!")
         except ValueError as e:
-            self.customer_view.showMessage("Fehler", str(e))
+            self.showMessage(self.customer_view, "Error", str(e))
 
     def removeCustomer(self):
         """
@@ -128,29 +148,40 @@ class MainController:
         """
         selected_items = self.customer_view.customerList.selectedItems()
         if not selected_items:
-            self.customer_view.showMessage("Hinweis", "Bitte wählen Sie einen Kunden zum Entfernen aus.")
+            self.showMessage(self.customer_view, "Note", "Please select a customer to remove.")
             return
             
         for item in selected_items:
             self.customer_view.customerList.takeItem(self.customer_view.customerList.row(item))
-            selected_id = int(item.text().split(' | ')[0].split(' ')[1])
-            self.customer_manager.removeCustomer(selected_id)
+            try:
+                selected_id = int(item.text().split(' | ')[0].split(' ')[1])
+                self.customer_manager.removeCustomer(selected_id)
+            except (ValueError, IndexError) as e:
+                self.showMessage(self.customer_view, "Error", f"Error removing customer: {str(e)}")
+                return
         
-        self.customer_view.showMessage("Erfolg", "Ausgewählte Kunden wurden entfernt.")
+        self.showMessage(self.customer_view, "Success", "Selected customers have been removed.")
+        
+    def showMessage(self, view, title, message):
+        """
+        Displays a message box in the specified view.
+        
+        Args:
+            view: The view where the message should be displayed.
+            title (str): The title of the message box.
+            message (str): The message to display.
+        """
+        if hasattr(view, 'showMessage') and callable(view.showMessage):
+            view.showMessage(title, message)
+        else:
+            QMessageBox.information(view, title, message)
 
     def start(self):
         """
         Updates the views for loaded data and displays the main window.
         """
-        if self.product_view.showMessage.__name__ == "showMessage" and self.product_view.showMessage.__code__.co_code == b'd\x01S\x00':
-            from PyQt5.QtWidgets import QMessageBox
-            def show_message(self, title, message):
-                QMessageBox.information(self, title, message)
-            import types
-            self.product_view.showMessage = types.MethodType(show_message, self.product_view)
-            
         self.product_view.updateProductList(self.inventory_manager.products)
-        
+
         self.customer_view.updateCustomerList(self.customer_manager.customers)
-        
+
         self.main_window.show()

@@ -1,6 +1,4 @@
-from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLineEdit, QPushButton, 
-                           QLabel, QMessageBox, QListWidget, QGridLayout, 
-                           QHBoxLayout, QSplitter, QFrame)
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QListWidget, QGridLayout, QHBoxLayout, QSplitter, QFrame)
 from PyQt5.QtCore import Qt
 
 class CustomerFormView(QWidget):
@@ -12,7 +10,6 @@ class CustomerFormView(QWidget):
     retrieving input values, and clearing form fields.
 
     Attributes:
-        layout (QVBoxLayout): The main layout of the form.
         nameInput (QLineEdit): Input field for the customer name.
         addressInput (QLineEdit): Input field for the customer address.
         emailInput (QLineEdit): Input field for the customer email.
@@ -46,72 +43,60 @@ class CustomerFormView(QWidget):
         This method initializes and arranges all UI components, such as labels,
         input fields, and buttons, within the form.
         """
-        self.setWindowTitle("WaWi - Kundenverwaltung")
+        self.setWindowTitle("WaWi - Customer Management")
 
-        # Hauptlayout für das Widget erstellen
         mainLayout = QVBoxLayout()
-        
-        # Splitter erstellen (teilt das Fenster in Form- und Listenbereich)
+
         splitter = QSplitter(Qt.Vertical)
-        
-        # ===== Formularframe =====
+
         formFrame = QFrame()
         formFrame.setFrameShape(QFrame.StyledPanel)
         formLayout = QGridLayout(formFrame)
-        
-        # Eingabefelder und Labels im Grid-Layout anordnen
-        formLayout.addWidget(QLabel("<b>Neuen Kunden hinzufügen</b>"), 0, 0, 1, 2)
+
+        formLayout.addWidget(QLabel("<b>Add New Customer</b>"), 0, 0, 1, 2)
         
         formLayout.addWidget(QLabel("Name:"), 1, 0)
         self.nameInput = QLineEdit()
         formLayout.addWidget(self.nameInput, 1, 1)
         
-        formLayout.addWidget(QLabel("Adresse:"), 2, 0)
+        formLayout.addWidget(QLabel("Address:"), 2, 0)
         self.addressInput = QLineEdit()
         formLayout.addWidget(self.addressInput, 2, 1)
         
-        formLayout.addWidget(QLabel("E-Mail:"), 3, 0)
+        formLayout.addWidget(QLabel("Email:"), 3, 0)
         self.emailInput = QLineEdit()
         formLayout.addWidget(self.emailInput, 3, 1)
         
-        formLayout.addWidget(QLabel("Telefon:"), 4, 0)
+        formLayout.addWidget(QLabel("Phone:"), 4, 0)
         self.phoneInput = QLineEdit()
         formLayout.addWidget(self.phoneInput, 4, 1)
-        
-        # Buttons in einem horizontalen Layout anordnen
+
         buttonLayout = QHBoxLayout()
-        self.submitButton = QPushButton("Hinzufügen")
-        self.clearButton = QPushButton("Felder leeren")
+        self.submitButton = QPushButton("Add")
+        self.clearButton = QPushButton("Clear Fields")
         self.clearButton.clicked.connect(self.clearInputs)
         buttonLayout.addWidget(self.submitButton)
         buttonLayout.addWidget(self.clearButton)
-        
-        # Buttons zum Formular hinzufügen
+
         formLayout.addLayout(buttonLayout, 5, 0, 1, 2)
-        
-        # ===== Listenframe =====
+
         listFrame = QFrame()
         listFrame.setFrameShape(QFrame.StyledPanel)
         listLayout = QVBoxLayout(listFrame)
         
-        listLayout.addWidget(QLabel("<b>Kundenliste</b>"))
-        
-        # Kundenliste erstellen
+        listLayout.addWidget(QLabel("<b>Customer List</b>"))
+
         self.customerList = QListWidget()
         listLayout.addWidget(self.customerList)
-        
-        # Button zum Löschen von Kunden
-        self.deleteButton = QPushButton("Ausgewählte Kunden entfernen")
+
+        self.deleteButton = QPushButton("Remove Selected Customers")
         listLayout.addWidget(self.deleteButton)
-        
-        # Frames zum Splitter hinzufügen
+
         splitter.addWidget(formFrame)
         splitter.addWidget(listFrame)
-        
-        # Splitter zum Hauptlayout hinzufügen
+
         mainLayout.addWidget(splitter)
         
-        # Layout auf das Widget anwenden
         self.setLayout(mainLayout)
 
     def showMessage(self, title: str, message: str):
@@ -133,7 +118,7 @@ class CustomerFormView(QWidget):
         """
         self.customerList.clear() 
         for customer in customers:
-            self.customerList.addItem(f"ID: {customer.customerId} | Name: {customer.name} | E-Mail: {customer.email} | Telefon: {customer.phone}")
+            self.customerList.addItem(f"ID: {customer.customerId} | Name: {customer.name} | Email: {customer.email} | Phone: {customer.phone}")
 
     def getInput(self) -> tuple:
         """
