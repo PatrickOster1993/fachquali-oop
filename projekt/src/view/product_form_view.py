@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QListWidget
+from model.MariaDBConnection import MariaDBConnection
 
 class ProductFormView(QWidget):
     """
@@ -35,6 +36,13 @@ class ProductFormView(QWidget):
         """
         super().__init__()
         self.initUI()
+        myMariaDB = MariaDBConnection("localhost", "root", "", "mattijn")
+        myConnection = myMariaDB.connect()
+        if myConnection:
+            QMessageBox.information(self, "connection status", "succes")
+        else:
+            QMessageBox.information(self, "connection status", myMariaDB.getError())
+ 
     
     def addWidget(self, widget: QWidget, context: str):
         """
