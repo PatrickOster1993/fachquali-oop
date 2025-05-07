@@ -1,7 +1,6 @@
 from model.inventory_manager_model import InventoryManager
 from model.product_model import Product
 from view.product_form_view import ProductFormView
-# Neue Importe
 from model.customer_manager_model import CustomerManager
 from model.customer_model import Customer
 from view.customer_form_view import CustomerFormView
@@ -36,32 +35,26 @@ class MainController:
         Initializes the MainController with models and views and
         sets up the main window with tabs.
         """
-        # Models initialisieren
         self.inventory_manager = InventoryManager()
         self.customer_manager = CustomerManager()
         
-        # Hauptfenster und Tabs erstellen
         self.main_window = QMainWindow()
         self.main_window.setWindowTitle("WaWi - Warehouse Management System")
         self.main_window.setMinimumSize(600, 500)
         
         self.tabs = QTabWidget()
         
-        # Produkt-View initialisieren
         self.product_view = ProductFormView()
         self.product_view.submitButton.clicked.connect(self.addProduct)
         self.product_view.deleteButton.clicked.connect(self.removeProduct)
         
-        # Kunden-View initialisieren
         self.customer_view = CustomerFormView()
         self.customer_view.submitButton.clicked.connect(self.addCustomer)
         self.customer_view.deleteButton.clicked.connect(self.removeCustomer)
         
-        # Tabs hinzufügen
         self.tabs.addTab(self.product_view, "Produkte")
         self.tabs.addTab(self.customer_view, "Kunden")
         
-        # Tabs zum Hauptfenster hinzufügen
         self.main_window.setCentralWidget(self.tabs)
 
     def addProduct(self):
@@ -70,7 +63,6 @@ class MainController:
         """
         name, price, quantity = self.product_view.getInput()
         
-        # Eingabevalidierung
         if not name or not price or not quantity:
             self.product_view.showMessage("Fehler", "Alle Felder müssen ausgefüllt sein!")
             return
@@ -111,7 +103,6 @@ class MainController:
         """
         name, address, email, phone = self.customer_view.getInput()
         
-        # Eingabevalidierung
         if not name or not address or not email:
             self.customer_view.showMessage("Fehler", "Name, Adresse und E-Mail müssen ausgefüllt sein!")
             return
@@ -151,22 +142,15 @@ class MainController:
         """
         Updates the views for loaded data and displays the main window.
         """
-        # ProductFormView.showMessage muss implementiert werden
-        # Patch für die fehlende Implementation der showMessage-Methode in ProductFormView
         if self.product_view.showMessage.__name__ == "showMessage" and self.product_view.showMessage.__code__.co_code == b'd\x01S\x00':
-            # showMessage ist nicht implementiert (enthält nur 'pass')
             from PyQt5.QtWidgets import QMessageBox
             def show_message(self, title, message):
                 QMessageBox.information(self, title, message)
-            # Methode dynamisch ersetzen
             import types
             self.product_view.showMessage = types.MethodType(show_message, self.product_view)
             
-        # Produktdaten laden und anzeigen
         self.product_view.updateProductList(self.inventory_manager.products)
         
-        # Kundendaten laden und anzeigen
         self.customer_view.updateCustomerList(self.customer_manager.customers)
         
-        # Hauptfenster anzeigen
         self.main_window.show()
