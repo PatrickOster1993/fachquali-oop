@@ -6,6 +6,7 @@ class Product:
         name (str): The name of the product.
         price (float): The price of the product.
         quantity (int): The quantity of the product in stock.
+        productId (int): ID of the product.
 
     Methods:
         __init__(productId, name, price, quantity): Initializes a new instance of the Product class.
@@ -13,7 +14,7 @@ class Product:
         toDict(): Converts the Product instance to a dictionary.
     """
     
-    def __init__(self, name: str, price: float, quantity: int):
+    def __init__(self, name: str, price: float, quantity: int, productId = None):
         """
         Initializes a new instance of the Product class.
  
@@ -23,7 +24,7 @@ class Product:
             price (float): The price of the product.
             quantity (int): The quantity of the product in stock.
         """
-        self.productId = None
+        self.productId = productId
         self.name = name
         self.price = price
         self.quantity = quantity
@@ -31,7 +32,7 @@ class Product:
     def toDict(self):
         """
         Converts the Product instance to a dictionary.
- 
+
         Returns:
             dict: A dictionary representation of the product.
         """
