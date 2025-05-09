@@ -4,7 +4,10 @@ from view.product_form_view import ProductFormView
 from model.customer_manager_model import CustomerManager
 from model.customer_model import Customer
 from view.customer_form_view import CustomerFormView
+from model.MariaDBConnection import MariaDBConnection
+from model.database_queries import DatabaseQueries
 from PyQt5.QtWidgets import QTabWidget, QMainWindow, QWidget, QVBoxLayout, QMessageBox
+import logging
 
 class MainController:
     """
@@ -35,8 +38,15 @@ class MainController:
         Initializes the MainController with models and views and
         sets up the main window with tabs.
         """
-        self.inventory_manager = InventoryManager()
-        self.customer_manager = CustomerManager()
+        self.db_connection = MariaDBConnection(
+            host="localhost",
+            user="root",
+            password="",
+            database="wawi"
+        )
+        
+        self.inventory_manager = InventoryManager(self.db_connection)
+        self.customer_manager = CustomerManager(self.db_connection)
 
         self.main_window = QMainWindow()
         self.main_window.setWindowTitle("WaWi - Warehouse Management System")

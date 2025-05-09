@@ -1,4 +1,4 @@
-class Product:
+class Product():
     """
     Represents a product in the inventory system.
  

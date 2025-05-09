@@ -1,44 +1,70 @@
 from .product_model import Product
-import os
-import json
+from .MariaDBConnection import MariaDBConnection
+from .database_queries import DatabaseQueries
+import logging
+
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('InventoryManager')
 
 class InventoryManager:
     """
     InventoryManager is responsible for managing the inventory of products.
-    It provides methods to add, remove, save, load, and retrieve products.
+    It provides methods to add, remove, and retrieve products using a MariaDB database.
     
     Attributes:
         products (list): A list of Product objects representing the inventory.
-        currentId (int): The ID of the currently selected product.
-        path (str): Path to the product data file.
+        db: MariaDBConnection instance for database operations.
         
     Methods:
         addProduct(product): Adds a new product to the inventory.
         removeProduct(productId): Removes a product from the inventory based on its ID.
-        saveProduct(): Saves the current product to a file.
-        loadProducts(): Loads the inventory from a file.
+        loadProducts(): Loads the inventory from the database.
         getProduct(productId): Retrieves a product from the inventory based on its ID.
     """
-    def __init__(self):
+    def __init__(self, db_connection=None):
         """
-        Initializes the InventoryManager with an empty product list and sets the currentId to 0.
+        Initializes the InventoryManager with a database connection and loads products.
+        
+        Args:
+            db_connection (MariaDBConnection, optional): Database connection to use.
+                If None, a new connection will be created.
         """
         self.products = []
-        self.currentId = 0
-        self.path = os.getcwd() + "/projekt pascal/src/data/products.json"
+        
+        # Use provided connection or create a new one
+        if db_connection:
+            self.db = db_connection
+        else:
+            # Default database configuration - adjust as needed
+            self.db = MariaDBConnection(
+                host="localhost",
+                user="root",
+                password="dein_passwort_hier",  # Setze das richtige Passwort ein
+                database="wawi"
+            )
+            
         self.loadProducts()
 
     def addProduct(self, product: Product):
         """
-        Adds a new product to the inventory.
+        Adds a new product to the inventory database.
         
         Args:
             product (Product): The product to be added to the inventory.
         """
-        self.currentId += 1
-        product.productId = self.currentId
-        self.products.append(product)
-        self.saveProduct()
+        query = DatabaseQueries.insert_product_query()
+        
+        if self.db.execute_query(query, (product.name, product.price, product.quantity)):
+            self.db.commit()
+            # Get the ID assigned by the database
+            product.productId = self.db.get_last_insert_id()
+            self.products.append(product)
+            logger.info(f"Product added: {product}")
+            return True
+        else:
+            logger.error(f"Failed to add product: {self.db.error}")
+            return False
 
     def removeProduct(self, productId: int):
         """
@@ -47,51 +73,43 @@ class InventoryManager:
         Args:
             productId (int): The ID of the product to be removed.
         """
-        self.products = [product for product in self.products if product.productId != productId]
-        self.saveProduct()
-
-    def saveProduct(self):
-        """
-        Saves the current products to a file.
-        """
-        try:
-            os.makedirs(os.path.dirname(self.path), exist_ok=True)
-            
-            with open(self.path, 'w') as file:
-                json.dump([product.toDict() for product in self.products], file)
-        except Exception as e:
-            print(f"Products could not be saved as .json in {self.path}! Error: {e}")
+        query = DatabaseQueries.delete_product_query()
+        
+        if self.db.execute_query(query, (productId,)):
+            self.db.commit()
+            # Update local cache
+            self.products = [product for product in self.products if product.productId != productId]
+            logger.info(f"Product removed: ID {productId}")
+            return True
+        else:
+            logger.error(f"Failed to remove product: {self.db.error}")
+            return False
             
     def loadProducts(self):
         """
-        Loads the inventory from a file.
-        Sets currentId to the highest existing productId.
+        Loads the inventory from the database.
         """
-        try:
-            with open(self.path, 'r') as file:
-                data = json.load(file)
-                self.products = []
-                max_id = 0
-                for elem in data:
-                    elem_dict = dict(elem)
-                    try:
-                        loaded_product = Product(
-                            elem_dict["name"],
-                            elem_dict["price"],
-                            elem_dict["quantity"],
-                            elem_dict["productId"]
-                        )
-                        self.products.append(loaded_product)
-                        if loaded_product.productId > max_id:
-                            max_id = loaded_product.productId
-                    except (KeyError, ValueError) as e:
-                        print(f"Error loading product: {e}")
-                self.currentId = max_id
-        except (FileNotFoundError, json.JSONDecodeError):
-            print("Could not access the file!")
-            self.products = []
-            self.currentId = 0
-
+        query = DatabaseQueries.select_all_products_query()
+        result = self.db.fetch_all(query)
+        
+        self.products = []
+        if result:
+            for row in result:
+                try:
+                    product = Product(
+                        name=row['name'],
+                        price=row['price'],
+                        quantity=row['quantity'],
+                        productId=row['product_id']
+                    )
+                    self.products.append(product)
+                except ValueError as e:
+                    logger.error(f"Error loading product: {e}")
+            
+            logger.info(f"Loaded {len(self.products)} products from database")
+        else:
+            if self.db.error:
+                logger.error(f"Error loading products: {self.db.error}")
 
     def getProduct(self, productId: int) -> Product:
         """
@@ -103,7 +121,19 @@ class InventoryManager:
         Returns:
             Product: The product object if found, otherwise None.
         """
-        for product in self.products:
-            if product.productId == productId:
-                return product
-        return None
+        query = DatabaseQueries.select_product_by_id_query()
+        result = self.db.fetch_one(query, (productId,))
+        
+        if result:
+            try:
+                return Product(
+                    name=result['name'],
+                    price=result['price'],
+                    quantity=result['quantity'],
+                    productId=result['product_id']
+                )
+            except ValueError as e:
+                logger.error(f"Error creating product object: {e}")
+                return None
+        else:
+            return None

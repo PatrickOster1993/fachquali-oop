@@ -1,31 +1,49 @@
 from .customer_model import Customer
-import os
-import json
+from .MariaDBConnection import MariaDBConnection
+from .database_queries import DatabaseQueries
+import logging
+
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('CustomerManager')
 
 class CustomerManager:
     """
-    CustomerManager is responsible for managing customer data.
-    It provides methods to add, remove, save, load, and retrieve customers.
+    CustomerManager is responsible for managing customer data in a MariaDB database.
+    It provides methods to add, remove, and retrieve customers.
     
     Attributes:
         customers (list): A list of Customer objects.
-        currentId (int): The ID of the currently selected customer.
-        path (str): Path to the customer data file.
+        db: MariaDBConnection instance for database operations.
         
     Methods:
         addCustomer(customer): Adds a new customer to the database.
         removeCustomer(customerId): Removes a customer based on their ID.
-        saveCustomer(): Saves the customers to a file.
-        loadCustomers(): Loads the customers from a file.
+        loadCustomers(): Loads the customers from the database.
         getCustomer(customerId): Retrieves a customer based on their ID.
     """
-    def __init__(self):
+    def __init__(self, db_connection=None):
         """
-        Initializes the CustomerManager with an empty customer list and sets the currentId to 0.
+        Initializes the CustomerManager with a database connection and loads customers.
+        
+        Args:
+            db_connection (MariaDBConnection, optional): Database connection to use.
+                If None, a new connection will be created.
         """
         self.customers = []
-        self.currentId = 0
-        self.path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "customers.json")
+        
+        # Use provided connection or create a new one
+        if db_connection:
+            self.db = db_connection
+        else:
+            # Default database configuration - adjust as needed
+            self.db = MariaDBConnection(
+                host="localhost",
+                user="root",
+                password="dein_passwort_hier",  # Setze das richtige Passwort ein
+                database="wawi"
+            )
+            
         self.loadCustomers()
 
     def addCustomer(self, customer: Customer):
@@ -35,10 +53,18 @@ class CustomerManager:
         Args:
             customer (Customer): The customer to be added.
         """
-        self.currentId += 1
-        customer.customerId = self.currentId
-        self.customers.append(customer)
-        self.saveCustomer()
+        query = DatabaseQueries.insert_customer_query()
+        
+        if self.db.execute_query(query, (customer.name, customer.address, customer.email, customer.phone)):
+            self.db.commit()
+            # Get the ID assigned by the database
+            customer.customerId = self.db.get_last_insert_id()
+            self.customers.append(customer)
+            logger.info(f"Customer added: {customer}")
+            return True
+        else:
+            logger.error(f"Failed to add customer: {self.db.error}")
+            return False
 
     def removeCustomer(self, customerId: int):
         """
@@ -47,51 +73,44 @@ class CustomerManager:
         Args:
             customerId (int): The ID of the customer to be removed.
         """
-        self.customers = [customer for customer in self.customers if customer.customerId != customerId]
-        self.saveCustomer()
-
-    def saveCustomer(self):
-        """
-        Saves the customers to a file.
-        """
-        try:
-            os.makedirs(os.path.dirname(self.path), exist_ok=True)
-            
-            with open(self.path, 'w') as file:
-                json.dump([customer.toDict() for customer in self.customers], file)
-        except Exception as e:
-            print(f"Customer data could not be saved as .json in {self.path}! Error: {e}")
+        query = DatabaseQueries.delete_customer_query()
+        
+        if self.db.execute_query(query, (customerId,)):
+            self.db.commit()
+            # Update local cache
+            self.customers = [customer for customer in self.customers if customer.customerId != customerId]
+            logger.info(f"Customer removed: ID {customerId}")
+            return True
+        else:
+            logger.error(f"Failed to remove customer: {self.db.error}")
+            return False
             
     def loadCustomers(self):
         """
-        Loads the customers from a file.
-        Sets currentId to the highest existing customerId.
+        Loads the customers from the database.
         """
-        try:
-            with open(self.path, 'r') as file:
-                data = json.load(file)
-                self.customers = []
-                max_id = 0
-                for elem in data:
-                    elem_dict = dict(elem)
-                    try:
-                        loaded_customer = Customer(
-                            elem_dict["name"],
-                            elem_dict["address"],
-                            elem_dict["email"],
-                            elem_dict["phone"],
-                            elem_dict["customerId"]
-                        )
-                        self.customers.append(loaded_customer)
-                        if loaded_customer.customerId > max_id:
-                            max_id = loaded_customer.customerId
-                    except (KeyError, ValueError) as e:
-                        print(f"Error loading customer: {e}")
-                self.currentId = max_id
-        except (FileNotFoundError, json.JSONDecodeError):
-            print(f"Customer file could not be accessed or does not exist yet!")
-            self.customers = []
-            self.currentId = 0
+        query = DatabaseQueries.select_all_customers_query()
+        result = self.db.fetch_all(query)
+        
+        self.customers = []
+        if result:
+            for row in result:
+                try:
+                    customer = Customer(
+                        name=row['name'],
+                        address=row['address'],
+                        email=row['email'],
+                        phone=row['phone'],
+                        customerId=row['customer_id']
+                    )
+                    self.customers.append(customer)
+                except ValueError as e:
+                    logger.error(f"Error loading customer: {e}")
+            
+            logger.info(f"Loaded {len(self.customers)} customers from database")
+        else:
+            if self.db.error:
+                logger.error(f"Error loading customers: {self.db.error}")
 
     def getCustomer(self, customerId: int) -> Customer:
         """
@@ -103,7 +122,20 @@ class CustomerManager:
         Returns:
             Customer: The customer object if found, otherwise None.
         """
-        for customer in self.customers:
-            if customer.customerId == customerId:
-                return customer
-        return None
+        query = DatabaseQueries.select_customer_by_id_query()
+        result = self.db.fetch_one(query, (customerId,))
+        
+        if result:
+            try:
+                return Customer(
+                    name=result['name'],
+                    address=result['address'],
+                    email=result['email'],
+                    phone=result['phone'],
+                    customerId=result['customer_id']
+                )
+            except ValueError as e:
+                logger.error(f"Error creating customer object: {e}")
+                return None
+        else:
+            return None

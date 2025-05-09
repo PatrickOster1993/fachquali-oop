@@ -2,6 +2,7 @@ import mariadb
 import os
 import dotenv
 from dotenv import load_dotenv
+# pip install python-dotenv
 
 class MariaDBConnection:
     def __init__(self):
