@@ -17,13 +17,8 @@ class DatabaseConfig:
     Attributes:
         config_path (str): Path to the configuration file.
         config (dict): The database configuration.
-        DEFAULT_CONFIG_PATH (str): Default path to the configuration file.
-        DEFAULT_SQLITE_PATH (str): Default path to the SQLite database file.
+        project_root (str): The absolute path to the project root directory.
     """
-    
-    # Default paths
-    DEFAULT_CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "db_config.json")
-    DEFAULT_SQLITE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "wawi.db")
     
     def __init__(self, config_path: Optional[str] = None):
         """
@@ -31,9 +26,18 @@ class DatabaseConfig:
         
         Args:
             config_path (str, optional): Path to the configuration file.
-                If None, the default path will be used.
+                If None, a default path inside the data directory will be used.
         """
-        self.config_path = config_path or self.DEFAULT_CONFIG_PATH
+        # Determine project root directory (parent of directory containing this file)
+        self.project_root = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__))))
+        
+        # Set default paths relative to project root
+        self.data_dir = os.path.join(self.project_root, "data")
+        self.default_config_path = os.path.join(self.data_dir, "db_config.json")
+        self.default_sqlite_path = os.path.join(self.data_dir, "wawi.db")
+        
+        # Use provided config path or default
+        self.config_path = config_path or self.default_config_path
         
         # Default configuration
         self.config = {
@@ -46,12 +50,61 @@ class DatabaseConfig:
                 "port": 3306  # Standard MariaDB/MySQL Port
             },
             "sqlite": {
-                "database_path": self.DEFAULT_SQLITE_PATH
+                "database_path": "data/wawi.db"  # Store as relative path by default
             }
         }
         
+        # Ensure data directory exists
+        os.makedirs(self.data_dir, exist_ok=True)
+        
         # Load configuration from file if it exists
         self.load_config()
+    
+    def _get_absolute_sqlite_path(self):
+        """
+        Get the absolute SQLite database path.
+        
+        Returns:
+            str: The absolute path to the SQLite database.
+        """
+        relative_path = self.config.get("sqlite", {}).get("database_path", "data/wawi.db")
+        
+        # If it's already an absolute path, return as is
+        if os.path.isabs(relative_path):
+            return relative_path
+        
+        # Otherwise, make it absolute relative to project root
+        return os.path.normpath(os.path.join(self.project_root, relative_path))
+    
+    def _get_relative_sqlite_path(self, absolute_path):
+        """
+        Convert an absolute path to a path relative to the project root.
+        
+        Args:
+            absolute_path (str): The absolute path to convert.
+            
+        Returns:
+            str: A path relative to the project root, or the original path if not possible.
+        """
+        try:
+            # Make absolute path for consistency
+            absolute_path = os.path.abspath(absolute_path)
+            
+            # Try to make the path relative to the project root
+            rel_path = os.path.relpath(absolute_path, self.project_root)
+            
+            # Use forward slashes for cross-platform compatibility
+            rel_path = rel_path.replace(os.path.sep, '/')
+            
+            # If the relative path goes outside the project root, use the default path
+            if rel_path.startswith('../'):
+                logger.warning(f"Path {absolute_path} is outside the project directory. Using default path.")
+                return "data/wawi.db"
+            
+            return rel_path
+        except Exception as e:
+            logger.error(f"Error converting path to relative: {e}")
+            return "data/wawi.db"
     
     def load_config(self) -> bool:
         """
@@ -64,11 +117,23 @@ class DatabaseConfig:
             if os.path.exists(self.config_path):
                 with open(self.config_path, 'r') as file:
                     loaded_config = json.load(file)
-                    self.config.update(loaded_config)
                     
-                    # Stellen Sie sicher, dass der Port in der MariaDB-Konfiguration existiert
-                    if "mariadb" in self.config and "port" not in self.config["mariadb"]:
-                        self.config["mariadb"]["port"] = 3306
+                    # Update config without losing default values for missing keys
+                    if "db_type" in loaded_config:
+                        self.config["db_type"] = loaded_config["db_type"]
+                    
+                    if "mariadb" in loaded_config:
+                        for key, value in loaded_config["mariadb"].items():
+                            self.config["mariadb"][key] = value
+                        
+                        # Ensure port is present
+                        if "port" not in self.config["mariadb"]:
+                            self.config["mariadb"]["port"] = 3306
+                    
+                    if "sqlite" in loaded_config and "database_path" in loaded_config["sqlite"]:
+                        # Store the SQLite path as a relative path
+                        sqlite_path = loaded_config["sqlite"]["database_path"]
+                        self.config["sqlite"]["database_path"] = self._get_relative_sqlite_path(sqlite_path)
                     
                 logger.info(f"Loaded database configuration from {self.config_path}")
                 return True
@@ -92,10 +157,12 @@ class DatabaseConfig:
             # Ensure directory exists
             os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
             
+            # Save the config to file
             with open(self.config_path, 'w') as file:
                 json.dump(self.config, file, indent=2)
                 
             logger.info(f"Saved database configuration to {self.config_path}")
+            logger.info(f"SQLite path stored as: {self.config['sqlite']['database_path']}")
             return True
             
         except Exception as e:
@@ -137,7 +204,7 @@ class DatabaseConfig:
         """
         config = self.config.get("mariadb", {}).copy()
         
-        # Stellen Sie sicher, dass der Port vorhanden ist
+        # Ensure the port is present
         if "port" not in config:
             config["port"] = 3306
             
@@ -145,7 +212,7 @@ class DatabaseConfig:
     
     def set_mariadb_config(self, host: str, user: str, password: str, database: str) -> bool:
         """
-        Set the MariaDB configuration (ohne Port).
+        Set the MariaDB configuration (without port).
         
         Args:
             host (str): Database host.
@@ -156,7 +223,7 @@ class DatabaseConfig:
         Returns:
             bool: True if successful, False otherwise.
         """
-        # Bestehende Port-Einstellung beibehalten, falls vorhanden
+        # Keep existing port if available
         existing_port = self.config.get("mariadb", {}).get("port", 3306)
         
         self.config["mariadb"] = {
@@ -193,12 +260,14 @@ class DatabaseConfig:
     
     def get_sqlite_config(self) -> Dict[str, Any]:
         """
-        Get the SQLite configuration.
+        Get the SQLite configuration with absolute path.
         
         Returns:
             Dict[str, Any]: SQLite configuration.
         """
-        return self.config.get("sqlite", {}).copy()
+        return {
+            "database_path": self._get_absolute_sqlite_path()
+        }
     
     def set_sqlite_path(self, database_path: str) -> bool:
         """
@@ -210,7 +279,8 @@ class DatabaseConfig:
         Returns:
             bool: True if successful, False otherwise.
         """
+        # Store as relative path
         self.config["sqlite"] = {
-            "database_path": database_path
+            "database_path": self._get_relative_sqlite_path(database_path)
         }
         return self.save_config()

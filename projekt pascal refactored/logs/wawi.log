@@ -192,3 +192,330 @@ AttributeError: 'MainController' object has no attribute '_show_how_to_use'
 2025-05-09 13:17:07,944 - MainController - INFO - Closing database connection...
 2025-05-09 13:17:07,945 - MariaDBConnection - INFO - Disconnected from MariaDB
 2025-05-09 13:17:07,962 - Main - INFO - Application exited with code 0
+2025-05-09 13:18:03,654 - Main - INFO - Starting application...
+2025-05-09 13:18:03,670 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 13:18:03,670 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 13:18:03,681 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:18:03,681 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB on localhost:8111
+2025-05-09 13:18:03,684 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:18:03,684 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:18:03,685 - MainController - INFO - Database tables verified.
+2025-05-09 13:18:03,685 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:18:03,686 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:18:05,428 - MainController - INFO - Closing database connection...
+2025-05-09 13:18:05,428 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:18:05,498 - Main - INFO - Application exited with code 0
+2025-05-09 14:18:22,234 - Main - INFO - Starting application...
+2025-05-09 14:18:22,257 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:18:22,258 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 14:18:22,267 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 14:18:22,267 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB on localhost:8111
+2025-05-09 14:18:22,270 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 14:18:22,270 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:18:22,271 - MainController - INFO - Database tables verified.
+2025-05-09 14:18:22,271 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 14:18:22,272 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 14:18:22,293 - Main - ERROR - Unhandled exception: 'MainController' object has no attribute '_show_how_to_use'
+Traceback (most recent call last):
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\main.py", line 28, in main
+    controller = MainController()
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 57, in __init__
+    self._create_menus()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 110, in _create_menus
+    how_to_action.triggered.connect(self._show_how_to_use)
+                                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainController' object has no attribute '_show_how_to_use'
+2025-05-09 14:19:04,661 - Main - INFO - Starting application...
+2025-05-09 14:19:04,677 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:04,678 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 14:19:04,686 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 14:19:04,686 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB on localhost:8111
+2025-05-09 14:19:04,689 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 14:19:04,689 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:19:04,690 - MainController - INFO - Database tables verified.
+2025-05-09 14:19:04,690 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 14:19:04,691 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 14:19:12,362 - MainController - INFO - Checking database for sample data import...
+2025-05-09 14:19:12,362 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 14:19:12,363 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 14:19:12,367 - BaseManager - INFO - Added Product: Product(id=2, name=Laptop, price=999.99, quantity=10)
+2025-05-09 14:19:12,367 - MainController - INFO - Imported sample product: Laptop
+2025-05-09 14:19:12,368 - BaseManager - INFO - Added Product: Product(id=3, name=Mouse, price=19.99, quantity=50)
+2025-05-09 14:19:12,369 - MainController - INFO - Imported sample product: Mouse
+2025-05-09 14:19:12,372 - BaseManager - INFO - Added Product: Product(id=4, name=Keyboard, price=49.99, quantity=30)
+2025-05-09 14:19:12,372 - MainController - INFO - Imported sample product: Keyboard
+2025-05-09 14:19:12,376 - BaseManager - INFO - Added Product: Product(id=5, name=Monitor, price=299.99, quantity=15)
+2025-05-09 14:19:12,377 - MainController - INFO - Imported sample product: Monitor
+2025-05-09 14:19:12,381 - BaseManager - INFO - Added Customer: Customer(id=2, name=John Doe, address=123 Main St, email=john@example.com, phone=555-1234)
+2025-05-09 14:19:12,382 - MainController - INFO - Imported sample customer: John Doe
+2025-05-09 14:19:12,386 - BaseManager - INFO - Added Customer: Customer(id=3, name=Jane Smith, address=456 Oak Ave, email=jane@example.com, phone=555-5678)
+2025-05-09 14:19:12,386 - MainController - INFO - Imported sample customer: Jane Smith
+2025-05-09 14:19:12,389 - BaseManager - INFO - Added Customer: Customer(id=4, name=Bob Johnson, address=789 Pine Rd, email=bob@example.com, phone=555-9012)
+2025-05-09 14:19:12,390 - MainController - INFO - Imported sample customer: Bob Johnson
+2025-05-09 14:19:12,390 - MainController - INFO - Imported 4 new products and 3 new customers.
+2025-05-09 14:19:15,013 - BaseManager - INFO - Removed Product with ID 5
+2025-05-09 14:19:15,013 - MainController - INFO - Product removed: 5
+2025-05-09 14:19:17,843 - MainController - INFO - Checking database for sample data import...
+2025-05-09 14:19:17,843 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:19:17,844 - BaseManager - INFO - Loaded 4 Customer instances from database
+2025-05-09 14:19:17,847 - BaseManager - INFO - Added Product: Product(id=6, name=Monitor, price=299.99, quantity=15)
+2025-05-09 14:19:17,847 - MainController - INFO - Imported sample product: Monitor
+2025-05-09 14:19:17,848 - MainController - INFO - Imported 1 new products and 0 new customers.
+2025-05-09 14:19:49,344 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:52,392 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:52,393 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:52,393 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:52,394 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 14:19:53,301 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:19:54,427 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:54,429 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:54,430 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:19:54,437 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 14:19:54,438 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 14:19:54,438 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 14:19:54,439 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:19:54,440 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:19:54,441 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:19:54,441 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:19:56,204 - MainController - INFO - Closing database connection...
+2025-05-09 14:19:56,204 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:19:56,264 - Main - INFO - Application exited with code 0
+2025-05-09 14:20:27,970 - Main - INFO - Starting application...
+2025-05-09 14:20:27,990 - DatabaseConfig - INFO - No configuration file found. Using defaults.
+2025-05-09 14:20:27,992 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:27,994 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:20:27,994 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:20:27,999 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:20:28,000 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:20:28,001 - MainController - INFO - Database tables verified.
+2025-05-09 14:20:28,001 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:20:28,003 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:20:32,585 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:34,137 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:34,139 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:34,139 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:34,140 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:20:35,086 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:20:35,633 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:35,634 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:35,635 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:20:35,643 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:20:35,645 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:20:35,645 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:20:35,646 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:20:35,646 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:20:35,646 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:20:35,647 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:20:36,514 - MainController - INFO - Closing database connection...
+2025-05-09 14:20:36,514 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:20:36,546 - Main - INFO - Application exited with code 0
+2025-05-09 14:21:51,346 - Main - INFO - Starting application...
+2025-05-09 14:21:51,383 - DatabaseConfig - INFO - No configuration file found. Using defaults.
+2025-05-09 14:21:51,384 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:21:51,385 - DatabaseConfig - INFO - SQLite path stored as: data/wawi.db
+2025-05-09 14:21:51,386 - Main - ERROR - Unhandled exception: type object 'DatabaseConfig' has no attribute 'DEFAULT_SQLITE_PATH'
+Traceback (most recent call last):
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\main.py", line 28, in main
+    controller = MainController()
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 44, in __init__
+    self._initialize_database()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 72, in _initialize_database
+    self.db_connection = factory.create_connection()
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\model\database_connection_factory.py", line 53, in create_connection
+    connection = self._create_sqlite_connection()
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\model\database_connection_factory.py", line 101, in _create_sqlite_connection
+    database_path = sqlite_config.get("database_path", DatabaseConfig.DEFAULT_SQLITE_PATH)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'DatabaseConfig' has no attribute 'DEFAULT_SQLITE_PATH'
+2025-05-09 14:22:00,032 - Main - INFO - Starting application...
+2025-05-09 14:22:00,068 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:22:00,069 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:22:00,070 - Main - ERROR - Unhandled exception: type object 'DatabaseConfig' has no attribute 'DEFAULT_SQLITE_PATH'
+Traceback (most recent call last):
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\main.py", line 28, in main
+    controller = MainController()
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 44, in __init__
+    self._initialize_database()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 72, in _initialize_database
+    self.db_connection = factory.create_connection()
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\model\database_connection_factory.py", line 53, in create_connection
+    connection = self._create_sqlite_connection()
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\model\database_connection_factory.py", line 101, in _create_sqlite_connection
+    database_path = sqlite_config.get("database_path", DatabaseConfig.DEFAULT_SQLITE_PATH)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'DatabaseConfig' has no attribute 'DEFAULT_SQLITE_PATH'
+2025-05-09 14:22:14,794 - Main - INFO - Starting application...
+2025-05-09 14:22:14,818 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:22:14,819 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:22:14,819 - Main - ERROR - Unhandled exception: type object 'DatabaseConfig' has no attribute 'DEFAULT_SQLITE_PATH'
+Traceback (most recent call last):
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\main.py", line 28, in main
+    controller = MainController()
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 44, in __init__
+    self._initialize_database()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\controller\main_controller.py", line 72, in _initialize_database
+    self.db_connection = factory.create_connection()
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\model\database_connection_factory.py", line 53, in create_connection
+    connection = self._create_sqlite_connection()
+  File "d:\Programming\Python\InventoryManagerPython\wawi-projekt\model\database_connection_factory.py", line 101, in _create_sqlite_connection
+    database_path = sqlite_config.get("database_path", DatabaseConfig.DEFAULT_SQLITE_PATH)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'DatabaseConfig' has no attribute 'DEFAULT_SQLITE_PATH'
+2025-05-09 14:23:39,723 - Main - INFO - Starting application...
+2025-05-09 14:23:39,737 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:23:39,737 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:23:39,738 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:23:39,738 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:23:39,740 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:23:39,741 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:23:39,741 - MainController - INFO - Database tables verified.
+2025-05-09 14:23:39,741 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:23:39,742 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:23:42,310 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:23:42,313 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:24:02,749 - Main - INFO - Starting application...
+2025-05-09 14:24:02,773 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:24:02,774 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:24:02,775 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:24:02,775 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:24:02,778 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:24:02,778 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:24:02,779 - MainController - INFO - Database tables verified.
+2025-05-09 14:24:02,779 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:24:02,780 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:24:07,200 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:24:07,200 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:25:57,097 - Main - INFO - Starting application...
+2025-05-09 14:25:57,122 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:25:57,123 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:25:57,124 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:25:57,124 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:25:57,126 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:25:57,126 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:25:57,126 - MainController - INFO - Database tables verified.
+2025-05-09 14:25:57,127 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:25:57,127 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:25:59,735 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:25:59,736 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:26:03,640 - MainController - INFO - Closing database connection...
+2025-05-09 14:26:03,640 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:26:03,661 - Main - INFO - Application exited with code 0
+2025-05-09 14:28:48,791 - Main - INFO - Starting application...
+2025-05-09 14:28:48,808 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:28:48,809 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:28:48,811 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:28:48,812 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:28:48,814 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:28:48,815 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:28:48,815 - MainController - INFO - Database tables verified.
+2025-05-09 14:28:48,816 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:28:48,817 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:29:57,451 - MainController - INFO - Closing database connection...
+2025-05-09 14:29:57,452 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:29:57,539 - Main - INFO - Application exited with code 0
+2025-05-09 14:30:04,425 - Main - INFO - Starting application...
+2025-05-09 14:30:04,463 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:30:04,464 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:30:04,465 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:30:04,465 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:30:04,468 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:30:04,468 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:30:04,469 - MainController - INFO - Database tables verified.
+2025-05-09 14:30:04,470 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:30:04,470 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:30:09,786 - MainController - INFO - Closing database connection...
+2025-05-09 14:30:09,787 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:30:09,850 - Main - INFO - Application exited with code 0
+2025-05-09 14:30:51,344 - Main - INFO - Starting application...
+2025-05-09 14:30:51,368 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:30:51,369 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:30:51,370 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:30:51,370 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:30:51,372 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:30:51,372 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:30:51,373 - MainController - INFO - Database tables verified.
+2025-05-09 14:30:51,373 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:30:51,374 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:30:57,319 - MainController - INFO - Closing database connection...
+2025-05-09 14:30:57,320 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:30:57,383 - Main - INFO - Application exited with code 0
+2025-05-09 14:31:21,816 - Main - INFO - Starting application...
+2025-05-09 14:31:21,846 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:31:21,847 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:31:21,848 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:31:21,848 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:31:21,852 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:31:21,853 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:31:21,854 - MainController - INFO - Database tables verified.
+2025-05-09 14:31:21,854 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:31:21,856 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:31:31,704 - MainController - INFO - Closing database connection...
+2025-05-09 14:31:31,705 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:31:31,779 - Main - INFO - Application exited with code 0
+2025-05-09 14:33:55,956 - Main - INFO - Starting application...
+2025-05-09 14:33:55,994 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:33:55,994 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:33:55,995 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:33:55,995 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:33:55,996 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:33:55,996 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:33:55,997 - MainController - INFO - Database tables verified.
+2025-05-09 14:33:55,997 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:33:55,997 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:34:07,720 - MainController - INFO - Closing database connection...
+2025-05-09 14:34:07,720 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:34:07,771 - Main - INFO - Application exited with code 0
+2025-05-09 14:38:01,501 - Main - INFO - Starting application...
+2025-05-09 14:38:01,529 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:38:01,529 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:38:01,530 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:38:01,530 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:38:01,534 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:38:01,535 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:38:01,535 - MainController - INFO - Database tables verified.
+2025-05-09 14:38:01,536 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:38:01,538 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:38:08,635 - MainController - INFO - Closing database connection...
+2025-05-09 14:38:08,636 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:38:08,692 - Main - INFO - Application exited with code 0
+2025-05-09 14:38:54,595 - Main - INFO - Starting application...
+2025-05-09 14:38:54,621 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:38:54,622 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:38:54,623 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:38:54,624 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:38:54,626 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:38:54,627 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:38:54,627 - MainController - INFO - Database tables verified.
+2025-05-09 14:38:54,628 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:38:54,629 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:39:53,218 - MainController - INFO - Closing database connection...
+2025-05-09 14:39:53,218 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:39:53,284 - Main - INFO - Application exited with code 0
+2025-05-09 14:43:33,031 - Main - INFO - Starting application...
+2025-05-09 14:43:33,061 - DatabaseConfig - WARNING - Path D:\Programming\Python\InventoryManagerPython\data\wawi.db is outside the project directory. Using default path.
+2025-05-09 14:43:33,062 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\db_config.json
+2025-05-09 14:43:33,063 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:43:33,063 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\Python\InventoryManagerPython\wawi-projekt\data\wawi.db
+2025-05-09 14:43:33,068 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 14:43:33,068 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 14:43:33,069 - MainController - INFO - Database tables verified.
+2025-05-09 14:43:33,069 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 14:43:33,070 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 14:43:40,446 - BaseManager - INFO - Removed Product with ID 1
+2025-05-09 14:43:40,447 - MainController - INFO - Product removed: 1
+2025-05-09 14:43:40,454 - BaseManager - INFO - Removed Product with ID 2
+2025-05-09 14:43:40,455 - MainController - INFO - Product removed: 2
+2025-05-09 14:43:44,262 - BaseManager - INFO - Removed Product with ID 3
+2025-05-09 14:43:44,263 - MainController - INFO - Product removed: 3
+2025-05-09 14:43:44,269 - BaseManager - INFO - Removed Product with ID 4
+2025-05-09 14:43:44,272 - MainController - INFO - Product removed: 4
+2025-05-09 14:43:47,868 - MainController - INFO - Closing database connection...
+2025-05-09 14:43:47,869 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 14:43:47,922 - Main - INFO - Application exited with code 0

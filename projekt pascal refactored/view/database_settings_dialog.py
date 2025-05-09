@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton, QFileDialog, QGroupBox, QFormLayout, QMessageBox)
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIntValidator
 
 from model.database_config import DatabaseConfig
@@ -78,7 +79,7 @@ class DatabaseSettingsDialog(QDialog):
         
         # Port input
         self.portInput = QLineEdit()
-        self.portInput.setValidator(QIntValidator(1, 65535))  # Gültiger Port-Bereich
+        self.portInput.setValidator(QIntValidator(1, 65535))  # Valid port range
         mariadb_layout.addRow("Port:", self.portInput)
         
         # User input
@@ -151,14 +152,15 @@ class DatabaseSettingsDialog(QDialog):
         # Load MariaDB settings
         mariadb_config = self.config.get_mariadb_config()
         self.hostInput.setText(mariadb_config.get("host", "localhost"))
-        self.portInput.setText(str(mariadb_config.get("port", 3306)))  # Default zu 3306
+        self.portInput.setText(str(mariadb_config.get("port", 3306)))
         self.userInput.setText(mariadb_config.get("user", "root"))
         self.passwordInput.setText(mariadb_config.get("password", ""))
         self.databaseInput.setText(mariadb_config.get("database", "wawi"))
         
         # Load SQLite settings
         sqlite_config = self.config.get_sqlite_config()
-        self.sqlitePathInput.setText(sqlite_config.get("database_path", DatabaseConfig.DEFAULT_SQLITE_PATH))
+        # Use the absolute path from the config
+        self.sqlitePathInput.setText(sqlite_config.get("database_path", ""))
         
         # Show/hide groups based on selected database type
         self._on_db_type_changed()
@@ -201,7 +203,7 @@ class DatabaseSettingsDialog(QDialog):
         except ValueError:
             port = 3306
             
-        # Speichern der MariaDB-Konfiguration mit Port
+        # Save MariaDB configuration with port
         self.config.set_mariadb_config_with_port(
             host=self.hostInput.text(),
             user=self.userInput.text(),
@@ -226,7 +228,7 @@ class DatabaseSettingsDialog(QDialog):
                 # Test MariaDB connection
                 mariadb_config = self.config.get_mariadb_config()
                 
-                # Port aus der Konfiguration extrahieren
+                # Port from the configuration
                 port = mariadb_config.get("port", 3306)
                 
                 connection = MariaDBConnection(
@@ -255,7 +257,7 @@ class DatabaseSettingsDialog(QDialog):
                 sqlite_config = self.config.get_sqlite_config()
                 
                 connection = SQLiteConnection(
-                    sqlite_config.get("database_path", DatabaseConfig.DEFAULT_SQLITE_PATH)
+                    sqlite_config.get("database_path", "")
                 )
                 
                 if connection.connect():

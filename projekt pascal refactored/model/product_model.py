@@ -38,12 +38,17 @@ class Product(BaseModel):
         Set the product price with validation.
         
         Args:
-            price (float): The price to set.
+            price (float or str): The price to set. Can be a float or a string with decimal point or comma.
             
         Raises:
             ValueError: If price is not a valid number or is negative.
         """
         try:
+            # Handle string input
+            if isinstance(price, str):
+                # Replace comma with dot for decimal values
+                price = price.replace(',', '.')
+            
             parsed_price = float(price)
             if parsed_price < 0:
                 raise ValueError("Price cannot be negative.")

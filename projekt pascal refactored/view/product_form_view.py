@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QLineEdit, QLabel
+from PyQt5.QtCore import Qt
 from view.base_form_view import BaseFormView
 
 class ProductFormView(BaseFormView):
@@ -25,17 +26,31 @@ class ProductFormView(BaseFormView):
         # Product name field
         self.formLayout.addWidget(QLabel("Product Name:"), 1, 0)
         self.nameInput = QLineEdit()
+        self.nameInput.setToolTip("Enter the name of the product")
+        self.nameInput.setPlaceholderText("e.g., Laptop")
         self.formLayout.addWidget(self.nameInput, 1, 1)
         
-        # Price field
+        # Price field with tooltip
         self.formLayout.addWidget(QLabel("Price:"), 2, 0)
         self.priceInput = QLineEdit()
+        self.priceInput.setToolTip("Enter price with either dot (50.25) or comma (50,25) as decimal separator")
+        self.priceInput.setPlaceholderText("e.g., 50.99 or 50,99")
         self.formLayout.addWidget(self.priceInput, 2, 1)
         
         # Quantity field
         self.formLayout.addWidget(QLabel("Quantity:"), 3, 0)
         self.quantityInput = QLineEdit()
+        self.quantityInput.setToolTip("Enter the quantity as a whole number")
+        self.quantityInput.setPlaceholderText("e.g., 10")
         self.formLayout.addWidget(self.quantityInput, 3, 1)
+        
+        # Add tooltips to buttons
+        self.submitButton.setToolTip("Add the product to inventory")
+        self.clearButton.setToolTip("Clear all input fields")
+        self.deleteButton.setToolTip("Remove selected products from inventory")
+        
+        # Set tooltip for the silent delete checkbox
+        self.silentDeleteCheckbox.setToolTip("When checked, products will be deleted without confirmation messages")
     
     def getInput(self):
         """

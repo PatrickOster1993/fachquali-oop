@@ -176,45 +176,106 @@ class MainController:
     
     def _import_sample_data(self):
         """
-        Import sample data into the database if it's empty.
+        Import sample data into the database, adding only missing data.
+        Existing data will be preserved.
         """
-        # Check if the database is empty
-        product_count_query = "SELECT COUNT(*) as count FROM products"
-        result = self.db_connection.fetch_one(product_count_query)
+        logger.info("Checking database for sample data import...")
         
-        if result and result.get('count', 0) == 0:
-            logger.info("Database is empty. Importing sample data...")
-            
-            # Add sample products
-            sample_products = [
-                Product(name="Laptop", price=999.99, quantity=10),
-                Product(name="Mouse", price=19.99, quantity=50),
-                Product(name="Keyboard", price=49.99, quantity=30),
-                Product(name="Monitor", price=299.99, quantity=15)
-            ]
-            
-            for product in sample_products:
-                self.product_manager.add(product)
-            
-            # Add sample customers
-            sample_customers = [
-                Customer(name="John Doe", address="123 Main St", email="john@example.com", phone="555-1234"),
-                Customer(name="Jane Smith", address="456 Oak Ave", email="jane@example.com", phone="555-5678"),
-                Customer(name="Bob Johnson", address="789 Pine Rd", email="bob@example.com", phone="555-9012")
-            ]
-            
-            for customer in sample_customers:
-                self.customer_manager.add(customer)
-            
-            # Update views
-            self.product_view.updateProductList(self.product_manager.items)
-            self.customer_view.updateCustomerList(self.customer_manager.items)
-            
-            logger.info("Sample data imported successfully.")
-            QMessageBox.information(self.main_window, "Sample Data", "Sample data has been imported successfully.")
+        # Sample data
+        sample_products = [
+            {"name": "Laptop", "price": 999.99, "quantity": 10},
+            {"name": "Mouse", "price": 19.99, "quantity": 50},
+            {"name": "Keyboard", "price": 49.99, "quantity": 30},
+            {"name": "Monitor", "price": 299.99, "quantity": 15}
+        ]
+        
+        sample_customers = [
+            {"name": "John Doe", "address": "123 Main St", "email": "john@example.com", "phone": "555-1234"},
+            {"name": "Jane Smith", "address": "456 Oak Ave", "email": "jane@example.com", "phone": "555-5678"},
+            {"name": "Bob Johnson", "address": "789 Pine Rd", "email": "bob@example.com", "phone": "555-9012"}
+        ]
+        
+        # Check existing data
+        existing_products = self._get_existing_products()
+        existing_customers = self._get_existing_customers()
+        
+        imported_products = 0
+        imported_customers = 0
+        
+        # Import missing products
+        for product_data in sample_products:
+            # Check if product with this name already exists
+            if not any(p.name.lower() == product_data["name"].lower() for p in existing_products):
+                try:
+                    product = Product(
+                        name=product_data["name"],
+                        price=product_data["price"],
+                        quantity=product_data["quantity"]
+                    )
+                    
+                    if self.product_manager.add(product):
+                        imported_products += 1
+                        logger.info(f"Imported sample product: {product_data['name']}")
+                    else:
+                        logger.warning(f"Failed to import sample product: {product_data['name']}")
+                except Exception as e:
+                    logger.error(f"Error importing sample product: {e}")
+        
+        # Import missing customers
+        for customer_data in sample_customers:
+            # Check if customer with this email already exists
+            if not any(c.email.lower() == customer_data["email"].lower() for c in existing_customers):
+                try:
+                    customer = Customer(
+                        name=customer_data["name"],
+                        address=customer_data["address"],
+                        email=customer_data["email"],
+                        phone=customer_data["phone"]
+                    )
+                    
+                    if self.customer_manager.add(customer):
+                        imported_customers += 1
+                        logger.info(f"Imported sample customer: {customer_data['name']}")
+                    else:
+                        logger.warning(f"Failed to import sample customer: {customer_data['name']}")
+                except Exception as e:
+                    logger.error(f"Error importing sample customer: {e}")
+        
+        # Update views
+        self.product_view.updateProductList(self.product_manager.items)
+        self.customer_view.updateCustomerList(self.customer_manager.items)
+        
+        # Show message
+        if imported_products > 0 or imported_customers > 0:
+            message = f"Imported {imported_products} new products and {imported_customers} new customers."
+            logger.info(message)
+            QMessageBox.information(self.main_window, "Sample Data", message)
         else:
-            logger.info("Database already contains data. Skipping sample import.")
-            QMessageBox.information(self.main_window, "Sample Data", "Database already contains data. No new data was imported.")
+            message = "No new sample data was imported. All sample data already exists."
+            logger.info(message)
+            QMessageBox.information(self.main_window, "Sample Data", message)
+    
+    def _get_existing_products(self):
+        """
+        Get a list of all existing products.
+        
+        Returns:
+            list: List of existing Product objects.
+        """
+        # Ensure products are loaded
+        self.product_manager.load_all()
+        return self.product_manager.items
+        
+    def _get_existing_customers(self):
+        """
+        Get a list of all existing customers.
+        
+        Returns:
+            list: List of existing Customer objects.
+        """
+        # Ensure customers are loaded
+        self.customer_manager.load_all()
+        return self.customer_manager.items
     
     def _show_how_to_use(self):
         """
@@ -273,7 +334,9 @@ class MainController:
         
         # Create and add product
         try:
-            product = Product(name=name, price=float(price), quantity=int(quantity))
+            # Price is directly passed to the Product constructor
+            # The Product class will handle decimal point/comma conversion
+            product = Product(name=name, price=price, quantity=int(quantity))
             
             if self.product_manager.add(product):
                 self.product_view.clearInputs()
@@ -287,13 +350,17 @@ class MainController:
     
     def _remove_product(self):
         """
-        Remove a product from the inventory.
+        Remove selected products from the inventory.
         """
         selected_items = self.product_view.listWidget.selectedItems()
         
         if not selected_items:
             self._show_message(self.product_view, "Note", "Please select a product to remove.")
             return
+        
+        # Track statistics
+        removed_count = 0
+        failed_count = 0
         
         for item in selected_items:
             self.product_view.listWidget.takeItem(self.product_view.listWidget.row(item))
@@ -304,15 +371,28 @@ class MainController:
                 
                 if self.product_manager.remove(selected_id):
                     logger.info(f"Product removed: {selected_id}")
+                    removed_count += 1
                 else:
-                    self._show_message(self.product_view, "Error", f"Failed to remove product: {self.product_manager.db.error}")
-                    return
+                    logger.error(f"Failed to remove product: {self.product_manager.db.error}")
+                    failed_count += 1
                     
             except (ValueError, IndexError) as e:
-                self._show_message(self.product_view, "Error", f"Error removing product: {str(e)}")
-                return
+                logger.error(f"Error removing product: {str(e)}")
+                failed_count += 1
         
-        self._show_message(self.product_view, "Success", "Selected products have been removed.")
+        # Show result message if not in silent mode or if there were failures
+        if failed_count > 0:
+            self._show_message(
+                self.product_view, 
+                "Error", 
+                f"Failed to remove {failed_count} product(s)."
+            )
+        elif removed_count > 0:
+            self._show_message(
+                self.product_view, 
+                "Success", 
+                f"Successfully removed {removed_count} product(s)."
+            )
     
     def _add_customer(self):
         """
@@ -349,13 +429,17 @@ class MainController:
     
     def _remove_customer(self):
         """
-        Remove a customer from the database.
+        Remove selected customers from the database.
         """
         selected_items = self.customer_view.listWidget.selectedItems()
         
         if not selected_items:
             self._show_message(self.customer_view, "Note", "Please select a customer to remove.")
             return
+        
+        # Track statistics
+        removed_count = 0
+        failed_count = 0
         
         for item in selected_items:
             self.customer_view.listWidget.takeItem(self.customer_view.listWidget.row(item))
@@ -366,15 +450,28 @@ class MainController:
                 
                 if self.customer_manager.remove(selected_id):
                     logger.info(f"Customer removed: {selected_id}")
+                    removed_count += 1
                 else:
-                    self._show_message(self.customer_view, "Error", f"Failed to remove customer: {self.customer_manager.db.error}")
-                    return
+                    logger.error(f"Failed to remove customer: {self.customer_manager.db.error}")
+                    failed_count += 1
                     
             except (ValueError, IndexError) as e:
-                self._show_message(self.customer_view, "Error", f"Error removing customer: {str(e)}")
-                return
+                logger.error(f"Error removing customer: {str(e)}")
+                failed_count += 1
         
-        self._show_message(self.customer_view, "Success", "Selected customers have been removed.")
+        # Show result message if not in silent mode or if there were failures
+        if failed_count > 0:
+            self._show_message(
+                self.customer_view, 
+                "Error", 
+                f"Failed to remove {failed_count} customer(s)."
+            )
+        elif removed_count > 0:
+            self._show_message(
+                self.customer_view, 
+                "Success", 
+                f"Successfully removed {removed_count} customer(s)."
+            )
     
     def _show_message(self, view, title, message):
         """
@@ -388,6 +485,12 @@ class MainController:
         if hasattr(view, 'showMessage') and callable(view.showMessage):
             view.showMessage(title, message)
         else:
+            # For views that don't have a custom showMessage method
+            # Check if we're in silent mode and this is a success message for removal
+            if hasattr(view, 'silentDeleteCheckbox') and view.silentDeleteCheckbox.isChecked() and title == "Success" and "removed" in message:
+                # Skip showing message for successful deletions in silent mode
+                return
+                
             QMessageBox.information(view, title, message)
     
     def start(self):

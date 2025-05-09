@@ -68,7 +68,7 @@ class DatabaseConnectionFactory:
         try:
             mariadb_config = self.config.get_mariadb_config()
             
-            # Port aus der Konfiguration extrahieren
+            # Get port from the configuration
             port = mariadb_config.get("port", 3306)
             
             connection = MariaDBConnection(
@@ -98,7 +98,8 @@ class DatabaseConnectionFactory:
             SQLiteConnection: A SQLite connection.
         """
         sqlite_config = self.config.get_sqlite_config()
-        database_path = sqlite_config.get("database_path", DatabaseConfig.DEFAULT_SQLITE_PATH)
+        # Get the absolute database path from the configuration
+        database_path = sqlite_config.get("database_path")
         
         # Ensure directory exists
         os.makedirs(os.path.dirname(database_path), exist_ok=True)

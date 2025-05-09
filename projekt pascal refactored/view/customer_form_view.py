@@ -26,22 +26,38 @@ class CustomerFormView(BaseFormView):
         # Name field
         self.formLayout.addWidget(QLabel("Name:"), 1, 0)
         self.nameInput = QLineEdit()
+        self.nameInput.setToolTip("Enter the full name of the customer")
+        self.nameInput.setPlaceholderText("e.g., John Doe")
         self.formLayout.addWidget(self.nameInput, 1, 1)
         
         # Address field
         self.formLayout.addWidget(QLabel("Address:"), 2, 0)
         self.addressInput = QLineEdit()
+        self.addressInput.setToolTip("Enter the customer's complete address")
+        self.addressInput.setPlaceholderText("e.g., 123 Main Street, City")
         self.formLayout.addWidget(self.addressInput, 2, 1)
         
         # Email field
         self.formLayout.addWidget(QLabel("Email:"), 3, 0)
         self.emailInput = QLineEdit()
+        self.emailInput.setToolTip("Enter a valid email address")
+        self.emailInput.setPlaceholderText("e.g., john.doe@example.com")
         self.formLayout.addWidget(self.emailInput, 3, 1)
         
         # Phone field
         self.formLayout.addWidget(QLabel("Phone:"), 4, 0)
         self.phoneInput = QLineEdit()
+        self.phoneInput.setToolTip("Enter the customer's phone number")
+        self.phoneInput.setPlaceholderText("e.g., 555-123-4567")
         self.formLayout.addWidget(self.phoneInput, 4, 1)
+        
+        # Add tooltips to buttons
+        self.submitButton.setToolTip("Add the customer to database")
+        self.clearButton.setToolTip("Clear all input fields")
+        self.deleteButton.setToolTip("Remove selected customers from database")
+        
+        # Set tooltip for the silent delete checkbox
+        self.silentDeleteCheckbox.setToolTip("When checked, customers will be deleted without confirmation messages")
     
     def getInput(self):
         """

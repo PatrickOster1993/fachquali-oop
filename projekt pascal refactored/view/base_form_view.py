@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QPushButton, QLabel, 
                            QMessageBox, QListWidget, QHBoxLayout, 
-                           QSplitter, QFrame, QGridLayout)
+                           QSplitter, QFrame, QGridLayout, QCheckBox)
 from PyQt5.QtCore import Qt
 
 class BaseFormView(QWidget):
@@ -15,6 +15,7 @@ class BaseFormView(QWidget):
         submitButton (QPushButton): Button to submit the form.
         clearButton (QPushButton): Button to clear form fields.
         deleteButton (QPushButton): Button to delete selected items.
+        silentDeleteCheckbox (QCheckBox): Checkbox to enable silent deletion without confirmation messages.
     """
     
     def __init__(self, title="Form"):
@@ -73,13 +74,25 @@ class BaseFormView(QWidget):
         # List title
         listLayout.addWidget(QLabel(f"<b>{title} List</b>"))
         
-        # List widget
+        # List widget - Enable multiple selection
         self.listWidget = QListWidget()
+        self.listWidget.setSelectionMode(QListWidget.ExtendedSelection)  # Allow multiple selection
         listLayout.addWidget(self.listWidget)
+        
+        # Delete options layout
+        deleteLayout = QHBoxLayout()
         
         # Delete button
         self.deleteButton = QPushButton(f"Remove Selected {title}s")
-        listLayout.addWidget(self.deleteButton)
+        deleteLayout.addWidget(self.deleteButton)
+        
+        # Silent delete checkbox
+        self.silentDeleteCheckbox = QCheckBox("Silent delete (no confirmation)")
+        self.silentDeleteCheckbox.setToolTip("When checked, items will be deleted without showing confirmation messages")
+        deleteLayout.addWidget(self.silentDeleteCheckbox)
+        
+        # Add delete layout to list layout
+        listLayout.addLayout(deleteLayout)
         
         # Add frames to splitter
         splitter.addWidget(formFrame)
@@ -99,6 +112,11 @@ class BaseFormView(QWidget):
             title (str): The message box title.
             message (str): The message to display.
         """
+        # Check if we're in silent mode and this is a success message
+        if self.silentDeleteCheckbox.isChecked() and title == "Success" and "removed" in message:
+            # Skip showing message for successful deletions in silent mode
+            return
+            
         QMessageBox.information(self, title, message)
     
     def clearInputs(self):
