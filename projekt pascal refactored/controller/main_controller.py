@@ -2,7 +2,8 @@ import logging
 import os
 from typing import Dict, Any, Tuple
 
-from PyQt5.QtWidgets import QTabWidget, QMainWindow, QAction, QMessageBox
+from PyQt5.QtWidgets import (QTabWidget, QMainWindow, QAction, QMessageBox)
+from PyQt5.QtCore import Qt
 
 from model.product_model import Product
 from model.customer_model import Customer
@@ -13,8 +14,10 @@ from model.database_connection_factory import DatabaseConnectionFactory
 from view.product_form_view import ProductFormView
 from view.customer_form_view import CustomerFormView
 from view.database_settings_dialog import DatabaseSettingsDialog
+from model.logger_service import LoggerService
+from model.app_info import ABOUT_TEXT, HOW_TO_USE_TEXT
 
-logger = logging.getLogger('MainController')
+logger = LoggerService.get_logger('MainController')
 
 class MainController:
     """
@@ -98,6 +101,19 @@ class MainController:
         exit_action = QAction("Exit", self.main_window)
         exit_action.triggered.connect(self.main_window.close)
         file_menu.addAction(exit_action)
+        
+        # Help menu
+        help_menu = menu_bar.addMenu("Help")
+        
+        # How to use action
+        how_to_action = QAction("How to Use", self.main_window)
+        how_to_action.triggered.connect(self._show_how_to_use)
+        help_menu.addAction(how_to_action)
+        
+        # About action
+        about_action = QAction("About", self.main_window)
+        about_action.triggered.connect(self._show_about)
+        help_menu.addAction(about_action)
     
     def _initialize_views(self):
         """
@@ -199,6 +215,30 @@ class MainController:
         else:
             logger.info("Database already contains data. Skipping sample import.")
             QMessageBox.information(self.main_window, "Sample Data", "Database already contains data. No new data was imported.")
+    
+    def _show_how_to_use(self):
+        """
+        Show the 'How to Use' dialog.
+        """
+        # Create message box with content from app_info.py
+        msg_box = QMessageBox(self.main_window)
+        msg_box.setWindowTitle("How to Use WaWi")
+        msg_box.setTextFormat(Qt.RichText)
+        msg_box.setText(HOW_TO_USE_TEXT)
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.exec_()
+
+    def _show_about(self):
+        """
+        Show the 'About' dialog.
+        """
+        # Create message box with content from app_info.py
+        msg_box = QMessageBox(self.main_window)
+        msg_box.setWindowTitle("About WaWi")
+        msg_box.setTextFormat(Qt.RichText)
+        msg_box.setText(ABOUT_TEXT)
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.exec_()
     
     def closeEvent(self, event):
         """

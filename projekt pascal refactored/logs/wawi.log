@@ -145,3 +145,50 @@
 2025-05-09 13:05:33,897 - MainController - INFO - Closing database connection...
 2025-05-09 13:05:33,898 - MariaDBConnection - INFO - Disconnected from MariaDB
 2025-05-09 13:05:33,925 - Main - INFO - Application exited with code 0
+2025-05-09 13:12:28,190 - Main - INFO - Starting application...
+2025-05-09 13:12:28,216 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:12:28,217 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 13:12:28,224 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:12:28,225 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB on localhost:8111
+2025-05-09 13:12:28,227 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:12:28,227 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:12:28,227 - MainController - INFO - Database tables verified.
+2025-05-09 13:12:28,228 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:12:28,228 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:12:28,238 - Main - ERROR - Unhandled exception: 'MainController' object has no attribute '_show_how_to_use'
+Traceback (most recent call last):
+  File "d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\main.py", line 28, in main
+    controller = MainController()
+  File "d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\controller\main_controller.py", line 55, in __init__
+    self._create_menus()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\controller\main_controller.py", line 108, in _create_menus
+    how_to_action.triggered.connect(self._show_how_to_use)
+                                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainController' object has no attribute '_show_how_to_use'
+2025-05-09 13:15:06,106 - Main - INFO - Starting application...
+2025-05-09 13:15:06,122 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:15:06,122 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 13:15:06,133 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:15:06,133 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB on localhost:8111
+2025-05-09 13:15:06,135 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:15:06,136 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:15:06,136 - MainController - INFO - Database tables verified.
+2025-05-09 13:15:06,137 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:15:06,137 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:16:00,510 - MainController - INFO - Closing database connection...
+2025-05-09 13:16:00,510 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:16:00,539 - Main - INFO - Application exited with code 0
+2025-05-09 13:16:30,358 - Main - INFO - Starting application...
+2025-05-09 13:16:30,381 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:16:30,382 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 13:16:30,396 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:16:30,396 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB on localhost:8111
+2025-05-09 13:16:30,398 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:16:30,399 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:16:30,400 - MainController - INFO - Database tables verified.
+2025-05-09 13:16:30,400 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:16:30,402 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:17:07,944 - MainController - INFO - Closing database connection...
+2025-05-09 13:17:07,945 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:17:07,962 - Main - INFO - Application exited with code 0
