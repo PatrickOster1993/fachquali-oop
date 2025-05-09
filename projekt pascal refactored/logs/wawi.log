@@ -1,0 +1,147 @@
+2025-05-09 12:57:17,551 - Main - INFO - Starting application...
+2025-05-09 12:57:17,565 - DatabaseConfig - INFO - No configuration file found. Using defaults.
+2025-05-09 12:57:17,566 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:17,567 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 12:57:17,567 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 12:57:17,601 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 12:57:17,601 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 12:57:17,602 - MainController - INFO - Database tables verified.
+2025-05-09 12:57:17,603 - BaseManager - INFO - No Product instances found in database
+2025-05-09 12:57:17,603 - BaseManager - INFO - No Customer instances found in database
+2025-05-09 12:57:21,427 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:25,012 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:25,014 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:25,016 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:25,031 - MariaDBConnection - ERROR - Error connecting to MariaDB: Access denied for user 'root'@'localhost' (using password: NO)
+2025-05-09 12:57:39,501 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:39,501 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:39,502 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:39,504 - MariaDBConnection - ERROR - Error connecting to MariaDB: Access denied for user 'root'@'localhost' (using password: NO)
+2025-05-09 12:57:42,958 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:49,083 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:49,084 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:49,084 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:49,087 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 12:57:49,959 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 12:57:50,819 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:50,819 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:50,820 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:57:50,825 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 12:57:50,825 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 12:57:50,825 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 12:57:50,825 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 12:57:50,826 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 12:57:50,826 - BaseManager - INFO - No Product instances found in database
+2025-05-09 12:57:50,826 - BaseManager - INFO - No Customer instances found in database
+2025-05-09 12:57:54,825 - MainController - INFO - Database is empty. Importing sample data...
+2025-05-09 12:57:54,830 - BaseManager - INFO - Added Product: Product(id=1, name=Laptop, price=999.99, quantity=10)
+2025-05-09 12:57:54,833 - BaseManager - INFO - Added Product: Product(id=2, name=Mouse, price=19.99, quantity=50)
+2025-05-09 12:57:54,838 - BaseManager - INFO - Added Product: Product(id=3, name=Keyboard, price=49.99, quantity=30)
+2025-05-09 12:57:54,843 - BaseManager - INFO - Added Product: Product(id=4, name=Monitor, price=299.99, quantity=15)
+2025-05-09 12:57:54,848 - BaseManager - INFO - Added Customer: Customer(id=1, name=John Doe, address=123 Main St, email=john@example.com, phone=555-1234)
+2025-05-09 12:57:54,852 - BaseManager - INFO - Added Customer: Customer(id=2, name=Jane Smith, address=456 Oak Ave, email=jane@example.com, phone=555-5678)
+2025-05-09 12:57:54,856 - BaseManager - INFO - Added Customer: Customer(id=3, name=Bob Johnson, address=789 Pine Rd, email=bob@example.com, phone=555-9012)
+2025-05-09 12:57:54,856 - MainController - INFO - Sample data imported successfully.
+2025-05-09 12:58:01,509 - MainController - INFO - Closing database connection...
+2025-05-09 12:58:01,509 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 12:58:01,526 - Main - INFO - Application exited with code 0
+2025-05-09 12:59:31,293 - Main - INFO - Starting application...
+2025-05-09 12:59:31,305 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:59:31,307 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 12:59:31,308 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 12:59:31,309 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 12:59:31,309 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 12:59:31,309 - MainController - INFO - Database tables verified.
+2025-05-09 12:59:31,309 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 12:59:31,310 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 12:59:33,073 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:59:35,762 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:59:35,763 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:59:35,764 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 12:59:35,774 - MariaDBConnection - ERROR - Error connecting to MariaDB: Access denied for user 'root'@'localhost' (using password: NO)
+2025-05-09 13:01:01,017 - MainController - INFO - Closing database connection...
+2025-05-09 13:01:01,018 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 13:01:01,044 - Main - INFO - Application exited with code 0
+2025-05-09 13:01:01,625 - Main - INFO - Starting application...
+2025-05-09 13:01:01,681 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:01,704 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:01:01,704 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB.
+2025-05-09 13:01:01,706 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:01:01,707 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:01:01,708 - MainController - INFO - Database tables verified.
+2025-05-09 13:01:01,709 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:01:01,710 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:01:05,760 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:08,952 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:08,953 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:08,954 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:08,956 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 13:01:09,865 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 13:01:11,962 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:11,963 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:11,964 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:01:11,966 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:01:12,764 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:01:51,490 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:02:21,184 - MainController - INFO - Closing database connection...
+2025-05-09 13:02:21,185 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:02:21,245 - Main - INFO - Application exited with code 0
+2025-05-09 13:02:21,727 - Main - INFO - Starting application...
+2025-05-09 13:02:21,769 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:02:21,798 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:02:21,798 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB.
+2025-05-09 13:02:21,802 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:02:21,802 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:02:21,803 - MainController - INFO - Database tables verified.
+2025-05-09 13:02:21,804 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:02:21,805 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:02:24,313 - MainController - INFO - Closing database connection...
+2025-05-09 13:02:24,314 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:02:24,406 - Main - INFO - Application exited with code 0
+2025-05-09 13:03:24,084 - Main - INFO - Starting application...
+2025-05-09 13:03:24,113 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:03:24,127 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:03:24,128 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB.
+2025-05-09 13:03:24,131 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:03:24,131 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:03:24,132 - MainController - INFO - Database tables verified.
+2025-05-09 13:03:24,133 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:03:24,134 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:03:25,959 - MainController - INFO - Closing database connection...
+2025-05-09 13:03:25,961 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:03:26,024 - Main - INFO - Application exited with code 0
+2025-05-09 13:05:11,896 - Main - INFO - Starting application...
+2025-05-09 13:05:11,910 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:11,910 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=3306
+2025-05-09 13:05:11,922 - MariaDBConnection - ERROR - Error connecting to MariaDB: Access denied for user 'root'@'localhost' (using password: NO)
+2025-05-09 13:05:11,922 - MariaDBConnection - ERROR - Authentication failed for user 'root'. Please check username and password.
+2025-05-09 13:05:11,922 - DatabaseConnectionFactory - WARNING - Failed to connect to MariaDB: Error connecting to MariaDB: Access denied for user 'root'@'localhost' (using password: NO)
+2025-05-09 13:05:11,922 - DatabaseConnectionFactory - WARNING - Failed to connect to MariaDB, falling back to SQLite
+2025-05-09 13:05:11,923 - SQLiteConnection - INFO - Connected to SQLite database: d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 13:05:11,923 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-09 13:05:11,924 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-09 13:05:11,924 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:05:11,925 - MainController - INFO - Database tables verified.
+2025-05-09 13:05:11,925 - BaseManager - INFO - Loaded 4 Product instances from database
+2025-05-09 13:05:11,925 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-09 13:05:22,219 - DatabaseConfig - INFO - Loaded database configuration from d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:28,749 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:28,750 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:28,750 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:28,750 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 13:05:28,753 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:05:29,754 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:05:30,652 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:30,653 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:30,653 - DatabaseConfig - INFO - Saved database configuration to d:\Programming\DAA\Oster, Patrick\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-09 13:05:30,658 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-09 13:05:30,658 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=8111
+2025-05-09 13:05:30,659 - MariaDBConnection - INFO - Connected to MariaDB database: wawi
+2025-05-09 13:05:30,659 - DatabaseConnectionFactory - INFO - Successfully connected to MariaDB on localhost:8111
+2025-05-09 13:05:30,660 - MariaDBConnection - INFO - Database tables created successfully
+2025-05-09 13:05:30,660 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-09 13:05:30,660 - BaseManager - INFO - Loaded 1 Product instances from database
+2025-05-09 13:05:30,661 - BaseManager - INFO - Loaded 1 Customer instances from database
+2025-05-09 13:05:33,897 - MainController - INFO - Closing database connection...
+2025-05-09 13:05:33,898 - MariaDBConnection - INFO - Disconnected from MariaDB
+2025-05-09 13:05:33,925 - Main - INFO - Application exited with code 0
