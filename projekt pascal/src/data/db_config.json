@@ -1,0 +1,12 @@
+{
+  "db_type": "mariadb",
+  "mariadb": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "wawi"
+  },
+  "sqlite": {
+    "database_path": "d:\\Programming\\DAA\\Oster, Patrick\\fachquali-oop\\projekt pascal\\src\\data\\wawi.db"
+  }
+}

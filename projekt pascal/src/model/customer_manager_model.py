@@ -3,8 +3,7 @@ from .MariaDBConnection import MariaDBConnection
 from .database_queries import DatabaseQueries
 import logging
 
-logging.basicConfig(level=logging.INFO, 
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger('CustomerManager')
 
 class CustomerManager:
@@ -22,28 +21,15 @@ class CustomerManager:
         loadCustomers(): Loads the customers from the database.
         getCustomer(customerId): Retrieves a customer based on their ID.
     """
-    def __init__(self, db_connection=None):
+    def __init__(self, db_connection):
         """
         Initializes the CustomerManager with a database connection and loads customers.
         
         Args:
-            db_connection (MariaDBConnection, optional): Database connection to use.
-                If None, a new connection will be created.
+            db_connection: Database connection to use
         """
         self.customers = []
-        
-        # Use provided connection or create a new one
-        if db_connection:
-            self.db = db_connection
-        else:
-            # Default database configuration - adjust as needed
-            self.db = MariaDBConnection(
-                host="localhost",
-                user="root",
-                password="dein_passwort_hier",  # Setze das richtige Passwort ein
-                database="wawi"
-            )
-            
+        self.db = db_connection
         self.loadCustomers()
 
     def addCustomer(self, customer: Customer):
@@ -57,7 +43,6 @@ class CustomerManager:
         
         if self.db.execute_query(query, (customer.name, customer.address, customer.email, customer.phone)):
             self.db.commit()
-            # Get the ID assigned by the database
             customer.customerId = self.db.get_last_insert_id()
             self.customers.append(customer)
             logger.info(f"Customer added: {customer}")

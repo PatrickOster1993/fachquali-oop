@@ -1,46 +1,23 @@
-import mariadb
+import sqlite3
 import logging
+import os
 
-import MariaDBConnection
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('SQLiteConnection')
 
-logging.basicConfig(level=logging.INFO, 
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger('MariaDBConnection')
-
-class MariaDBConnection:
+class SQLiteConnection:
     """
-    Handles the connection to a MariaDB database.
-    
-    This class manages the connection to a MariaDB database and provides
-    methods for executing queries and managing transactions.
-    
-    Attributes:
-        host (str): Database host
-        user (str): Database user
-        password (str): Database password
-        database (str): Database name
-        port (int): Database port
-        connection: Active database connection
-        cursor: Cursor for executing queries
-        error (str): Last error message, if any
+    Handles the connection to a SQLite database.
     """
     
-    def __init__(self, host, user, password, database, port=3306):
+    def __init__(self, database_path):
         """
-        Initializes the MariaDB connection with the provided credentials.
+        Initializes the SQLite connection with the provided database path.
         
         Args:
-            host (str): Database host
-            user (str): Database user
-            password (str): Database password
-            database (str): Database name
-            port (int, optional): Database port. Defaults to 3306.
+            database_path (str): Path to the SQLite database file
         """
-        self.host = host
-        self.user = user
-        self.password = password
-        self.database = database
-        self.port = port
+        self.database_path = database_path
         self.connection = None
         self.cursor = None
         self.error = None
@@ -49,30 +26,26 @@ class MariaDBConnection:
         
     def connect(self):
         """
-        Establishes a connection to the MariaDB database.
+        Establishes a connection to the SQLite database.
         
         Returns:
             bool: True if connection successful, False otherwise
         """
         try:
-            self.connection = mariadb.connect(
-                host=self.host,
-                user=self.user,
-                password=self.password,
-                database=self.database,
-                port=self.port
-            )
+            db_dir = os.path.dirname(os.path.abspath(self.database_path))
+            if not os.path.exists(db_dir):
+                os.makedirs(db_dir)
             
-            self.cursor = self.connection.cursor(dictionary=True) # without it, it would be a tuple like: (1, "Laptop") and as a dict: {"product_id": 1, "name": "Laptop"}
+            self.connection = sqlite3.connect(self.database_path)
             
-            # enable autocommit for simple operations
-            self.connection.autocommit = False
+            self.connection.row_factory = sqlite3.Row
+            self.cursor = self.connection.cursor()
             
-            logger.info(f"Connected to MariaDB database: {self.database}")
+            logger.info(f"Connected to SQLite database: {self.database_path}")
             return True
             
-        except mariadb.Error as e:
-            self.error = f"Error connecting to MariaDB: {e}"
+        except sqlite3.Error as e:
+            self.error = f"Error connecting to SQLite: {e}"
             logger.error(self.error)
             return False
     
@@ -90,11 +63,11 @@ class MariaDBConnection:
             if self.connection:
                 self.connection.close()
                 
-            logger.info("Disconnected from MariaDB")
+            logger.info("Disconnected from SQLite")
             return True
             
-        except mariadb.Error as e:
-            self.error = f"Error disconnecting from MariaDB: {e}"
+        except sqlite3.Error as e:
+            self.error = f"Error disconnecting from SQLite: {e}"
             logger.error(self.error)
             return False
     
@@ -113,11 +86,14 @@ class MariaDBConnection:
             if not self.connection or not self.cursor:
                 if not self.connect():
                     return False
+            
+            # convert MySQL-style '?' to SQLite's '?'
+            query = query.replace('?', '?')
                     
             self.cursor.execute(query, params or ())
             return True
             
-        except mariadb.Error as e:
+        except sqlite3.Error as e:
             self.error = f"Error executing query: {e}"
             logger.error(f"{self.error}\nQuery: {query}\nParams: {params}")
             return False
@@ -138,9 +114,11 @@ class MariaDBConnection:
             if not self.execute_query(query, params):
                 return None
                 
-            return self.cursor.fetchall()
+            results = self.cursor.fetchall()
             
-        except mariadb.Error as e:
+            return [{k: item[k] for k in item.keys()} for item in results]
+            
+        except sqlite3.Error as e:
             self.error = f"Error fetching data: {e}"
             logger.error(self.error)
             return None
@@ -161,9 +139,13 @@ class MariaDBConnection:
             if not self.execute_query(query, params):
                 return None
                 
-            return self.cursor.fetchone()
+            result = self.cursor.fetchone()
             
-        except mariadb.Error as e:
+            if result:
+                return {k: result[k] for k in result.keys()}
+            return None
+            
+        except sqlite3.Error as e:
             self.error = f"Error fetching data: {e}"
             logger.error(self.error)
             return None
@@ -181,7 +163,7 @@ class MariaDBConnection:
                 return True
             return False
             
-        except mariadb.Error as e:
+        except sqlite3.Error as e:
             self.error = f"Error committing transaction: {e}"
             logger.error(self.error)
             return False
@@ -199,7 +181,7 @@ class MariaDBConnection:
                 return True
             return False
             
-        except mariadb.Error as e:
+        except sqlite3.Error as e:
             self.error = f"Error rolling back transaction: {e}"
             logger.error(self.error)
             return False
@@ -211,56 +193,40 @@ class MariaDBConnection:
         Returns:
             int: The last insert ID, or None if an error occurred
         """
-        result = self.fetch_one("SELECT LAST_INSERT_ID() as id")
+        result = self.fetch_one("SELECT last_insert_rowid() as id")
         if result and 'id' in result:
             return result['id']
         return None
     
-    def create_tables(self):
+    def create_tables(self, queries=None):
         """
         Creates the necessary database tables if they don't exist.
+        
+        Args:
+            queries (list, optional): List of SQL queries to execute for table creation.
+                If None, no tables will be created.
         
         Returns:
             bool: True if tables were created successfully, False otherwise
         """
-        try:
-            self.execute_query('''
-                CREATE TABLE IF NOT EXISTS products (
-                    product_id INT AUTO_INCREMENT PRIMARY KEY,
-                    name VARCHAR(255) NOT NULL,
-                    price DECIMAL(10, 2) NOT NULL,
-                    quantity INT NOT NULL
-                )
-            ''')
+        if not queries:
+            return True
             
-            self.execute_query('''
-                CREATE TABLE IF NOT EXISTS customers (
-                    customer_id INT AUTO_INCREMENT PRIMARY KEY,
-                    name VARCHAR(255) NOT NULL,
-                    address TEXT NOT NULL,
-                    email VARCHAR(255) NOT NULL,
-                    phone VARCHAR(50)
-                )
-            ''')
+        try:
+            for query in queries:
+                # in SQLite, AUTO_INCREMENT is named AUTOINCREMENT and INT is INTEGER
+                query = query.replace("AUTO_INCREMENT", "AUTOINCREMENT")
+                query = query.replace("INT ", "INTEGER ")
+                
+                if not self.execute_query(query):
+                    raise sqlite3.Error(self.error or "Query execution failed")
             
             self.commit()
             logger.info("Database tables created successfully")
             return True
             
-        except mariadb.Error as e:
+        except sqlite3.Error as e:
             self.error = f"Error creating tables: {e}"
             logger.error(self.error)
             self.rollback()
             return False
-    
-    def __enter__(self):
-        """
-        Support for using the connection as a context manager.
-        """
-        return self
-    
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        """
-        Ensures the connection is closed when exiting a context.
-        """
-        self.disconnect()
