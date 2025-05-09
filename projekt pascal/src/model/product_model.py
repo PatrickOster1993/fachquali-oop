@@ -1,4 +1,5 @@
-class Product:
+from SimpleCRUD import simpleCrud
+class Product(simpleCrud):
     """
     Represents a product in the inventory system.
  
@@ -40,7 +41,12 @@ class Product:
                 raise ValueError("Quantity cannot be negative.")
         except ValueError:
             raise ValueError("Quantity must be an integer.")
+        super().__init__("products")
 
+    
+    
+    
+    
     def toDict(self):
         """
         Converts the Product instance to a dictionary.
