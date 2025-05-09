@@ -3,8 +3,7 @@ from .MariaDBConnection import MariaDBConnection
 from .database_queries import DatabaseQueries
 import logging
 
-logging.basicConfig(level=logging.INFO, 
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger('InventoryManager')
 
 class InventoryManager:
@@ -32,15 +31,13 @@ class InventoryManager:
         """
         self.products = []
         
-        # Use provided connection or create a new one
         if db_connection:
             self.db = db_connection
         else:
-            # Default database configuration - adjust as needed
             self.db = MariaDBConnection(
                 host="localhost",
                 user="root",
-                password="dein_passwort_hier",  # Setze das richtige Passwort ein
+                password="",
                 database="wawi"
             )
             
@@ -57,7 +54,6 @@ class InventoryManager:
         
         if self.db.execute_query(query, (product.name, product.price, product.quantity)):
             self.db.commit()
-            # Get the ID assigned by the database
             product.productId = self.db.get_last_insert_id()
             self.products.append(product)
             logger.info(f"Product added: {product}")
