@@ -214,8 +214,9 @@ class SQLiteConnection:
             
         try:
             for query in queries:
-                # in SQLite, AUTO_INCREMENT is named AUTOINCREMENT and INT is INTEGER
-                query = query.replace("AUTO_INCREMENT", "AUTOINCREMENT")
+                # In SQLite, AUTO_INCREMENT ist falsch - muss PRIMARY KEY AUTOINCREMENT heißen
+                # und INT ist INTEGER
+                query = query.replace("INT AUTO_INCREMENT PRIMARY KEY", "INTEGER PRIMARY KEY AUTOINCREMENT")
                 query = query.replace("INT ", "INTEGER ")
                 
                 if not self.execute_query(query):
