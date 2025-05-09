@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QListWidget, QGridLayout, QHBoxLayout, QSplitter, QFrame)
 from PyQt5.QtCore import Qt
-from model.MariaDBConnection import MariaDBConnection
 
 class ProductFormView(QWidget):
     """
@@ -36,13 +35,6 @@ class ProductFormView(QWidget):
         super().__init__()
         self.initUI()
         
-        # myMariaDB = MariaDBConnection("localhost", "root", "wawi")
-        # myConnection = myMariaDB. connect()
-        # if myConnection:
-        #     QMessageBox. information(self, "connection status", "succes")
-        # else
-        #     QMessageBox. information(self, "connection status", "failed")
-
     def initUI(self):
         """
         Sets up the graphical user interface for the product form.
