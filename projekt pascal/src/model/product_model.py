@@ -17,7 +17,7 @@ class Product:
     def __init__(self, name: str, price: float, quantity: int, productId = None):
         """
         Initializes a new instance of the Product class.
-
+ 
         Args:
             productId (int): The unique identifier for the product.
             name (str): The name of the product.
@@ -25,22 +25,21 @@ class Product:
             quantity (int): The quantity of the product in stock.
         """
         self.productId = int(productId) if productId is not None else None
-        self.name = str(name)
+        self.name = str(name) if name else ""
         
         try:
             self.price = float(price)
             if self.price < 0:
-                raise ValueError("Price must not be negative.")
+                raise ValueError("Price cannot be negative.")
         except ValueError:
-            raise ValueError("Price must be a number.")
-
+            raise ValueError("Price must be a valid number.")
+        
         try:
             self.quantity = int(quantity)
             if self.quantity < 0:
-                raise ValueError("Quantity must not be negative.")
+                raise ValueError("Quantity cannot be negative.")
         except ValueError:
-            raise ValueError("Quantity must be an integer")
-        
+            raise ValueError("Quantity must be an integer.")
 
     def toDict(self):
         """
@@ -64,6 +63,3 @@ class Product:
             str: A string describing the product.
         """
         return f"Product(productId: {self.productId}, name={self.name}, price={self.price}, quantity={self.quantity})"
-    
-
-# help(Product) # Zeigt entsprechende Doku für jeweilige Klasse in Konsole!

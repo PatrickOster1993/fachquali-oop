@@ -1,3 +1,5 @@
+import re
+
 class Customer:
     """
     Represents a customer in the inventory system.
@@ -27,10 +29,23 @@ class Customer:
             customerId (int, optional): The unique identifier for the customer. Defaults to None.
         """
         self.customerId = int(customerId) if customerId is not None else None
+        
+        if not name:
+            raise ValueError("Customer name cannot be empty.")
         self.name = str(name)
+        
+        if not address:
+            raise ValueError("Customer address cannot be empty.")
         self.address = str(address)
+        
+        if not email:
+            raise ValueError("Customer email cannot be empty.")
+        email_pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        if not re.match(email_pattern, email):
+            raise ValueError("Invalid email format. Please use format: name@example.com")
         self.email = str(email)
-        self.phone = str(phone)
+        
+        self.phone = str(phone) if phone else ""
 
     def toDict(self):
         """
