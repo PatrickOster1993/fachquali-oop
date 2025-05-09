@@ -1,4 +1,4 @@
-from QueryExecuter import QueryExecuter
+from .QueryExecuter import QueryExecuter
 
 class SimpleCRUD:
 

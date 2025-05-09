@@ -1,4 +1,4 @@
-from MariaDBConnection import MariaDBConnection
+from .MariaDBConnection import MariaDBConnection
 
 class QueryExecuter(MariaDBConnection):
     def __init__(self, query):

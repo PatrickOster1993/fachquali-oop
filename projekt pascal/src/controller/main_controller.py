@@ -1,5 +1,5 @@
 from model.inventory_manager_model import InventoryManager
-from model.product_model import Product
+from model.ProductModel import ProductModel
 from view.product_form_view import ProductFormView
 from model.customer_manager_model import CustomerManager
 from model.customer_model import Customer
@@ -76,7 +76,7 @@ class MainController:
             return
             
         try:
-            product = Product(
+            product = ProductModel(
                 name=name,
                 price=price,
                 quantity=quantity

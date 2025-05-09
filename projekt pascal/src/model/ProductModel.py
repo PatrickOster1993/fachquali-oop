@@ -1,5 +1,5 @@
-from SimpleCRUD import simpleCrud
-class Product(simpleCrud):
+from .SimpleCRUD import SimpleCRUD
+class ProductModel(SimpleCRUD):
     """
     Represents a product in the inventory system.
  
