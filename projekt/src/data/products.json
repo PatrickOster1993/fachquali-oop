@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"productId": 1, "name": "Test", "price": "0.99", "quantity": "8"}, {"productId": 1, "name": "Laptop", "price": "499.99", "quantity": "4"}, {"productId": 1, "name": "laptop", "price": "15", "quantity": "1"}]
+=======
+[{"productId": 1, "name": "Laptop", "price": 499.99, "quantity": 2}, {"productId": 2, "name": "Monitor", "price": 179.99, "quantity": 4}, {"productId": 4, "name": "uehfeouifw", "price": 23.0, "quantity": 2}, {"productId": 5, "name": "dasd", "price": 2.0, "quantity": 2}]
+>>>>>>> origin/main

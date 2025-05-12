@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QListWidget
-from model.MariaDBConnection import MariaDBConnection
+from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox, QListWidget, QGridLayout, QHBoxLayout, QSplitter, QFrame)
+from PyQt5.QtCore import Qt
 
 class ProductFormView(QWidget):
     """
@@ -10,12 +10,12 @@ class ProductFormView(QWidget):
     retrieving input values, and clearing form fields.
 
     Attributes:
-        layout (QVBoxLayout): The main layout of the form.
         nameInput (QLineEdit): Input field for the product name.
         priceInput (QLineEdit): Input field for the product price.
         quantityInput (QLineEdit): Input field for the product quantity.
         submitButton (QPushButton): Button to submit the form data.
         deleteButton (QPushButton): Deletes the selected products.
+        productList (QListWidget): List widget to display products.
 
     Methods:
         __init__(): Initializes the ProductFormView instance.
@@ -23,8 +23,7 @@ class ProductFormView(QWidget):
         showMessage(title: str, message: str): Displays a message box with the given message.
         updateProductList(products: list): Updates the product list in the view.
         getInput() -> tuple: Retrieves the input values from the form fields.
-        clearInput(): Clears the input fields in the form.
-        addWidget(widget: QWidget, info: str): Add specified widget to layout.
+        clearInputs(): Clears the input fields in the form.
     """
     
     def __init__(self):
@@ -35,29 +34,6 @@ class ProductFormView(QWidget):
         """
         super().__init__()
         self.initUI()
-        myMariaDB = MariaDBConnection("localhost", "root", "", "mattijn")
-        myConnection = myMariaDB.connect()
-        if myConnection:
-            QMessageBox.information(self, "connection status", "succes")
-        else:
-            QMessageBox.information(self, "connection status", myMariaDB.getError())
- 
-    
-    def addWidget(self, widget: QWidget, context: str):
-        """
-        Adds widget to layout and sets placeholder text as given within arguments.
-
-        Args:
-            widget (QWidget): Widget Object to add to layout
-            placeholder (str): Further information regarding widget.
-        """
-
-        if isinstance(widget, QLineEdit):
-            self.layout.addWidget(QLabel(context))
-        elif isinstance(widget, QPushButton):
-            widget.setText(context)
-
-        self.layout.addWidget(widget)
         
     def initUI(self):
         """
@@ -66,29 +42,57 @@ class ProductFormView(QWidget):
         This method initializes and arranges all UI components, such as labels,
         input fields, and buttons, within the form.
         """
-        self.setWindowTitle("WaWi")
+        self.setWindowTitle("WaWi - Product Management")
 
-        self.layout = QVBoxLayout()
+        mainLayout = QVBoxLayout()
+        
+        splitter = QSplitter(Qt.Vertical)
+        
+        formFrame = QFrame()
+        formFrame.setFrameShape(QFrame.StyledPanel)
+        formLayout = QGridLayout(formFrame)
 
-        self.nameInput = QLineEdit(self)
-        self.addWidget(self.nameInput, "Produktbezeichnung")
+        formLayout.addWidget(QLabel("<b>Add New Product</b>"), 0, 0, 1, 2)
+        
+        formLayout.addWidget(QLabel("Product Name:"), 1, 0)
+        self.nameInput = QLineEdit()
+        formLayout.addWidget(self.nameInput, 1, 1)
+        
+        formLayout.addWidget(QLabel("Price:"), 2, 0)
+        self.priceInput = QLineEdit()
+        formLayout.addWidget(self.priceInput, 2, 1)
+        
+        formLayout.addWidget(QLabel("Quantity:"), 3, 0)
+        self.quantityInput = QLineEdit()
+        formLayout.addWidget(self.quantityInput, 3, 1)
 
-        self.priceInput = QLineEdit(self)
-        self.addWidget(self.priceInput, "Preis")
+        buttonLayout = QHBoxLayout()
+        self.submitButton = QPushButton("Add")
+        self.clearButton = QPushButton("Clear Fields")
+        self.clearButton.clicked.connect(self.clearInputs)
+        buttonLayout.addWidget(self.submitButton)
+        buttonLayout.addWidget(self.clearButton)
 
-        self.quantityInput = QLineEdit(self)
-        self.addWidget(self.quantityInput, "Menge")
+        formLayout.addLayout(buttonLayout, 4, 0, 1, 2)
 
-        self.productList = QListWidget(self)
-        self.addWidget(self.productList, "Produkte")
+        listFrame = QFrame()
+        listFrame.setFrameShape(QFrame.StyledPanel)
+        listLayout = QVBoxLayout(listFrame)
+        
+        listLayout.addWidget(QLabel("<b>Product List</b>"))
 
-        self.submitButton = QPushButton(self)
-        self.addWidget(self.submitButton, "Hinzufügen")
+        self.productList = QListWidget()
+        listLayout.addWidget(self.productList)
 
-        self.deleteButton = QPushButton(self)
-        self.addWidget(self.deleteButton, "Entfernen")
+        self.deleteButton = QPushButton("Remove Selected Products")
+        listLayout.addWidget(self.deleteButton)
 
-        self.setLayout(self.layout)
+        splitter.addWidget(formFrame)
+        splitter.addWidget(listFrame)
+
+        mainLayout.addWidget(splitter)
+
+        self.setLayout(mainLayout)
 
     def showMessage(self, title: str, message: str):
         """
@@ -98,7 +102,7 @@ class ProductFormView(QWidget):
             title (str): The title of the message box.
             message (str): The message to display.
         """
-        pass
+        QMessageBox.information(self, title, message)
 
     def updateProductList(self, products: list):
         """
@@ -109,7 +113,7 @@ class ProductFormView(QWidget):
         """
         self.productList.clear() 
         for product in products:
-            self.productList.addItem(f"ID: {product.productId} | Name: {product.name} | Preis: {product.price} | Menge: {product.quantity}")
+            self.productList.addItem(f"ID: {product.productId} | Name: {product.name} | Price: {product.price} | Quantity: {product.quantity}")
 
     def getInput(self) -> tuple:
         """
@@ -131,3 +135,4 @@ class ProductFormView(QWidget):
         self.nameInput.clear()
         self.priceInput.clear()
         self.quantityInput.clear()
+        self.nameInput.setFocus()
