@@ -1,0 +1,7 @@
+DB_HOST="localhost"
+DB_PORT="3306"
+DB_USER="root"
+DB_PASSWORD="DAA"
+DB_NAME="Wawi"
+DB_CHARSET="utf8mb4"
+DB_COLLATION="utf8mb4_unicode_ci"
