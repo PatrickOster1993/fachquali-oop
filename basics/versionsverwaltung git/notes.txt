@@ -1,0 +1,54 @@
+Beantragung eines Personalausweises in Deutschland:
+---------------------------------------------------
+
+MANUELL:
+- Termin beim Einwohnermeldeamt
+- Foto machen
+- Nummer ziehen
+
+DIGITAL:
+- rechtliche Überprüfung: deutsche Staatsbürgerschaft ...
+- Biometrisches Foto
+- Fingerabdruck
+- Identitätsnachweis (z. B. Geburtsurkunde, oder bereits beantragt --> letzter Perso / Reisepass)
+- Adressnachweis / Wohnort
+- Größe
+- Augenfarbe
+- Ablaufdatum / Beantragungsdatum
+- Signatur
+- Geburtsdatum
+- Gebührenzahlung
+- Benachrichtung, dass beantragt
+- Aushändigung Ausweis
+- digitale Nutzung eID-Funktion (optional)
+- Erkennungsnummer d. Ausweises (ID)
+
+# Eingabe d. Daten:
+    - Foto
+    - Fingerabdruck
+    - Signatur / Unterschrift
+    - Identitätsnachweis
+    - Adressnachweis
+    - Größe
+    - Augenfarbe
+    - Geburtsurkunde
+    - Gebührenzahlung
+    - digitale Nutzung eID-Funktion (optional)
+    
+# Verarbeitung d. Daten (Überprüfung)
+    - Deutsche Staatsbürgerschaft
+    - Foto biometrisch
+    - Identitätsnachweis liegt vor
+    - Adresse mit Adressnachweis identisch
+    - Zahlung erfolgt
+    - Benachrichtung, dass beantragt (Wartezeit)
+
+# Ausgabe d. Daten
+    - Ausweisdokument mit Foto, Signatur und überprüften Daten
+    - + Ablaufdatum / Datum Beantragung
+    - + Erkennungsnummer (ID)
+
+    --> immer ins issue schreiben: <Eingabe> --> <Beschreibung d. Sub-Features> --> <zu erwartende Ausgabe>
+
+
+
