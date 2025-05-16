@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufgabe 8</title>
+    <link rel="stylesheet" href="vertiefung.css">
+    <script src="vertiefung.js" defer></script>
+</head>
+<body>
+    <h1>Teilnehmerliste</h1>
+    <form id="teilnehmerForm">
+        <h2>Neuen Teilnehmer hinzufügen</h2>
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="number" id="alter" placeholder="Alter" required>
+        <select id="geschlecht" required>
+            <option value="">--Geschlecht wählen--</option>
+            <option value="m">Männlich</option>
+            <option value="w">Weiblich</option>
+            <option value="div">Divers</option>
+        </select>
+        <input type="text" id="interessen" placeholder="Interessen">
+        <button type="submit">Hinzufügen</button>
+    </form>
+    <div id="teilnehmerContainer"></div>
+</body>
+</html>
