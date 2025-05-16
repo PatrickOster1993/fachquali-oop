@@ -1,0 +1,10 @@
++----------------------------------------+
+|               Bankkonto                |
++----------------------------------------+
+| - inhaber: str                         |
+| - kontostand: float                     |
++----------------------------------------+
+| + __init__(inhaber, kontostand)        |
+| + einzahlen(betrag: int) : void        |
+| + abheben(betrag: int) : bool          |
++----------------------------------------+

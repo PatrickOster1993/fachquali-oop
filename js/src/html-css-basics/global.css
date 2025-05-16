@@ -1,0 +1,135 @@
+/* Generieren von Grid: https: //grid.layoutit.com/ */
+
+/* Kommentar in CSS */
+
+/* Übergeordnetes Basis-Styling */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 1rem; /* 1rem = 16 px in html */
+    padding: 1rem;
+    background-color: white;
+    color: darkblue;
+}
+
+/* Basis-Styling für feste Selektoren */
+h1, h2, h3 {
+    color: black;
+}
+
+footer {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    border-top: 5px solid blue;
+}
+
+/* Klasse */
+
+.kontaktformular {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    background-color:aquamarine;
+    padding: 2rem;
+    margin: 2rem;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 4px;
+}
+
+/* IDs */
+#name, #email, #nachricht, #gender, #geburstag, #farbe {
+    padding: 0.5rem;
+    margin: 1rem;
+    border: 1px dotted palevioletred;
+    border-radius: 4px;
+}
+
+/* Formulareingaben */
+input[type="submit"] {
+    background-color: pink;
+    color: white;
+    border: none;
+    cursor: wait;
+}
+
+/* hover */
+input[type="submit"]:hover {
+    background-color: blue;
+}
+
+
+
+/* The element to apply the animation to */
+    
+.personal {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1em 1em;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-content: center;
+    justify-items: space-evenly;
+    align-items: space-evenly;
+    grid-template-areas:
+        ". . ."
+        ". . ."
+    ;
+
+    /* The animation code */
+    .mitarbeiter {
+        border: 2px solid palevioletred;
+        border-radius: 16px;
+        text-align: center;
+        animation: 0.5s linear 0s infinite alternate sun-rise;
+        
+    }
+}
+@keyframes sun-rise {
+    from {
+        /* pushes the sun down past the viewport */
+        transform: translateY(50px);
+    }
+
+    to {
+        /* returns the sun to its default position */
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .personal {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+                "."
+                "."
+                "."
+                "."
+                "."
+                "."
+            ;
+    }
+}
+/* Flexbox */
+nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem;
+    background-color: violet;
+
+
+    a {
+       color: white; 
+    }
+    
+}
+
