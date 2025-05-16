@@ -13,9 +13,13 @@ class Bankkonto:
 
     def __init__(self, inhaber, kontostand):
         self.__inhaber = inhaber
+        if kontostand < 0:
+            raise ValueError("Kontostand darf nicht negativ sein!")
         self.__kontostand = kontostand
     
     def einzahlen(self, betrag):
+        if betrag < 0:
+            raise ValueError("Betrag muss positiv sein!")
         self.__kontostand += betrag
     
     def abheben(self, betrag):
