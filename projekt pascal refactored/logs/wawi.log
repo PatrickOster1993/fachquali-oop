@@ -519,3 +519,29 @@ AttributeError: type object 'DatabaseConfig' has no attribute 'DEFAULT_SQLITE_PA
 2025-05-09 14:43:47,868 - MainController - INFO - Closing database connection...
 2025-05-09 14:43:47,869 - SQLiteConnection - INFO - Disconnected from SQLite
 2025-05-09 14:43:47,922 - Main - INFO - Application exited with code 0
+2025-05-12 13:13:29,964 - Main - INFO - Starting application...
+2025-05-12 13:13:29,991 - DatabaseConfig - WARNING - Path c:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\data\wawi.db is outside the project directory. Using default path.
+2025-05-12 13:13:29,991 - DatabaseConfig - INFO - Loaded database configuration from C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-12 13:13:29,993 - SQLiteConnection - INFO - Connected to SQLite database: C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-12 13:13:29,994 - DatabaseConnectionFactory - INFO - Successfully connected to SQLite at C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\wawi.db
+2025-05-12 13:13:30,003 - SQLiteConnection - INFO - Database tables created successfully
+2025-05-12 13:13:30,004 - DatabaseConnectionFactory - INFO - Database tables initialized successfully.
+2025-05-12 13:13:30,004 - MainController - INFO - Database tables verified.
+2025-05-12 13:13:30,005 - BaseManager - INFO - No Product instances found in database
+2025-05-12 13:13:30,006 - BaseManager - INFO - Loaded 3 Customer instances from database
+2025-05-12 13:14:03,467 - DatabaseConfig - WARNING - Path c:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\data\wawi.db is outside the project directory. Using default path.
+2025-05-12 13:14:03,468 - DatabaseConfig - INFO - Loaded database configuration from C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-12 13:14:41,370 - DatabaseConfig - WARNING - Path c:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\data\wawi.db is outside the project directory. Using default path.
+2025-05-12 13:14:41,371 - DatabaseConfig - INFO - Loaded database configuration from C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-12 13:14:58,035 - DatabaseConfig - INFO - Saved database configuration to C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-12 13:14:58,036 - DatabaseConfig - INFO - SQLite path stored as: data/wawi.db
+2025-05-12 13:14:58,038 - DatabaseConfig - INFO - Saved database configuration to C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-12 13:14:58,038 - DatabaseConfig - INFO - SQLite path stored as: data/wawi.db
+2025-05-12 13:14:58,042 - DatabaseConfig - INFO - Saved database configuration to C:\Users\IT-User\OneDrive - Campus Bildung und Beruf\Dokumente\Schulaufgaben\Fachquali_VariousArtists\Herr Oster\OOP\fachquali-oop\projekt pascal refactored\data\db_config.json
+2025-05-12 13:14:58,043 - DatabaseConfig - INFO - SQLite path stored as: data/wawi.db
+2025-05-12 13:14:58,043 - MariaDBConnection - INFO - Connecting to MariaDB: host=localhost, user=root, database=wawi, port=3306
+2025-05-12 13:15:02,158 - MariaDBConnection - ERROR - Error connecting to MariaDB: Can't connect to server on 'localhost' (10061)
+2025-05-12 13:15:02,158 - MariaDBConnection - ERROR - Cannot connect to host 'localhost' on port 3306. Please check host and port settings.
+2025-05-12 13:15:07,505 - MainController - INFO - Closing database connection...
+2025-05-12 13:15:07,506 - SQLiteConnection - INFO - Disconnected from SQLite
+2025-05-12 13:15:07,523 - Main - INFO - Application exited with code 0

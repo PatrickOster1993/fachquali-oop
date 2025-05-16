@@ -1,5 +1,5 @@
 {
-  "db_type": "sqlite",
+  "db_type": "mariadb",
   "mariadb": {
     "host": "localhost",
     "user": "root",
