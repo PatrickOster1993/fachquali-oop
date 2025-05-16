@@ -10,27 +10,25 @@
 # +----------------------------------------+
 
 class Bankkonto:
-    def __init__(self, inhaber, kontostand):
-        self.inhaber = inhaber
-        self.kontostand = kontostand
-        
-        def einzahlen(self, betrag):
-            self.kontostand += betrag
-            
-        def abheben(self, betrag):
-            if betrag
-            if self._kontostand < betrag:
-                raise ValueError("Betrag größer als Kontostand")
-            if betrag > self._kontostand:
-                
-            else:
-                self._kontostand -= betrag
-                return True
-            def testKontostand(self):
-                self.assertEqual(self.konto.kontostand, 100)
-                
-                
-                
-                
-                
-                
+    def __init__(self, inhaber: str, kontostand: float):
+        self.__inhaber = inhaber
+        self.__kontostand = kontostand
+
+    def einzahlen(self, betrag: int) -> None:
+        if betrag > 0:
+            self.__kontostand += betrag
+        else:
+            print("Invalid amount. Deposit amount must be positive.")
+
+    def abheben(self, betrag: int) -> bool:
+        if betrag > 0 and self.__kontostand >= betrag:
+            self.__kontostand -= betrag
+            return True
+        return False
+
+    
+    def get_kontostand(self) -> float:
+        return self.__kontostand
+
+    def get_inhaber(self) -> str:
+        return self.__inhaber
