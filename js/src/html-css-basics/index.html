@@ -1,0 +1,181 @@
+<!-- Mein Kommentar -->
+<!-- 
+    Mein
+    mehrzeiliger
+    Kommentar  
+-->
+<!DOCTYPE html> <!-- state of the art: bitte immer aktuelle HTML- u. CSS-Spezifikation verwenden! -->
+<html lang="de"> <!-- für SEO-Optimierung, Screenreader (=Barrierefreiheit), automatisches Übersetzen durch Browser -->
+<head>
+    <meta charset="UTF-8"> <!-- Zeichencodierung -> UTF-8 ist Standard für Umlaute -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Optimierung für mobile Geräte -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Kompatibel für IE-->
+    <meta name="description" content="Seite zum Erlernen grundlegender HTML- und CSS-Kenntnisse"> <!-- Seitenbeschreibung für Suchmaschinen (SEO!) -->
+    <meta name="keywords" content="HTML, CSS, Grundlagen, Lernen, Tutorial, Beispielcode, Webentwicklung, Webdesign"> <!-- Schlüsselwörter für SEO-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Icon, das im Browsertab oben angezeigt wird-->
+    <link rel="stylesheet" href="global.css"> <!-- Styling hinzufügen -->
+    <script src="script.js" defer></script> <!-- JS-Datei für "Dynamik" auf Website -->
+    <!--
+        ohne defer: Skript sofort beim Laden der Seite ausgeführt (Performance-Nachteile!)
+        defer: Skript wird erst ausgeführt, wenn kompletter HTML-Code geparst wurde
+            - verbessert Performance
+            - verhindert, das Skripte irgendwelche Elemente referenzieren, sofern noch nicht in DOM geladen!
+        async: Skript wird parallel zum Rendern ausgeführt (aber asynchron, also unabh. von Reihenfolge!)
+    -->
+    <title>HTML-Basics</title> <!-- Titel, der auf Tab im Browser dargestellt wird -->
+</head>
+<body>
+    <!-- Das was dargestellt wird! -->
+     <header> <!-- Kopfbereich der Seite -->
+        <h1>Willkommen!</h1> <!-- Hauptüberschrift -->
+        <nav> <!-- Navigationsleiste für Nutzer -->
+        <!-- Theoretisch auch alles mit <div> möglich! Aber lieber HTML5-Konvention verwenden!!!-->
+        <!-- Suchmaschine: Screenreader / Browser allg. -> Inhalte besser verstehen!-->
+        <!-- SEO: wird durch Suchmaschine verständlicher gemacht -->
+        <!-- Wartbarkeit -->
+            <ul> <!-- Liste -->
+                <!-- Inline-Styling möglichst auf ein Minimum reduzieren! Lieber alles in CSS!-->
+                <li><a href="#">Startseite</a></li> <!-- # = "Ackerlink" = Platzhalter, der automatisch zum Seitenanfang springt-->
+                <li><a href="kontakt.html">Kontakt</a></li> <!-- Springt auf entsprechende Sub-Page-->
+                <li><a href="#sub-title">Irgendwas im Text</a></li> <!-- Springt zum entsprechenden Element mit ID "sub-sitle"-->
+            </ul>
+        </nav>
+     </header>
+     <main> <!-- Hauptinhalt der Seite -->
+        <section> <!--Inhaltsabschnitt-->
+            <h2 id="sub-title">Hauptinhalte</h2>
+            <p>Einfacher Text!</p>
+            <p><mark>Markierter Text</mark></p>
+            <p><code>int i = 0;</code></p>
+            <p><abbr title="HyperText Markup Language">HTML</abbr></p> <!-- Akronyme / Abkürzungen -->
+        </section>
+        <section>
+            <!-- geordnete Liste:-->
+             <ol type="I"> <!-- römische Aufzählung -->
+                <li>Erster Punkt</li>
+                <li>Zweiter Punkt</li>
+             </ol>
+             <dl>
+                <dt>HTML</dt>
+                <dd>HyperText Markup Language</dd>
+                <dt>CSS</dt>
+                <dd>Cascading Style Sheets</dd>
+             </dl>
+        </section>
+        <section>
+            <h2>Tabelle</h2>
+            <table border="1"> <!-- Rahmen mit 1px Breite -->
+                <caption>Tabellenüberschrift</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Alter</th>
+                        <th>Ort</th>    
+                    </tr> <!-- tr = table row -->
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Patrick</td>
+                        <td>31</td>
+                        <td>Regensburg</td>
+                    </tr>
+                    <tr>
+                        <td>Sven</td>
+                        <td>50</td>
+                        <td>Köln</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Hier im Foot könnte noch was stehen!</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        <section class="kontaktformular">
+            <h2>Formular</h2>
+            <h3>Kontaktformular</h3>
+            <form action="/submit" method="post"> <!-- Daten per POST senden!-->
+                <!-- "post" sendet über body auf "sichere" Art -> später über JS abgreifbar-->
+                <!-- "get" fügt Daten der URL an -> für User also über URL sichtbar! -> z. B. Suchleiste!!!-->
+                <label for="name">Name:</label> <!-- "for" verknüpft Label mit input ID-->
+                <input type="text" id="name" name="name" required> <!-- Pflichtfeld-->
+                <label for="email">Email:</label> <!-- "for" verknüpft Label mit input ID-->
+                <input type="email" id="email" name="email" required>
+                <label for="geburtstag">Geburtstag:</label> <!-- "for" verknüpft Label mit input ID-->
+                <input type="date" id="geburtstag" name="geburtstag">
+                <fieldset id="gender"> <!-- inputs gruppieren -->
+                    <legend>Geschlecht:</legend>
+                    <label for="m">Männlich:</label> <!-- "for" verknüpft Label mit input ID-->
+                    <input type="radio" id="m" name="gender" value="m">
+                    <label for="w">Weiblich:</label> <!-- "for" verknüpft Label mit input ID-->
+                    <input type="radio" id="w" name="gender" value="w">
+                </fieldset>
+                <label for="nachricht">Nachricht:</label> <!-- "for" verknüpft Label mit input ID-->
+                <textarea id="nachricht" name="nachricht" rows="5"></textarea>
+                <label for="farbe">Lieblingsfarbe:</label> <!-- "for" verknüpft Label mit input ID-->
+                <input type="color" id="farbe" name="farbe">
+                <input type="submit" value="Absenden"> <!--Absende-Button-->
+            </form>
+        </section>
+        <section>
+            <h2>Sonstiges</h2>
+            <article>Artikelüberschrift</article>
+            <p>Das ist ein eigenständiger Artikel</p>
+            <aside> <!-- für Nebeninfos, Werbung-->
+                <p>Hier ergänzende Seiteninhalte einfügen!</p>
+                <button>Klick mich!</button>
+            </aside>
+            <figure>
+                <img src="bild.png" alt="Random Bild">
+                <figcaption>Beschreibung des Bilds</figcaption>
+            </figure>
+            <details>
+                <summary>Zusammenfassung</summary>
+                <p>Detaillierte Infos</p>
+            </details>
+
+            <progress value="70" max="100"></progress>
+            <meter value="0.6">60%</meter>
+        </section>
+        <section>
+            <h2>Multimedia</h2>
+            <audio controls>
+                <source src="mein_song.mp3" type="audio/mp3">
+            </audio>
+            <video controls width="320">
+                <source src="mein_vide.mp4" type="video/mp4">
+            </video>
+        </section>
+        <section class="personal">
+            <article class="mitarbeiter">
+                <h2>Patrick</h2>
+                <p>Dozent</p>
+            </article>
+            <article class="mitarbeiter">
+                <h2>Martin</h2>
+                <p>Hausmeister</p>
+            </article>
+            <article class="mitarbeiter">
+                <h2>Svenja</h2>
+                <p>Abteilungsleiterin</p>
+            </article>
+            <article class="mitarbeiter">
+                <h2>Florian</h2>
+                <p>Systemadmin</p>
+            </article>
+            <article class="mitarbeiter">
+                <h2>Mark</h2>
+                <p>Softwareentwickler</p>
+            </article>
+            <article class="mitarbeiter">
+                <h2>Kevin</h2>
+                <p>Büroangestellter</p>
+            </article>
+        </section>
+     </main>
+     <footer>
+        <p>&copy; 2025 Fachqualifikation Fachinformatiker AE | Alle Rechte vorbehalten.</p>
+     </footer>
+</body>
+</html>
