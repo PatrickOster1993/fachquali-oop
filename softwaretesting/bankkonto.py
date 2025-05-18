@@ -32,3 +32,6 @@ class Bankkonto:
     
     def getKontostand(self):
         return self.__kontostand
+    
+    def getInhaber(self):
+        return self.__inhaber
